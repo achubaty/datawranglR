@@ -5,6 +5,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consectetur mat
 
 We will meet 2 hours each week for 6 weeks. Students will receive 1 course credit, graded pass/fail for this course.
 
+## Course Highlights
+- We will meet for 2 hours each week for 6 weeks
+- Targetted new and experienced R users
+- Learn basic R commands and usage
+- Produce high quality graphics using base plot and ggplot
+- Start analyzing your data quickly by reformatting it using plyr and reshape
+- Begin using markdown and R together to generate reports and annotate your code
+
 ## Course Overview
 ### Before we start
 - install R version 3 or above

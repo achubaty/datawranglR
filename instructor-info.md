@@ -16,9 +16,10 @@
 ### Lesson Plans
 (for each lesson)
 
+#### Datasets and Packages
+(for each lesson)
+any special requirements not found in default installation?
 
 ### Assignments
 (for each lesson)
-
-
 
