@@ -1,8 +1,11 @@
 # Introduction to R and R Markdown
 - basic data structures
 - getting data into and out of R
+- Logical operators
 - viewing your data (e.g. `head`, `str`, `summary`)
 - subsetting and indexing
+- Introduction to Markdown syntax
+- Embedding R code into Markdown
 
 # Data manipulation: plyr, reshape2, and tidy data
 
