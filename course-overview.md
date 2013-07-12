@@ -2,9 +2,9 @@
 
 ## Course Description
 When presenting research "a picture is worth a 1000 words", but how do you make that picture as clear and compelling as possible?
-The `R` programming language is predominately known for statistical analysis, but `R` is also capable of producing publication-quality figures for scientific papers, international newspapers (e.g. The New York Times), and websites.
-In addition to its core functionality, sophisticated visualization in `R` is enhanced by supplemental packages, most notably the `ggplot2` library.
-In this course we move beyond basic plotting and highlight some of the more powerful approaches for visualization in `R`.
+The R programming language is predominately known for statistical analysis, but R is also capable of producing publication-quality figures for scientific papers, international newspapers (e.g. The New York Times), and websites.
+In addition to its core functionality, sophisticated visualization in R is enhanced by supplemental packages, most notably the `ggplot2` library.
+In this course we move beyond basic plotting and highlight some of the more powerful approaches for visualization in R.
 Students will learn to rapidly explore their data with the `ggplot2` package and develop highly-customized figures with base graphics functions.
 This course will also cover the use of the `plyr` and `reshape2` packages, which are useful tools to format, reshape, and "wrangle" data sets before plotting or analysis.
 This course is applicable both to students who have never used R before and those who have used R, but have not accessed its higher-powered data-manipulation and graphing capabilities.
