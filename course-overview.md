@@ -1,42 +1,47 @@
-# BISC 890 Directed Readings - Data Wrangling and Visualization in R
+# BISC 890-1 Directed Readings: Data Wrangling and Visualization in R
 
 ## Course Description
-When presenting research "a picture is worth a 1000 words", however how do you make you clear and appealing graphics? The *R* programming language is predominately known for statistical analysis, but *R* is also capable of producing publication quality figures that can be embedded into blogs, and publications. In addition to its core functionality, sophisticated visualization in *R* is enhanced by supplemental packages, most notably the `ggplot2` library. In this course we move beyond basic plotting and highlight some of the more powerful approaches for visualization in *R*. We will explain the syntax for base `plot` and `ggplot2` in order to customize figures. This course will also cover the use of the `plyr` and `reshape2` packages, which are useful tools to format data sets before plotting, or analysis. This course is applicable to all students who those who have never used R before and those who have used R, but have not accessed its higher powered data manipulation and graphing capabilities. This course additionally will cover the basics of making reproducible documents for research purposes, and even blogs using the Markdown markup language.
+When presenting research "a picture is worth a 1000 words", but how do you make that picture as clear and compelling as possible?
+The `R` programming language is predominately known for statistical analysis, but `R` is also capable of producing publication-quality figures for scientific papers, international newspapers (e.g. The New York Times), and websites.
+In addition to its core functionality, sophisticated visualization in `R` is enhanced by supplemental packages, most notably the `ggplot2` library.
+In this course we move beyond basic plotting and highlight some of the more powerful approaches for visualization in `R`.
+Students will learn to rapidly explore their data with the `ggplot2` package and develop highly-customized figures with base graphics functions.
+This course will also cover the use of the `plyr` and `reshape2` packages, which are useful tools to format, reshape, and "wrangle" data sets before plotting or analysis.
+This course is applicable both to students who have never used R before and those who have used R, but have not accessed its higher-powered data-manipulation and graphing capabilities.
+Throughout the course, the exercises and assignments will emphasize reproducible research documentation ("literate programming") in which documentation, code, and figures are combined in the easy-to-learn plain-text language Markdown.
 
-We will meet 2 hours each week for 6 weeks. Students will receive 1 course credit, graded pass/fail for this course.
+We will meet 2 hours each week for 6 weeks. Students will receive 1 course credit, graded pass/fail.
 
 ## Course Instructors
-
- - Franz Simon
- - Sean Anderson
- - Alex Chubaty
- - Corey Phillis
+- Franz Simon
+- Sean Anderson
+- Alex Chubaty
+- Corey Phillis
 
 ## Course Highlights
 - We will meet for 2 hours each week for 6 weeks
 - Targeted for new and experienced R users
 - Learn basic R commands and usage
-- Produce high quality graphics using base plot and ggplot
-- Start analyzing your data quickly by reformatting it using plyr and reshape
-- Begin using markdown and R together to generate reports and annotate your code
+- Produce high-quality graphics using base graphics and `ggplot`
+- Learn to manipulate data quickly using `plyr` and `reshape`
+- Begin using Markdown and R together to generate reproducible reports
 
 ## Course Overview
 ### Before we start
-- Install R version 3 or above
+- Install R version 3.0.0 or higher
 - Install R Studio
-- Install markdown editor (optional)
 
 ### Topics covered
-- Intro to R and markdown
+- Intro to R and Markdown
 - R basic graphics
-- R advanced graphics (ggplot)
-- Additional graphics customization
 - Data manipulation in R: `plyr` and `reshape`
+- R grid graphics (`ggplot`)
+- Multipanel plotting with base graphics (`layout`, `mfrow`, `split.screen`)
+- Additional graphics customization (`par`, building plots with `lines`, `points`, etc.)
 
 ### Course Objectives
-
- - Learn how to make reproducible documents
- - Learn how to manage data and prepare it for analysis and presentation
- - Learn the grammar of `base` plot and `ggplot2`
- - Learn the basics of aesthetics
- - Become aware of open access software
+- Learn how to make reproducible documents
+- Learn how to manage data and prepare it for analysis and presentation
+- Learn the grammar of base graphics plotting and `ggplot2`
+- Learn some basic guidelines for producing effective and beautiful figures
+- Become aware of open access software
