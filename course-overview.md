@@ -9,6 +9,7 @@ Students will learn to rapidly explore their data with the `ggplot2` package and
 This course will also cover the use of the `plyr` and `reshape2` packages, which are useful tools to format, reshape, and "wrangle" data sets before plotting or analysis.
 This course is applicable both to students who have never used R before and those who have used R, but have not accessed its higher-powered data-manipulation and graphing capabilities.
 Throughout the course, the exercises and assignments will emphasize reproducible research documentation ("literate programming") in which documentation, code, and figures are combined in the easy-to-learn plain-text language Markdown.
+
 We will meet for 2-hours every two weeks. Students will receive 1 course credit, graded pass/fail. The final grade is determined by completion of assignments and attendance. Assignments will be given at the end of each meeting and will be due prior to the following meeting. Attendance is mandatory for a passing grade.
 
 ## Course Instructors
