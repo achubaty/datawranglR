@@ -7,10 +7,10 @@ We will meet 2 hours each week for 6 weeks. Students will receive 1 course credi
 
 ## Course Instructors
 
- - Franz Simon
- - Sean Anderson
- - Alex Chubaty
- - Corey Phillis
+ - Franz Simon [fsimon@sfu.ca](mailto:fsimon@sfu.ca)
+ - Sean Anderson [EMAIL@sfu.ca](mailto:EMAIL@sfu.ca)
+ - Alex Chubaty [achubaty@sfu.ca](mailto:achubaty@sfu.ca)
+ - Corey Phillis [EMAIL@sfu.ca](mailto:EMAIL@sfu.ca)
 
 ## Course Highlights
 - We will meet for 2 hours each week for 6 weeks
