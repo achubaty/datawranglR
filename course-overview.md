@@ -1,4 +1,4 @@
-# BISC 890-1 Directed Readings: Data Wrangling and Visualization in R
+# BISC 888-1 Directed Readings: Data Wrangling and Visualization in R
 
 ## Course Description
 When presenting research "a picture is worth a thousand words", but how do you make that picture as clear and compelling as possible?
