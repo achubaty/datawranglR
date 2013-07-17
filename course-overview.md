@@ -10,9 +10,10 @@ This course will also cover the use of the `plyr` and `reshape2` packages, which
 This course is applicable both to students who have never used R before and those who have used R, but have not accessed its higher-powered data-manipulation and graphing capabilities.
 Throughout the course, the exercises and assignments will emphasize reproducible research documentation ("literate programming") in which documentation, code, and figures are combined in the easy-to-learn plain-text language Markdown.
 
-We will meet for 2-hours every two weeks. Students will receive 1 course credit, graded pass/fail. The final grade is determined by completion of assignments and attendance. Assignments will be given at the end of each meeting and will be due prior to the following meeting. Attendance is mandatory for a passing grade.
+We will meet for 2-hours blocks every two weeks. Students will receive 1 course credit, graded pass/fail. The final grade is determined by completion of assignments and attendance. Assignments will be given at the end of each meeting and will be due prior to the following meeting. Attendance is mandatory for a passing grade.
 
 ## Course Instructors
+ - Bernard Roitberg (faculty supervisor) [roitberg@sfu.ca](mailto:roitberg@sfu.ca)
  - Franz Simon [fsimon@sfu.ca](mailto:fsimon@sfu.ca)
  - Sean Anderson [scanders@sfu.ca](mailto:scanders@sfu.ca)
  - Alex Chubaty [achubaty@sfu.ca](mailto:achubaty@sfu.ca)
@@ -22,7 +23,7 @@ We will meet for 2-hours every two weeks. Students will receive 1 course credit,
  - Based on enrollment (limited to 20 students)
 
 ## Course Highlights
-- We will meet for 2 hours each week for 6 weeks
+- We will meet for 2-hours sessions bi-weekly for a total of 6 sessions
 - Targeted for new and experienced R users
 - Learn basic R commands and usage
 - Produce high-quality graphics using R base graphics and `ggplot`
