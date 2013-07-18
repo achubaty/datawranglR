@@ -10,7 +10,7 @@ This course will also cover the use of the `plyr` and `reshape2` packages, which
 This course is applicable both to students who have never used R before and those who have used R, but have not accessed its higher-powered data-manipulation and graphing capabilities.
 Throughout the course, the exercises and assignments will emphasize reproducible research documentation ("literate programming") in which documentation, code, and figures are combined in the easy-to-learn plain-text language Markdown.
 
-We will meet for 2-hour blocks every two weeks. Students will receive 1 course credit, graded pass/fail. The final grade is determined by completion of assignments and attendance. Assignments will be given at the end of each meeting and will be due prior to the following meeting. Attendance is mandatory for a passing grade.
+We will meet for 2-hour blocks every 2 weeks. Students will receive 1 course credit, graded pass/fail. The final grade is determined by completion of assignments and attendance. Assignments will be given at the end of each meeting and will be due prior to the following meeting. Attendance is mandatory for a passing grade.
 
 ## Course Instructors
  - Bernard Roitberg (faculty supervisor) [roitberg@sfu.ca](mailto:roitberg@sfu.ca)
@@ -48,5 +48,5 @@ We will meet for 2-hour blocks every two weeks. Students will receive 1 course c
 ### Assignments
 - Assignments are due at the start of class
 - Assignments are designed to apply the skills learned and practice using R
-- All assignments must be written in Markdown format
+- All assignments will be written in Markdown format
 
