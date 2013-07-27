@@ -2,7 +2,9 @@
 % Sean Anderson
 % April 14, 2011
 
-`plyr` is an R package that makes it simple to split data apart, do stuff to it, and mash it back together. This is a common data-manipulation step. Importantly, `plyr` makes it easy to control the input and output data format from a syntactically consistent set of functions.
+`plyr` is an R package that makes it simple to split data apart, do stuff to it, and mash it back together. 
+This is a common data-manipulation step. 
+Importantly, `plyr` makes it easy to control the input and output data format from a syntactically consistent set of functions.
 
 Or, from the documentation:
 > plyr is a set of tools that solves a common set of problems: you need to break
@@ -10,7 +12,9 @@ Or, from the documentation:
 > all the pieces back together. It’s already possible to do this with split and
 > the apply functions, but plyr just makes it all a bit easier...
 
-This is a very quick introduction to `plyr`. For more details see Hadley Wickham's introductory guide The [split-apply-combine strategy for data analysis](http://had.co.nz/plyr/plyr-intro-090510.pdf) (2011, Journal of Statistical Software, Vol 40). There’s quite a bit of discussion online in general, and especially on [stackoverflow.com](http://stackoverflow.com/questions/tagged/plyr).
+This is a very quick introduction to `plyr`. 
+For more details see Hadley Wickham's introductory guide [The split-apply-combine strategy for data analysis](http://had.co.nz/plyr/plyr-intro-090510.pdf) (2011, Journal of Statistical Software, Vol 40). 
+There’s quite a bit of discussion online in general, and especially on [stackoverflow.com](http://stackoverflow.com/questions/tagged/plyr).
 
 Why use `apply` functions instead of `for` loops?
 =================================================
@@ -33,12 +37,12 @@ Why use `plyr` over base `apply` functions?
 
 3.  `plyr` can be run in parallel — faster
 
-The basic idea behind apply functions
-=====================================
+The basic idea behind `apply` functions
+=======================================
 
-`apply` functions work by applying a function to a set of values and
-returning the output in some format. Here’s about as simple an example
-as possible:
+`apply` functions work by applying a function to a set of values and returning
+the output in some format. 
+Here’s about as simple an example as possible:
 
     y <- c(1, 2, 3)
     f <- function(x) x^2
@@ -46,29 +50,25 @@ as possible:
 
     [1] 1 4 9
 
-Here, I have applied the function `f` to the values of `y`. Note that
-the `sapply` function was unnecessary here. This would have been better
-done in a vectorized format. If `y` was large, and the function more
-complex, the vectorized format could be noticeably faster.
+Here, I have applied the function `f` to the values of `y`. 
+Note that the `sapply` function was unnecessary here. 
+This would have been better done in a vectorized format. 
+If `y` was large, and the function more complex, the vectorized format could be noticeably faster.
 
     f(y)
 
     [1] 1 4 9
 
-But, it isn't always possible (or easy) to vectorize a function,
-particularly when you’re dealing with groupings of data as in the
-following examples.
+But, it isn't always possible (or easy) to vectorize a function, particularly when you’re dealing with groupings of data as in the following examples.
 
 `plyr` basics
 =============
 
-`plyr` builds on the built in `apply` functions by giving you control
-over the input and output formats and keeping the syntax consistent
-across all variations. It also adds some niceties like error processing,
-parallel processing, and progress bars.
+`plyr` builds on the built in `apply` functions by giving you control over the input and output formats and keeping the syntax consistent across all variations. 
+It also adds some niceties like error processing, parallel processing, and progress bars.
 
-The basic format is 2 letters followed by `ply()`. The first letter
-refers to the format in and the second to the format out.
+The basic format is 2 letters followed by `ply()`. 
+The first letter refers to the format in and the second to the format out.
 
 The 3 main letters are:
 
@@ -78,13 +78,13 @@ The 3 main letters are:
 
 3.  `l` = list
 
-So, `ddply` means: take a data frame, split it up, do something to it,
-and return a data frame. I find I use this the majority of the time
-since I often work with data frames.
+So, `ddply` means: take a data frame, split it up, do something to it, and return a data frame. 
+I find I use this the majority of the time since I often work with data frames.
 
 `ldply` means: take a list, split it up, do something to it, and return
-a data frame. This extends to all combinations. The columns are the
-input formats and the rows are the output format:
+a data frame. 
+This extends to all combinations. 
+The columns are the input formats and the rows are the output format:
 
 -----------------------------------------
              data frame   list     array
@@ -96,12 +96,12 @@ list         `dlply`      `llply`  `alply`
 array        `daply`      `laply`  `aaply`
 -----------------------------------------
 
-I’ve ignored a couple other format options. One that you might find
-useful is the underscore (`_`) which will throw away the output
-(e.g., `d_ply()`). This can be useful when plotting.
+I’ve ignored a couple other format options. 
+One that you might find useful is the underscore (`_`) which will throw away the output (e.g., `d_ply()`). 
+This can be useful when plotting.
 
-
-`plyr` provides a consistent and easy-to-work-with format for apply functions with control over the input and output formats. Some of the functionality can be duplicated with base R functions (but with less consistent syntax). Also, few R `apply` functions work directly with data frames as input and output and data frames are a common object class to work with.
+`plyr` provides a consistent and easy-to-work-with format for apply functions with control over the input and output formats. 
+Some of the functionality can be duplicated with base R functions (but with less consistent syntax). Also, few R `apply` functions work directly with data frames as input and output and data frames are a common object class to work with.
 
 Base R `apply` functions (from a presentation given by Hadley):
 
@@ -112,9 +112,9 @@ array                `apply`     `.`           `.`         `.`
 
 data frame           `.`         `aggregate`   `by`        `.`
 
-list                 `sapply`     `.`           `lapply`    `.`
+list                 `sapply`    `.`           `lapply`    `.`
 
-n replicates         `replicate`  `.`           `replicate` `.`
+n replicates         `replicate` `.`           `replicate` `.`
 
 function arguments   mapply      `.`           `mapply`    `.`
 -------------------------------------------------------------------
