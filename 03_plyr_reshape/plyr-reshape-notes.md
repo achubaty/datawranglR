@@ -2,36 +2,26 @@
 % Sean Anderson
 % April 14, 2011
 
-What is `plyr`? It’s a bundle of awesomeness (i.e. an R package) that
-makes it simple to split apart data, do stuff to it, and mash it back
-together. This is a common data manipulation step.
+`plyr` is an R package that makes it simple to split data apart, do stuff to it, and mash it back together. This is a common data-manipulation step. Importantly, `plyr` makes it easy to control the input and output data format from a syntactically consistent set of functions.
 
 Or, from the documentation:
+> plyr is a set of tools that solves a common set of problems: you need to break
+> a big problem down into manageable pieces, operate on each pieces and then put
+> all the pieces back together. It’s already possible to do this with split and
+> the apply functions, but plyr just makes it all a bit easier...
 
-> `plyr` is a set of tools that solves a common set of problems: you need
-> to break a big problem down into manageable pieces, operate on each
-> pieces and then put all the pieces back together. It’s already possible
-> to do this with split and the apply functions, but `plyr` just makes it
-> all a bit easier...
-
-This is a very quick introduction to `plyr`. For more details have a
-look at the `plyr` site: <http://had.co.nz/plyr/> and particularly
-Hadley Wickham’s introductory guide *The split-apply-combine strategy
-for data analysis*.
-
-<http://had.co.nz/plyr/plyr-intro-090510.pdf>
+This is a very quick introduction to `plyr`. For more details see Hadley Wickham's introductory guide The [split-apply-combine strategy for data analysis](http://had.co.nz/plyr/plyr-intro-090510.pdf) (2011, Journal of Statistical Software, Vol 40). There’s quite a bit of discussion online in general, and especially on [stackoverflow.com](http://stackoverflow.com/questions/tagged/plyr).
 
 Why use `apply` functions instead of `for` loops?
 =================================================
 
-1.  the code is cleaner – easier to code and read, and less error prone
-    because:
+1.  The code is cleaner (once you're familiar with the concept). The code can be easier to code and read, and less error prone because:
 
-    1.  you don't have to deal with subsetting
+    (a)  you don't have to deal with subsetting
 
-    2.  you don't have to deal with saving your results
+    (b)  you don't have to deal with saving your results
 
-2.  apply functions are often faster, sometimes dramatically
+2.  Apply functions can be faster than for loops, sometimes dramatically.
 
 Why use `plyr` over base `apply` functions?
 ===========================================
@@ -109,6 +99,25 @@ array        `daply`      `laply`  `aaply`
 I’ve ignored a couple other format options. One that you might find
 useful is the underscore (`_`) which will throw away the output
 (e.g., `d_ply()`). This can be useful when plotting.
+
+
+`plyr` provides a consistent and easy-to-work-with format for apply functions with control over the input and output formats. Some of the functionality can be duplicated with base R functions (but with less consistent syntax). Also, few R `apply` functions work directly with data frames as input and output and data frames are a common object class to work with.
+
+Base R `apply` functions (from a presentation given by Hadley):
+
+-------------------------------------------------------------------
+                     array       data frame    list        nothing
+-------------------- ----------- ------------- ----------- --------
+array                `apply`     `.`           `.`         `.`
+
+data frame           `.`         `aggregate`   `by`        `.`
+
+list                 `sapply`     `.`           `lapply`    `.`
+
+n replicates         `replicate`  `.`           `replicate` `.`
+
+function arguments   mapply      `.`           `mapply`    `.`
+-------------------------------------------------------------------
 
 A general example with `plyr`
 =============================
