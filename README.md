@@ -15,11 +15,11 @@ Throughout the course, the exercises and assignments will emphasize reproducible
 We will meet for 2-hour blocks every 2 weeks. Students will receive 1 course credit, graded pass/fail. The final grade is determined by completion of assignments and attendance. Assignments will be given at the end of each meeting and will be due prior to the following meeting. Attendance is mandatory for a passing grade.
 
 ## Course Instructors
- - Bernard Roitberg (faculty supervisor) [roitberg@sfu.ca](mailto:roitberg@sfu.ca)
- - Franz Simon [fsimon@sfu.ca](mailto:fsimon@sfu.ca)
- - Sean Anderson [scanders@sfu.ca](mailto:scanders@sfu.ca)
- - Alex Chubaty [achubaty@sfu.ca](mailto:achubaty@sfu.ca)
- - Corey Phillis [cphillis@sfu.ca](mailto:cphillis@sfu.ca)
+ - Bernard Roitberg (faculty supervisor): roitberg@sfu.ca
+ - Franz Simon fsimon@sfu.ca
+ - Sean Anderson: sean_anderson@sfu.ca
+ - Alex Chubaty: achubaty@sfu.ca
+ - Corey Phillis: cphillis@sfu.ca
 
 ## Class size
  - Based on enrollment (limited to 20 students)
