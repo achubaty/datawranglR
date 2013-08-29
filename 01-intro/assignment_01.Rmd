@@ -1,31 +1,25 @@
-
 # Assignment 1 
 ## Introduction to R
 ========================================================
 
-### 1) Download a CSV from GitHub
-Your professor an expert in Fire Pokemon has jsut returned from collect by plotting a traits of a herd Charmanders. However, you don't have any data on their weight, height, and sex, a common problem when working with Pokemon. Therefore you decided to simulate your own data for practise instead. Create a dataframe containing all the information on a Charamander's weight, height, and sex.
-#### 
-```{r}
-height <- c(c(5, 100, by = 5),  c(5, 100, by = 5))
-```
+## For this assignment include all R code embedded into a Rmd format that support your anwser.
 
-### 2) Simulate your own data
-#### 
-```{r}
-height <- c(c(5, 100, by = 5),  c(5, 100, by = 5))
-```
+### 1) Download a CSV from GitHub
+Your professor (an expert in Fire Pokemon) has just returned from Vermelion City. He has been busy collecting data on traits of herds Charmanders. However, you don't have any data on their weight, height, and sex, a common problem when working with Pokemon. The proffessor asks for you to summarize the traits of the different herds.
+
+1) Which traits did the professor collect on Charmanders?
+
+2a) What is the average and variance across all populations?
+ b) Plot the traits values on appropriate plots.
+
+3) A new population of Charmanders have been discovered in a lovely town called **In Silicon** (The home of Polygon). This charmander however have been found to be 1.5 times as heavy and have a female-male sex ratio of 3:1. Collect the same trait types of trait values by simulating the data.
 
 ### 3) Apply functions
 #### Biologists are often accused of Physic's envy so in the spirit of Physic's pretend your Charmander's are spheres (or Voltorbs) and calculate the volume and surface area of the Charmanders and attach this to your dataframe.
 
 
-
 ### 4) Loop Operators
 #### Charmanders grow from a min 1lbs to max 5lbs per week with a unifrom distribution. Using loops calculate the growth trajectories of each charmander and report the average weight of each charmander after one year.
-```{r}
-
-```
 
 ### 5) Control Operators
 #### There is a new discovery Charmanders have sexually dimorphic in their growth rates. Female Charmanders are grow twice as fast as their male counterparts. Find all of female Charmanders in the dataset.
