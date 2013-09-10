@@ -1,5 +1,5 @@
 % Sean Anderon, 2012-13, sean@seananderson.ca
-\documentclass{article}
+\documentclass{tufte-handout}
 \usepackage{geometry} 
 \geometry{letterpaper}
 \usepackage{graphicx}
@@ -191,8 +191,8 @@ ggplot(mtcars, aes(wt, mpg)) + geom_point() + geom_rangeframe() +
 
 Just what you wanted:
 <<echo = true, fig = true, height = 2.5, width = 5>>=
-qplot(carat, price, data = dsamp, colour = cut) + theme_excel2003() +
- scale_colour_excel2003()
+qplot(carat, price, data = dsamp, colour = cut) + theme_excel() +
+ scale_colour_excel()
 @
 
 You can customize just about every aspect of a \texttt{ggplot} plot. We won't
