@@ -1,0 +1,30 @@
+# Assignment 1 
+## Introduction to R
+========================================================
+
+## For this assignment include all R code embedded into a Rmd format that support your anwser.
+
+### Your professor (an expert in Fire Pokemon) has just returned from Vermelion City. He has been busy collecting data on traits of herds Charmanders. The proffessor hearing you are in the new Data Wrangling course asks for you help summarzing his findings.
+
+### 1) Upload the charmander.csv into the R environment
+
+### 2) 
+#### Which traits did the professor collect on Charmanders?
+
+### 3a) 
+#### What is the average and variance across all populations in height? How many females and males did he collect? How many individuals did he collect from both?
+### b) 
+#### Plot the traits values on appropriate plots.
+
+### 4) 
+#### A new population of Charmanders have been discovered in a lovely town called **In Silicon** (The home of Polygon). This charmander however have been found to be 1.5 times as heavy and have a female-male sex ratio of 3:1. Collect the same trait types of trait values by simulating the data using this new infomation.
+
+### 5) 
+#### Biologists are often accused of Physic's envy so in the spirit of Physic's pretend your Charmander's are spheres (or Voltorbs) and calculate the volume and surface area of the Charmanders and attach this to your dataframe.
+
+
+### 6)
+#### Charmanders grow from a min 1lbs to max 5lbs per week with a unifrom distribution. Using loops calculate the growth trajectories of 5 male charmanders that start at 5,8, 11, 14lbs respectively and report the average weight of each charmander after one year.
+
+### 7) 
+#### There is a new discovery Charmanders have sexually dimorphic in their growth rates. Female Charmanders are grow twice as fast as their male counterparts. Find all of female Charmanders in the dataset.
