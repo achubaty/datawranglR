@@ -213,6 +213,8 @@ colr <- list("red", "green", "blue")
 ## Data Types
 `is()`
 
+`is.na()`
+
 `as()`
 
 ---
@@ -242,6 +244,9 @@ data <- read.csv("filename.csv", header=TRUE)
 summary(data)
 head(data)
 tail(data)
+names(data)
+
+which()
 ```
 
 ---
@@ -258,10 +263,16 @@ require(plyr)
 setwd("path/to/working/directory")
 
 # install/load additional packages
-if (!require(lme4)) {install.packages("lme4"); library(lme4)}
+if (!require(lme4)) {
+	install.packages("lme4"); library(lme4)
+}
 
 # import data
 data <- read.csv("filename.csv, header="TRUE")
+
+# first-look at the data
+head(data)
+summary(data)
 
 # clean up data
 ...
@@ -274,3 +285,49 @@ data <- read.csv("filename.csv, header="TRUE")
 
 ```
 
+---
+## Control operators
+
+---
+### Conditional statements
+```
+if (condition1) {
+	doThisThing
+} else {
+	doAnotherThing
+}
+```
+
+### Evaluation of conditions
+```
+<
+>
+==
+<=
+<=
+!=
+&&
+||
+```
+
+---
+### Loops
+- `for` loops are used when the number of iterations in *known*
+- `while` loops are used when the number of iterations is *unknown*
+
+```
+pies <- numeric(100)
+for (i in 1:length(pies)) {
+	pies[i] <- pi * i
+}
+
+x <- 0; done=FALSE
+while (!done) {
+	if (x > 23) {
+		done = TRUE
+	} else {
+		x <- x + pi
+	}
+	print(x, digits=4)
+}
+```
