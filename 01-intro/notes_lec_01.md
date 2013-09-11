@@ -235,12 +235,29 @@ This flexibility can lead to trouble down the road however because functions wil
 
 ## Basic Commands
 ### Arithmetic
+
+You can do arithmetic in R and thankfully the notation is familiar
+
 ```
-+
--
-*
-/
++ ### Add
+- ### Subtract
+* ### Multiply
+/ ### Divide
 ```
+
+These will follow BEDMAS. 
+
+You can do fun things like 
+
+```{r}
+x <- 7
+y <- 13.5
+z <- 2.5
+
+x <- ((x * y + z) * 5 - 25)
+print(x)
+```
+
 
 ### Powers
 ```
@@ -254,6 +271,8 @@ log10()
 
 ## Basic Commands
 ### Mathematical functions
+
+What is a function? Think of a function as a machine. You put an input (an argument) in and you get an output. Here are some examples of mathematic functions.
 
 ```
 sum()
