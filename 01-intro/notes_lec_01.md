@@ -109,6 +109,14 @@ We have now learned how to run a script in R. A whole new world has been opened 
 
 ## Getting help with R
 
+The first and most important thing to know how to do in R is how to get help. You know you are on your way to becoming a guRu when you can figure out how to do new things all on your lonesome. 
+
+- R has to built in ways to get help. First is `?`. 
+`?` will give you a help file. For example if you want to know how to use the `summary()` function you can type `?summary()` and a help file will appear on the bottom right panel of R-Studio. This file will tell you different things about the function and will also often give you examples.
+
+- The other built in help operator is `??` this is for when you don't know the name of the function or package you want. For example, if you want to do some bootstrapping but don't know the name of the function type `??bootstrap` and it will produce a list of packages that are related to bootstrapping.
+
+
 - `?` and `??`
 - Google
 - R Stack Exchange
