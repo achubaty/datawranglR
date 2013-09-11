@@ -116,10 +116,8 @@ The first and most important thing to know how to do in R is how to get help. Yo
 
 - The other built in help operator is `??` this is for when you don't know the name of the function or package you want. For example, if you want to do some bootstrapping but don't know the name of the function type `??bootstrap` and it will produce a list of packages that are related to bootstrapping.
 
-
-- `?` and `??`
-- Google
-- R Stack Exchange
+- Google is your friend. Google is a great help in finding solutions to any problems you may have. The only difficulty is asking the write question. As you become more familiar with R this will become easier.
+- R Stack Exchange is an extremely good resource. It is a help forum for R. I suggest searching for similiar questions before posting anything. People who are active on this site are a little prickly when you ask a question that has been asked before. Do not be intimidated though it is a great resource!!!
 
 ---------------------
 
@@ -131,38 +129,83 @@ The first and most important thing to know how to do in R is how to get help. Yo
 
 ## Basic R Syntax
 
+Syntax are the symbols you are going to be using to create scripts. R only uses a couple.
+
 ```
 ?
+```
+See above.
+```
 #
-<-
-=
-()
-{}
-[]
-:
-;
-""
 ```
 
+This is the most important symbol in all of R! It is used to create comments. Comments are sections of code that the computer is told not to read when it is executing your script, which isn't as useless as it sounds. Comments are the way you can write notes to yourself about what your code is actually doing. Just think how foreign R looks right now just wait until you don't use it for a year and you come back... Therefore, as a seasoned programmer I give you this advice. Comment!!! and then comment some more. I have never heard a programmer complain that they didn't comment enough.    
+
+```
+<-
+```
+
+This is the assign symbol. It says take what you have on the right and make whatever is on the left of it have that value, for example:
+
+```{r}
+x <- 2
+### Assigns the variable x the value of 2. You can now do fun things like
+y <- x + 5 ### Add the 5 to the value of x.
+print(y) ###Display the value of y.
+```
+
+```
+=
+```
+
+Is the equality symbol. We will learn more about this when we get to control operators.
+
+```
+()
+```
+Round braces are used in a bunch of ways in R from containing the arguments of functions to their mathematical use. How `()`  works depends on the context in which they are used. 
+```
+{}
+```
+Curly braces are used for denoting chunks of code that are part of functions and iteriation operators. 
+```
+[]
+```
+Used for subscripting
+```
+:
+```
+```
+;
+```
+```
+""
+```
+Used for denoting characters.
 ---------------------
 
 ## Basic Commands
 ###Assigning variables
 
+Assigning variables is a key of programming. It is a little different from the world of math and algebra. For example, we can do this.
+
 ```
 x <- 3
-y <- 5.291
-z <- 2 * pi
-
-X <- 3.8
-Y <- -45
-Z <- exp(1)
+print(x) ## x has the value of 3. 
+x <- 2
+x <- 7
+print(x) ## x now has the value of 7. The assign is not an equality sign it will rewrite the value of x if you give x another value. 
 ```
+The fact that you will rewrite over symbols if you assign something to them is foundational. This is often very useful but you can run into big problems when you have bigger scripts. To avoid overridding a value when you don't want to I suggest using informative names. Maybe the variable `x` was my mass when I was born in kg. So instead call it `massBirthkg` or `mass.birth.kg`. You can use any name you want as long as it don't start with a number. You can use numbers in variable names just not as the first letter.
 
 ---------------------
 
 ## Basic Commands
 ### Assigning vectors
+
+Vectors are an ordered list of numbers. Thing of variables as a single column of mailboxes at a post office. Each mail box (element in computer speak) contains your bills(a value) however they also have an address on them. Letting you refer to them as the 1st mail box, the 2nd, etc... 
+
+There are mutiple ways to create vectors, for example:
 
 ```
 a <- c(11.2, 33.4, 16.7, 13.2, 7.8, -23.5)
@@ -170,16 +213,23 @@ b <- c(1:10)
 d <- seq(from=0, to=1, by=0.1)
 ```
 
+In order to access the value of the 3rd element of `a` you write `a[3]`. Vectors in R are listed starting from 1.
+
 ---------------------
 
 ## Basic Commands
 ### Assigning variables
+
+R is very flexible and pretty smart. It will allow you to assign more than numeric values to variables. For example:
 
 ```
 name <- "Alex"
 names <- c("Alex", "Brian", "Conan", "Dave", "Erin", "Franz")
 colr <- list("red", "green", "blue")
 ```
+
+This flexibility can lead to trouble down the road however because functions will require specific variable types. For example if you try to add all the elements of `names` using `sum(names)` you will get an error. 
+
 
 ---------------------
 
