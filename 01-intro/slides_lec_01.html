@@ -95,21 +95,22 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <ul>
 <li>Install R version 3.0.0 or higher from <a href="http://cran.stat.sfu.ca">CRAN</a></li>
 <li>Install R Studio from <a href="http://www.rstudio.com/ide/download/desktop">rstudio.org</a></li>
+<li>make sure the <code>knitr</code> package is installed</li>
 </ul>
+<pre><code>install.packages(&quot;knitr&quot;)
+library(knitr)</code></pre>
 </div>
 <div class="section slide level1" id="introduction-to-markdown">
 <h1>Introduction to Markdown</h1>
+<p><strong>Why use Markdown?</strong></p>
 <ul>
-<li>why use Markdown?
-<ul>
-<li>philosophy: &gt; easy to read; easy to write</li>
+<li>philosophy: &quot;easy to read; easy to write&quot;</li>
 <li>easily converted to other file types (<code>.doc</code>, <code>.html</code>, <code>.pdf</code>, etc.) using <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a></li>
 <li>text files will always be supported/accessible (non-proprietary file format)</li>
 <li>text files are happy with Git version control; binary files (e.g., <code>.doc</code>, <code>.docx</code>) aren't</li>
 <li>we can easily embed code in our documents
 <ul>
 <li>advanced annotation of R code</li>
-</ul></li>
 </ul></li>
 </ul>
 </div>
@@ -135,14 +136,14 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 <li>citations (not covered)</li>
 </ul>
 </div>
-<div class="section slide level1" id="intro-to-r">
-<h1>Intro to R</h1>
-</div>
-<div class="section slide level1">
-
+<div class="section slide level1" id="introduction-to-r">
+<h1>Introduction to R</h1>
 <h2 id="what-is-r">What is R?</h2>
-<p><a href="http://www.r-project.org">www.r-project.org</a> &gt; free software environment for statistical computing and graphics</p>
-<p>Cross-platform (Windows, OSX, Linux)</p>
+<ul>
+<li><a href="http://www.r-project.org">www.r-project.org</a></li>
+<li>Free (gratis/libre) software environment for statistical computing and graphics</li>
+<li>Cross-platform (Windows, OSX, Linux)</li>
+</ul>
 </div>
 <div class="section slide level1">
 
@@ -180,7 +181,7 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
 
 <h2 id="r-studio">R studio</h2>
 <div class="figure">
-<img src="images/rstudio.png" alt="Rstudio" /><p class="caption">Rstudio</p>
+<img src="images/rstudio.png" />
 </div>
 </div>
 <div class="section slide level1">

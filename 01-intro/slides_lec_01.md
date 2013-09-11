@@ -51,19 +51,25 @@
 
 - Install R version 3.0.0 or higher from [CRAN](http://cran.stat.sfu.ca)
 - Install R Studio from [rstudio.org](http://www.rstudio.com/ide/download/desktop)
+- make sure the `knitr` package is installed
+
+```
+install.packages("knitr")
+library(knitr)
+```
 
 ---------------------
 
 # Introduction to Markdown
 
-- why use Markdown?
-    - philosophy:
-        > easy to read; easy to write
-    - easily converted to other file types (`.doc`, `.html`, `.pdf`, etc.) using [Pandoc](http://johnmacfarlane.net/pandoc/)
-    - text files will always be supported/accessible (non-proprietary file format)
-    - text files are happy with Git version control; binary files (e.g., `.doc`, `.docx`) aren't
-    - we can easily embed code in our documents
-        - advanced annotation of R code
+**Why use Markdown?**
+
+- philosophy: "easy to read; easy to write"
+- easily converted to other file types (`.doc`, `.html`, `.pdf`, etc.) using [Pandoc](http://johnmacfarlane.net/pandoc/)
+- text files will always be supported/accessible (non-proprietary file format)
+- text files are happy with Git version control; binary files (e.g., `.doc`, `.docx`) aren't
+- we can easily embed code in our documents
+    - advanced annotation of R code
 
 ---------------------
 
@@ -86,15 +92,12 @@
 
 ---------------------
 
-# Intro to R
-
----------------------
-
+# Introduction to R
 ## What is R?
-[www.r-project.org](http://www.r-project.org)
-> free software environment for statistical computing and graphics
 
-Cross-platform (Windows, OSX, Linux)
+- [www.r-project.org](http://www.r-project.org)
+- Free (gratis/libre) software environment for statistical computing and graphics
+- Cross-platform (Windows, OSX, Linux)
 
 ---------------------
 
@@ -127,7 +130,7 @@ Cross-platform (Windows, OSX, Linux)
 
 ## R studio
 
-![Rstudio](images/Rstudio.png)
+![](images/rstudio.png)
 
 ---------------------
 
@@ -187,6 +190,7 @@ colr <- list("red", "green", "blue")
 
 ## Basic Commands
 ### Arithmetic
+
 ```
 +
 -
@@ -195,6 +199,7 @@ colr <- list("red", "green", "blue")
 ```
 
 ### Powers
+
 ```
 exp()
 ^
@@ -231,7 +236,7 @@ plot(cars)
 ```
 
 ```
-2 + 2 = \`r 2+2\`
+two plus two = `r 2+2`
 ```
 
 ---------------------
@@ -262,13 +267,19 @@ as()
 ```
 # sample data from the trees dataset
 summary(trees)
+
 ?trees # tells us about the dataset
+
 ### Height is in feet
 ### Girth (diameter) is in inches measured at 4'6”
 ### Volume is in cubic feet
+
 radii <- trees$Girth / 2
+
 radii.ft <- radii / 12
+
 volumes <- pi * (radii.ft)^2 * trees$Height
+
 trees$Volume
 ```
 
@@ -319,7 +330,7 @@ if (!require(lme4)) {
 }
 
 # import data
-data <- read.csv("filename.csv, header="TRUE")
+data <- read.csv("filename.csv", header=TRUE)
 
 # first-look at the data
 head(data)
