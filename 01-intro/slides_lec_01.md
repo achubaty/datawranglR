@@ -65,7 +65,7 @@ library(knitr)
 **Why use Markdown?**
 
 - philosophy: "easy to read; easy to write"
-- easily converted to other file types (`.doc`, `.html`, `.pdf`, etc.) using [Pandoc](http://johnmacfarlane.net/pandoc/)
+- easily converted to other file types (`.docx`, `.html`, `.pdf`, etc.) using [Pandoc](http://johnmacfarlane.net/pandoc/)
 - text files will always be supported/accessible (non-proprietary file format)
 - text files are happy with Git version control; binary files (e.g., `.doc`, `.docx`) aren't
 - we can easily embed code in our documents
@@ -89,6 +89,9 @@ library(knitr)
 
 ## Advanced Syntax
 - citations (not covered)
+	- [for more info](http://carlboettiger.info/2012/05/30/knitcitations.html) see `knitcitations` package 
+- write a full manuscript in Markdown! (not covered)
+	- But it can be done. [See Ethan White's example on GitHub](https://github.com/ethanwhite/data-sharing-paper)  	  
 
 ---------------------
 
