@@ -1,0 +1,35 @@
+# Assignment 1: Introduction to R
+
+For this assignment include all your R code in this R Markdown file to support your answer. Your code goes in the code "chunks" below. If you open this file in RStudio then you can run all the R code by clicking on the `Knit HTML` button. You can experiment with code in the R console and then paste your code into this document, or write it directly in this document and send it over to the console with the keyboard shortcut `command+enter` or `control+enter`.
+
+Your professor (an expert in Fire Pokemon) has just returned from Vermillion City. He has been busy collecting data on traits of herds of [Charmanders](http://pokemon.wikia.com/wiki/Charmander). The professor, hearing you are in the new Data Wrangling course asks for you help summarize his findings.
+
+1. Load the `charmander.csv` data file into the R environment.
+
+```{r}
+
+```
+
+2. For which Charmander traits did The Professor collect data (print the column names)? What is the mean mass and variance for this Charmander population? How many females and males did he collect?
+
+```{r}
+
+```
+
+
+3. A new population of Charmanders have been discovered in a lovely town called *In Silicon* (the home of [Porygon](http://pokemon.wikia.com/wiki/Porygon)). In this Charmander population, individuals have been found to be 50% heavier than individuals in the population near Vermillion City. Based on the data collected, simulate the mass data for this new population (assume equal population sizes).
+
+```{r}
+
+```
+
+4. Calculate the difference in mass from the population mean for each individual in each population based on their sex.
+
+```{r}
+
+```
+
+5. Breaking news!!! Prof. Oak visited SFU and was interested in your research. He was curious whether Charmanders are sexually dimorphic. Calculate the average mass of female vs male Charmanders and suggest whether they are sexually dimorphic.
+```{r}
+
+```
