@@ -1,5 +1,5 @@
 % Data Wrangling & Presentation in R
-% Alex Chubaty, Franz Simon, Sean Anderson, Cory Phillis
+% Alex Chubaty, Franz Simon, Sean Anderson, Corey Phillis
 % Fall 2013
 
 ---------------------
@@ -72,11 +72,12 @@
 - paragraphs seperated by new line
 - emphasis using `**bold**` and `*italics*`
 - headers using `#`, `##`, `###`, etc.
-- lists (ordered & unordered)
-- blockquotes
-- code
-- links
-- images
+- ordered lists using `1.`
+- unordered lists using `-`
+- blockquotes using `>`
+- code using backticks
+- links using `[link text](http://link_target)`
+- images using `![picture caption](image.jpg)`
 
 ---------------------
 
@@ -245,6 +246,7 @@ plot(cars)
 ---------------------
 
 ## Data Types
+
 ```
 is()
 
@@ -271,6 +273,7 @@ trees$Volume
 ```
 
 ---------------------
+
 # Working with data in R
 
 ---------------------
@@ -340,6 +343,7 @@ summary(data)
 ---------------------
 
 ### Conditional statements
+
 ```
 if (condition1) {
 	doThisThing
@@ -349,6 +353,7 @@ if (condition1) {
 ```
 
 ### Evaluation of conditions
+
 ```
 <
 >
