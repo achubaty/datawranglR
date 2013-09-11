@@ -29,8 +29,7 @@ Your professor (an expert in Fire Pokemon) has just returned from Vermillion Cit
 
 ```
 
-5. Charmanders typically grow between 500 to 800 g per week. Assuming a uniform distribution of growth rates, using loops to calculate the growth trajectories of 5 male Charmanders that start at 5, 8, 11, and 14 kg respectively. Report the mass of each Charmander after one year.
-
+5. Breaking news!!! Prof. Oak visited SFU and was interested in your research. He was curious whether Charmanders are sexually dimorphic. Calculate the average mass of female vs male Charmanders and suggest whether they are sexually dimorphic.
 ```{r}
 
 ```
