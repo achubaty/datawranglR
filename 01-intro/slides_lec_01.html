@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Chubaty, Franz Simon, Sean Anderson, Corey Phillis" />
+  <title>Data Wrangling &amp; Presentation in R</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js.gz"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Data Wrangling &amp; Presentation in R</h1>
+  <p class="author">
+Alex Chubaty, Franz Simon, Sean Anderson, Corey Phillis
+  </p>
+  <p class="date">Fall 2013</p>
+</div>
+<div class="section slide level1">
+
+<h2 id="rlogo-mdlogo"><img src="images/Rlogo.png" alt="Rlogo" /> + <img src="images/mdlogo.png" alt="mdlogo" /></h2>
+<h3 id="course-instructors">Course Instructors</h3>
+<ul>
+<li>Alex Chubaty <strong>B7250</strong> <script type="text/javascript">
+<!--
+h='&#x73;&#102;&#x75;&#46;&#x63;&#x61;';a='&#64;';n='&#x61;&#x63;&#104;&#x75;&#98;&#x61;&#116;&#x79;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x61;&#x63;&#104;&#x75;&#98;&#x61;&#116;&#x79;&#32;&#x61;&#116;&#32;&#x73;&#102;&#x75;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x61;</noscript></li>
+<li>Corey Phillis <strong>B6226</strong> <script type="text/javascript">
+<!--
+h='&#x73;&#102;&#x75;&#46;&#x63;&#x61;';a='&#64;';n='&#x63;&#112;&#104;&#x69;&#108;&#108;&#x69;&#x73;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x63;&#112;&#104;&#x69;&#108;&#108;&#x69;&#x73;&#32;&#x61;&#116;&#32;&#x73;&#102;&#x75;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x61;</noscript></li>
+<li>Franz Simon <strong>B7250</strong> <script type="text/javascript">
+<!--
+h='&#x73;&#102;&#x75;&#46;&#x63;&#x61;';a='&#64;';n='&#102;&#x73;&#x69;&#x6d;&#x6f;&#110;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#102;&#x73;&#x69;&#x6d;&#x6f;&#110;&#32;&#x61;&#116;&#32;&#x73;&#102;&#x75;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x61;</noscript></li>
+<li>Sean Anderson <strong>B6226</strong> <script type="text/javascript">
+<!--
+h='&#x73;&#102;&#x75;&#46;&#x63;&#x61;';a='&#64;';n='&#x73;&#x63;&#x61;&#110;&#100;&#x65;&#114;&#x73;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x73;&#x63;&#x61;&#110;&#100;&#x65;&#114;&#x73;&#32;&#x61;&#116;&#32;&#x73;&#102;&#x75;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x61;</noscript></li>
+</ul>
+</div>
+<div class="section slide level1">
+
+<h2 id="course-highlights">Course Highlights</h2>
+<ul>
+<li>Meet for 2 hours bi-weekly (6 classes)</li>
+<li>New and experienced R users welcome</li>
+<li>We'll cover:
+<ul>
+<li>Basic R commands and usage</li>
+<li>Producing high-quality graphics using R</li>
+<li>Constructing custom figures</li>
+<li>Manipulating data quickly</li>
+<li>Using Markdown + R to generate reproducible reports</li>
+</ul></li>
+</ul>
+</div>
+<div class="section slide level1">
+
+<h2 id="lecture-schedule">Lecture Schedule</h2>
+<ul>
+<li>Introduction to Markdown &amp; R</li>
+<li>R base graphics</li>
+<li>Data manipulation in R</li>
+<li>R grid graphics</li>
+<li>Custom and advanced plotting</li>
+<li>Extras and additions</li>
+</ul>
+</div>
+<div class="section slide level1">
+
+<h2 id="assignments">Assignments</h2>
+<ul>
+<li>Apply the skills learned and practice using R</li>
+<li>Assignments are due at the start of class</li>
+<li>All assignments will be written in Markdown format</li>
+</ul>
+</div>
+<div class="section slide level1" id="before-we-start">
+<h1>Before we start</h1>
+<ul>
+<li>Install R version 3.0.0 or higher from <a href="http://cran.stat.sfu.ca">CRAN</a></li>
+<li>Install R Studio from <a href="http://www.rstudio.com/ide/download/desktop">rstudio.org</a></li>
+</ul>
+</div>
+<div class="section slide level1" id="introduction-to-markdown">
+<h1>Introduction to Markdown</h1>
+<ul>
+<li>why use Markdown?
+<ul>
+<li>philosophy: &gt; easy to read; easy to write</li>
+<li>easily converted to other file types (<code>.doc</code>, <code>.html</code>, <code>.pdf</code>, etc.) using <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a></li>
+<li>text files will always be supported/accessible (non-proprietary file format)</li>
+<li>text files are happy with Git version control; binary files (e.g., <code>.doc</code>, <code>.docx</code>) aren't</li>
+<li>we can easily embed code in our documents
+<ul>
+<li>advanced annotation of R code</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div class="section slide level1">
+
+<h2 id="basic-syntax">Basic Syntax:</h2>
+<ul>
+<li>paragraphs seperated by new line</li>
+<li>emphasis using <code>**bold**</code> and <code>*italics*</code></li>
+<li>headers using <code>#</code>, <code>##</code>, <code>###</code>, etc.</li>
+<li>ordered lists using <code>1.</code></li>
+<li>unordered lists using <code>-</code></li>
+<li>blockquotes using <code>&gt;</code></li>
+<li>code using backticks</li>
+<li>links using <code>[link text](http://link_target)</code></li>
+<li>images using <code>![picture caption](image.jpg)</code></li>
+</ul>
+</div>
+<div class="section slide level1">
+
+<h2 id="advanced-syntax">Advanced Syntax</h2>
+<ul>
+<li>citations (not covered)</li>
+</ul>
+</div>
+<div class="section slide level1" id="intro-to-r">
+<h1>Intro to R</h1>
+</div>
+<div class="section slide level1">
+
+<h2 id="what-is-r">What is R?</h2>
+<p><a href="http://www.r-project.org">www.r-project.org</a> &gt; free software environment for statistical computing and graphics</p>
+<p>Cross-platform (Windows, OSX, Linux)</p>
+</div>
+<div class="section slide level1">
+
+<h2 id="why-use-r">Why use R?</h2>
+<ul>
+<li>customization</li>
+<li>complexity</li>
+<li>control</li>
+<li>it's <em>free</em></li>
+</ul>
+</div>
+<div class="section slide level1">
+
+<h2 id="using-r">Using R</h2>
+<ul>
+<li>R is a command line tool
+<ul>
+<li>commands can be entered one line at a time</li>
+<li>or by executing the contents of a script file</li>
+</ul></li>
+<li>we will use rstudio IDE</li>
+<li>pressing <code>⇧</code> in the R terminal will recall the previous command</li>
+</ul>
+</div>
+<div class="section slide level1">
+
+<h2 id="getting-help-with-r">Getting help with R</h2>
+<ul>
+<li><code>?</code> and <code>??</code></li>
+<li>Google</li>
+<li>R Stack Exchange</li>
+</ul>
+</div>
+<div class="section slide level1">
+
+<h2 id="r-studio">R studio</h2>
+<div class="figure">
+<img src="images/rstudio.png" alt="Rstudio" /><p class="caption">Rstudio</p>
+</div>
+</div>
+<div class="section slide level1">
+
+<h2 id="basic-r-syntax">Basic R Syntax</h2>
+<pre><code>?
+#
+&lt;-
+=
+()
+{}
+[]
+:
+;
+&quot;&quot;</code></pre>
+</div>
+<div class="section slide level1">
+
+<h2 id="basic-commands">Basic Commands</h2>
+<h3 id="assigning-variables">Assigning variables</h3>
+<pre><code>x &lt;- 3
+y &lt;- 5.291
+z &lt;- 2 * pi
+
+X &lt;- 3.8
+Y &lt;- -45
+Z &lt;- exp(1)</code></pre>
+</div>
+<div class="section slide level1">
+
+<h2 id="basic-commands-1">Basic Commands</h2>
+<h3 id="assigning-vectors">Assigning vectors</h3>
+<pre><code>a &lt;- c(11.2, 33.4, 16.7, 13.2, 7.8, -23.5)
+b &lt;- c(1:10)
+d &lt;- seq(from=0, to=1, by=0.1)</code></pre>
+</div>
+<div class="section slide level1">
+
+<h2 id="basic-commands-2">Basic Commands</h2>
+<h3 id="assigning-variables-1">Assigning variables</h3>
+<pre><code>name &lt;- &quot;Alex&quot;
+names &lt;- c(&quot;Alex&quot;, &quot;Brian&quot;, &quot;Conan&quot;, &quot;Dave&quot;, &quot;Erin&quot;, &quot;Franz&quot;)
+colr &lt;- list(&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;)</code></pre>
+</div>
+<div class="section slide level1">
+
+<h2 id="basic-commands-3">Basic Commands</h2>
+<h3 id="arithmetic">Arithmetic</h3>
+<pre><code>+
+-
+*
+/</code></pre>
+<h3 id="powers">Powers</h3>
+<pre><code>exp()
+^
+log()
+log10()</code></pre>
+</div>
+<div class="section slide level1">
+
+<h2 id="basic-commands-4">Basic Commands</h2>
+<h3 id="mathematical-functions">Mathematical functions</h3>
+<pre><code>sum()
+abs()
+mean()
+sd()
+sqrt()</code></pre>
+</div>
+<div class="section slide level1">
+
+<h2 id="r-markdown">R Markdown</h2>
+<ul>
+<li>Use R Studio to produce <code>.Rmd</code> files</li>
+<li>Embed R code, with solutions and figures</li>
+</ul>
+<p><code>{r} summary(cars, eval=TRUE)</code></p>
+<p><code>{r fig.width=7, fig.height=6} plot(cars)</code></p>
+<pre><code>two plus two = `r 2+2`</code></pre>
+</div>
+<div class="section slide level1">
+
+<h2 id="data-types">Data Types</h2>
+<ul>
+<li>R treats different data in different ways</li>
+<li>R will automatically select what it thinks is the appropriate data type</li>
+<li>However, you may need/want to specify data types yourself</li>
+<li>R uses numeric and string variables, lists, arrays, matrices, dataframes</li>
+</ul>
+</div>
+<div class="section slide level1">
+
+<h2 id="data-types-1">Data Types</h2>
+<pre><code>is()
+
+is.na()
+
+as()</code></pre>
+</div>
+<div class="section slide level1">
+
+<h2 id="an-example">An example</h2>
+<pre><code># sample data from the trees dataset
+summary(trees)
+
+?trees # tells us about the dataset
+
+### Height is in feet
+### Girth (diameter) is in inches measured at 4&#39;6”
+### Volume is in cubic feet
+
+radii &lt;- trees$Girth / 2
+
+radii.ft &lt;- radii / 12
+
+volumes &lt;- pi * (radii.ft)^2 * trees$Height
+
+trees$Volume</code></pre>
+</div>
+<div class="section slide level1" id="working-with-data-in-r">
+<h1>Working with data in R</h1>
+</div>
+<div class="section slide level1">
+
+<h2 id="importing-and-viewing-data">Importing and viewing data</h2>
+<pre><code>setwd(&quot;path/to/data/directory&quot;)
+data &lt;- read.csv(&quot;filename.csv&quot;, header=TRUE )
+summary(data)</code></pre>
+<pre><code>head(data)
+tail(data)
+names(data)</code></pre>
+<pre><code>which()</code></pre>
+</div>
+<div class="section slide level1">
+
+<h2 id="using-additional-packages">Using additional packages</h2>
+<pre><code>install.packages(&quot;plyr&quot;)
+require(plyr)</code></pre>
+</div>
+<div class="section slide level1">
+
+<h2 id="sample-r-script">Sample R script</h2>
+<pre><code># change working directory
+setwd(&quot;path/to/working/directory&quot;)
+
+# install/load additional packages
+if (!require(lme4)) {
+    install.packages(&quot;lme4&quot;); library(lme4)
+}
+
+# import data
+data &lt;- read.csv(&quot;filename.csv&quot;, header=TRUE)
+
+# first-look at the data
+head(data)
+summary(data)
+
+# clean up data
+...
+
+# visualize the data
+...
+
+# analyse the data
+...
+</code></pre>
+</div>
+<div class="section slide level1">
+
+<h2 id="control-operators">Control operators</h2>
+</div>
+<div class="section slide level1">
+
+<h3 id="conditional-statements">Conditional statements</h3>
+<pre><code>if (condition1) {
+    doThisThing
+} else {
+    doAnotherThing
+}</code></pre>
+<h3 id="evaluation-of-conditions">Evaluation of conditions</h3>
+<pre><code>&lt;
+&gt;
+==
+&lt;=
+&lt;=
+!=
+&amp;&amp;
+||</code></pre>
+</div>
+<div class="section slide level1">
+
+<h3 id="loops">Loops</h3>
+<ul>
+<li><code>for</code> loops are used when the number of iterations in <em>known</em></li>
+<li><code>while</code> loops are used when the number of iterations is <em>unknown</em></li>
+</ul>
+<pre><code>pies &lt;- numeric(100)
+for (i in 1:length(pies)) {
+    pies[i] &lt;- pi * i
+}</code></pre>
+<pre><code>x &lt;- 0; done=FALSE
+while (!done) {
+    if (x &gt; 23) {
+        done = TRUE
+    } else {
+        x &lt;- x + pi
+    }
+    print(x, digits=4)
+}</code></pre>
+</div>
+</body>
+</html>
