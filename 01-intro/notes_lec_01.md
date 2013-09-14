@@ -158,7 +158,7 @@ print(y) ###Display the value of y.
 =
 ```
 
-Is the equality symbol. We will learn more about this when we get to control operators.
+Is the equality symbol. We will learn more about this when we get to control operators. It can be used for 
 
 ```
 ()
@@ -297,11 +297,12 @@ sqrt()
 ## Data Types
 
 ```
-is()
+is() ### Is a family of functions. is.numeric() converts a character variable into a numeric variable.
 
-is.na()
+is.na() ### Identifies elements in the data set that are NA. NA means no value in R. Often an important step before data analysis when you need to clean up your data. 
 
-as()
+as() ### This is a family of functions that allow you to coerce an object to another type. For example, you can convert a dataframe to a matrix but take a dataframe such as trees using the following code:
+matrix.trees <- as.matrix(trees)
 ```
 
 ---------------------
@@ -330,19 +331,25 @@ trees$Volume
 ## Importing and viewing data
 
 ```
-setwd("path/to/data/directory")
-data <- read.csv("filename.csv", header=TRUE )
-summary(data)
+setwd("path/to/data/directory") ### Quotations are important for setwd(). You should set your working directory at the beginning of each script. You should have a different folder for each project or group of related projects.
+
+data <- read.csv("filename.csv", header=TRUE ) ### Imports your data from a csv into a dataframe. The header argument lets you import the first row of your spreadsheet as header for your dataframe.
+
+summary(data) ### Summarizes the data giving basic summary statistics depending on datatype.
 ```
 
 ```
-head(data)
-tail(data)
-names(data)
+head(data)  ### Prints the first five lines and the header of a dataframe.
+tail(data)  ### Prints the last five lines and the header of a dataframe.
+names(data) ### Prints only the headers of the dataframe.
 ```
 
 ```
-which()
+which() ### Is used with truth operators to find the position of elements of which the statement is true. For example,
+
+d <- c(3, 4, 1, 9, 34)
+
+which(d > 7) ### which will print 4, & 5.
 ```
 
 ---------------------
@@ -406,19 +413,32 @@ if (condition1) {
 ```
 <
 >
-==
+== ### You must use two since = means assign
 <=
 <=
-!=
-&&
-||
+!= ### Does not equal
+&& ### And
+|| ### In programming "or" is inclusive. 
 ```
+
+This means in programming if you say "Bob is a tall or a boy" It is true for all of these conditions:
+
+- Bob is tall, and not boy, 
+- Bob is tall, and a boy,
+- Bob is short and a boy
+
+The only thing it is not true for is Bob is short and not a boy.
 
 ---------------------
 
 ### Loops
 - `for` loops are used when the number of iterations in *known*
+    - An example of where you would use this kind of loop is if you wanted to know how a population of animals grew over the next 50 years. You will want to stop at 50 years so you know how many loops you need.
+
+
 - `while` loops are used when the number of iterations is *unknown*
+    - An example would be instead of wanting to know the population size at 50 years if you wanted to know how long until a population went extinct. You would keep running the simulation until the population hit zero. For this kind of task you won't know for how long you will have to run the simulation. 
+- Most of the time you should use `for` loops since it is possible when using a `while` loop to great an infinite loop that never finishes.
 
 ```
 pies <- numeric(100)
