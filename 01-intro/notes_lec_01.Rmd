@@ -77,9 +77,10 @@ When you open R studio you will notice four windows. Today you will only focus o
 
 Now you can create a new R script by typing `Ctrl + Shift + N` or going to the File tab and clicking on new R script. You can now write and delete text. For example type:
 
-```{r}
+```
 2+2
 ```
+
 again and press enter. Nothing will happen. In order to actually run your code highlight `2 + 2` and press `Ctrl + Enter`. You will see in the bottom right panel that your code will have executed.
 
 We have now learned how to run a script in R. A whole new world has been opened to you! And it is a dazzling place to be.
