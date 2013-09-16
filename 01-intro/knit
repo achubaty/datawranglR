@@ -1,0 +1,4 @@
+#!/usr/bin/Rscript
+
+library(knitr)
+knit("notes_lec_01.Rmd")
