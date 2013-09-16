@@ -48,7 +48,7 @@ A more interesting question is "Why use R?" There are several reasons:
 1. Customization
   -  R allows you more control over graphing and statistics than most GUI platforms like JMP.
 2. Complexity
-  -  R is open source and is supported by a large community. This means that new statistcal techniques when created are quicker to be implented than using SAS since you don't have to wait for a new release of your software 
+  -  R is open source and is supported by a large community. This means that new statistical techniques when created are quicker to be implemented than using SAS since you don't have to wait for a new release of your software 
 3. It's *free*
   - This is one of its biggest selling points. As graduate students you are two things: poor and transient. Which means that unless your supervisor has paid a lot of money for a license you will not be able to afford buying proprietary software. The more important thing is you will only be at graduate school for 2-6 years. This means that after you leave university you will no longer be able to work on your statistics anymore if you use a proprietary product.
 
@@ -59,27 +59,23 @@ A more interesting question is "Why use R?" There are several reasons:
 
 For example if you open up R console and type:
 
-```{r} 2 + 2 
+```
+2 + 2 
 ```
 
 Then press enter you should get a line saying `r 2+2`.
 
-Your code will have been executed. 
-  - pressing the up arrow in the R terminal will recall the previous command
+Your code will have been executed. Pressing the up arrow in the R terminal will recall the previous command
  
-Entering things in line by line is usually inefficent and does not take advantage of one of the big pros of R which is reproducibility. Reprocuibility allows you to perform the same action again in the exact same way. This allows you to run the same analysis on different data, or be able to address reviewer mistakes quicker because you will have saved the commands saying exactly what it is you have done. 
+Entering things in line by line is usually inefficient and does not take advantage of one of the big pros of R which is reproducibility. Reproducibility allows you to perform the same action again in the exact same way. This allows you to run the same analysis on different data, or be able to address reviewer mistakes quicker because you will have saved the commands saying exactly what it is you have done. 
 
-- You can instead execute code by writing a script and executing the script. 
-
-This approach has the advantage of reproduciblity. Also it allows for you to make far bigger and more complex programs since you do not have to re-enter in each command. To do this you will need a code editor. We will be using R-Studio for this course.
+You can instead execute code by writing a script and executing the script. This approach has the advantage of reproducibility. Also it allows for you to make far bigger and more complex programs since you do not have to re-enter in each command. To do this you will need a code editor. We will be using R-Studio for this course.
 
 ## Introduction to R-Studio
 
 When you open R studio you will notice four windows. Today you will only focus on the two on the right. The top one is the editor and the bottom window is the R-Console that you used previously.
 
-Now you can create a new R script by typing `Ctrl + Shift + N` or going to the File tab and clicking on new R script.
-
-You will notice that this script works exactly like notepad. You can write and delete text. For example type:
+Now you can create a new R script by typing `Ctrl + Shift + N` or going to the File tab and clicking on new R script. You can now write and delete text. For example type:
 
 ```{r}
 2+2
@@ -124,11 +120,15 @@ This is the most important symbol in all of R! It is used to create comments. Co
 
 This is the assign symbol. It says take what you have on the right and make whatever is on the left of it have that value, for example:
 
-```{r}
+```
 x <- 2
-### Assigns the variable x the value of 2. You can now do fun things like
-y <- x + 5 ### Add the 5 to the value of x.
-print(y) ###Display the value of y.
+# Assigns the variable x the value of 2. You can now do fun things like
+
+y <- x + 5 
+# Add the 5 to the value of x.
+
+print(y)  
+# Display the value of y.
 ```
 
 ```
@@ -177,19 +177,23 @@ Assigning variables is a key of programming. It is a little different from the w
 
 ```
 x <- 3
-print(x) ## x has the value of 3. 
+print(x) 
+# x has the value of 3. 
+
 x <- 2
 x <- 7
-print(x) ## x now has the value of 7. The assign is not an equality sign it will rewrite the value of x if you give x another value. 
+print(x) 
+# x now has the value of 7. The assign is not an equality sign it will rewrite
+# the value of x if you give x another value. 
 ```
 
-The fact that you will rewrite over symbols if you assign something to them is foundational. This is often very useful but you can run into big problems when you have bigger scripts. To avoid overridding a value when you don't want to I suggest using informative names. Maybe the variable `x` was my mass when I was born in kg. So instead call it `massBirthkg` or `mass.birth.kg`. You can use any name you want as long as it don't start with a number. You can use numbers in variable names just not as the first letter.
+The fact that you will rewrite over symbols if you assign something to them is foundational. This is often very useful but you can run into big problems when you have bigger scripts. To avoid overriding a value when you don't want to I suggest using informative names. Maybe the variable `x` was my mass when I was born in kg. So instead call it `massBirthkg` or `mass.birth.kg`. You can use any name you want as long as it don't start with a number. You can use numbers in variable names just not as the first letter.
 
 ### Assigning vectors
 
 Vectors are an ordered list of numbers. Thing of variables as a single column of mailboxes at a post office. Each mail box (element in computer speak) contains your bills(a value) however they also have an address on them. Letting you refer to them as the 1st mail box, the 2nd, etc... 
 
-There are mutiple ways to create vectors, for example:
+There are multiple ways to create vectors, for example:
 
 ```
 a <- c(11.2, 33.4, 16.7, 13.2, 7.8, -23.5)
@@ -216,10 +220,10 @@ This flexibility can lead to trouble down the road however because functions wil
 You can do arithmetic in R and thankfully the notation is familiar
 
 ```
-+ ### Add
-- ### Subtract
-* ### Multiply
-/ ### Divide
++ # Add
+- # Subtract
+* # Multiply
+/ # Divide
 ```
 
 These will follow BEDMAS. 
@@ -392,12 +396,12 @@ if (condition1) {
 ```
 <
 >
-== ### You must use two since = means assign
+== # You must use two since = means assign
 <=
 <=
-!= ### Does not equal
-&& ### And
-|| ### Or (in programming "or" is inclusive)
+!= # Does not equal
+&& # And
+|| # Or (in programming "or" is inclusive)
 ```
 
 This means in programming if you say "Bob is a tall or a boy" It is true for all of these conditions:
@@ -409,6 +413,7 @@ This means in programming if you say "Bob is a tall or a boy" It is true for all
 The only thing it is not true for is Bob is short and not a boy.
 
 ### Loops
+
 - `for` loops are used when the number of iterations in *known*
     - An example of where you would use this kind of loop is if you wanted to know how a population of animals grew over the next 50 years. You will want to stop at 50 years so you know how many loops you need.
 
