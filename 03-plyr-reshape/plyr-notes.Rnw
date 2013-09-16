@@ -1,19 +1,20 @@
 % Sean Anderson, 2011-13, sean@seananderson.ca
-\documentclass{tufte-handout}
+%\documentclass{tufte-handout}
+\documentclass[12pt]{article}
 \usepackage{geometry} 
 \geometry{letterpaper}
 \usepackage{graphicx}
 \usepackage{Sweave} 
 \usepackage{url}
-%\usepackage[usenames,dvipsnames]{color}
-%\usepackage[pdftex,colorlinks=true,urlcolor=MidnightBlue]{hyperref}
-%\usepackage[pdftex,colorlinks=true]{hyperref}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[pdftex,colorlinks=true,urlcolor=MidnightBlue]{hyperref}
+\usepackage[pdftex,colorlinks=true]{hyperref}
 \usepackage{booktabs}
 \usepackage{listings}
 
 \title{A quick introduction to plyr}
 
-\author{Sean C. Anderson}
+\author{Sean C. Anderson\\ sean@seananderson.ca}
 
 \setlength\parskip{0.1in}
 \setlength\parindent{0in}
