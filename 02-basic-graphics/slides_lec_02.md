@@ -24,7 +24,9 @@
 
 ---------------------
 
-## Structure()
+## Structure of Arbitrary Objects
+
+- str()
 
 ---------------------
 
@@ -36,7 +38,11 @@
 
 ## Scatter Plots
 
-`plot(x, y)`
+- `plot(x, y)`
+- # add solid horizontal lines at y=1,5,7 
+- abline(h=c(1,5,7))
+- # add dashed blue verical lines at x = 1,3,5,7,9
+- abline(v=seq(1,10,2),lty=2,col="blue")
 
 ---------------------
 
@@ -52,19 +58,25 @@
 
 ## Bar Graphs
 
-`barplot(x , y)`
+- Discrete independent 
+- continous reponse variable
+- `barplot(x , y)`
+- `as.factor(x)`
 
 ---------------------
 
 ## Histograms
 
-`hist(x , y)`
+- Approximation of a probablility density funciton.
+- `hist(x , y)`
 
 ---------------------
 
 ## Box Plots
 
-`boxplot()`
+- Graph factors based on their quartiles
+- `boxplot()`
+- Another solution are violon plots
 
 ---------------------
 
@@ -78,36 +90,49 @@
 
 ## Colour
 
-- Names
+- Text
 - RGB
 - CMYK
 - HEX
 
 ---------------------
 
-## Legends
+## Colour Brewer
 
----------------------
-
-## Axes and Texts
-
----------------------
-
-## Points
-
----------------------
-
-## Legends
+- [Colour Brewer](http://colorbrewer2.org/)
 
 ---------------------
 
 ## Customizing the axis
 
+- Two ways of dealing with axes
+    - Inside the plot command
+    - Using the function `axis()`
 
 ---------------------
 
+## Points
+
+ - `plot(x , y, pch = 2, cex = 3, ity= 5)`
 
 ---------------------
 
+## Legends
+
+- `legend("top", legend = LETTERS[1:6])`
 
 ---------------------
+
+## Adding Text
+
+- `text(location, "text to place", pos, ...)`
+- `mtext("text to place", side, line=n, ...)`
+
+
+---------------------
+
+## Whole new world 
+- Polygons
+
+---------------------
+
