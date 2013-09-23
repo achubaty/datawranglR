@@ -43,8 +43,8 @@
 - `plot(x, y)`
 - `points(x,y)`	### adds x vs y points to existing plot
 - `curve(x)`		### plots continuous data / functions
-- # add dashed blue verical lines at x = 1,3,5,7,9
-- `abline(v=seq(1,10,2),lty=2,col="blue")`
+
+- `abline(v = seq(1, 10, 2),lty  2,col = "blue")` ### create a sequential palette for usage and show colors
 
 ---------------------
 
@@ -63,7 +63,7 @@
 
 - Discrete independent 
 - continous reponse variable
-- `barplot(x , y)`
+- `barplot(x, y)`
 - `as.factor(x)`
 
 ---------------------
@@ -72,7 +72,7 @@
 
 - Approximation of a probablility density funciton.
 - `hist(x , y, breaks = 10)`
-- curve(dnorm(x, mean=mean(y), sd=sd(y)), add=TRUE)
+- `curve(dnorm(x, mean=mean(y), sd=sd(y)), add=TRUE)`
 
 
 ---------------------
@@ -104,7 +104,14 @@
 
 ## Colour Brewer
 
-- [Colour Brewer](http://colorbrewer2.org/)
+- [Colour Brewer](http://colorbrewer2.org/) 
+ 
+- `display.brewer.all()` ###
+ 
+- `install.packages("RColorBrewer")` ###
+- `require(RColorBrewer)` ###
+- `mypalette <- brewer.pal(7,"Greens")` ### create a sequential palette for usage and show colors
+- `image(1:7, 1, as.matrix(1:7), col = mypalette)`
 
 ---------------------
 
@@ -119,8 +126,9 @@
 
 ## Points
 
- - `plot(x , y, pch = 2, cex = 3, ity= 5)`
- - 
+- `plot(x , y1, pch = 2, cex = 3, ity= 5)`
+- `points(x, y2, pch = 3)` ### Adds points to a graph
+
 
 ---------------------
 
