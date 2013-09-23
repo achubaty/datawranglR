@@ -1,7 +1,6 @@
 % Data Wrangling & Presentation in R
 % Lecture 2: Introduction to Base Graphics
 % Franz Simon, Alex Chubaty, Sean Anderson, Corey Phillis
-% Fall 2013
 
 ---------------------
 
@@ -40,52 +39,68 @@
 
 ## Scatter Plots
 
-- `plot(x, y)`
-- `points(x,y)`	### adds x vs y points to existing plot
-- `curve(x)`		### plots continuous data / functions
+```
+plot(x, y)
+points(x,y)	### adds x vs y points to existing plot
+curve(x)	### plots continuous data / functions
 
-- `abline(v = seq(1, 10, 2),lty  2,col = "blue")` ### create a sequential palette for usage and show colors
+### create a sequential palette for usage and show colors
+abline(v=seq(1, 10, 2), lty=2, col="blue")
+```
 
 ---------------------
 
 ## Saving your Graphs
 
-
-- `pdf(save = "charmander.pdf", width = 5, height = 5 )` ### Dimensions in inches
-- `jpeg(save = "charmander.pdf", width = 500, height = 500)` ### Size in pixels
-- `jpeg(save = "charmander.pdf", width = 500, height = 500, units= "in")` ### Or px, cm, or mm 
-- `dev.off()` ### turns off the plotting device
+```
+pdf("charmander.pdf", width=5, height=5) ### Dimensions in inches
+jpeg("charmander.jpg", width=500, height=500) ### Size in pixels
+jpeg("charmander.jpg", width=500, height=500, units="in") ### Or px, cm, or mm 
+dev.off() ### turns off the plotting device
+```
 
 
 ---------------------
 
 ## Bar Graphs
 
-- Discrete independent 
-- continous reponse variable
-- `barplot(x, y)`
-- `as.factor(x)`
+- Discrete independent variable
+- Continous response variable
+
+```
+barplot(x, y)
+as.factor(x)
+```
 
 ---------------------
 
 ## Histograms
 
 - Approximation of a probablility density funciton.
-- `hist(x , y, breaks = 10)`
-- `curve(dnorm(x, mean=mean(y), sd=sd(y)), add=TRUE)`
 
+```
+hist(x, y, breaks=10)
+hist(x, y, breaks=10, freq=FALSE)
+curve(dnorm(x, mean=mean(y), sd=sd(y)), add=TRUE)
+```
 
 ---------------------
 
-## Box Plots
+## Box & Whisker Plots
 
 - Graph factors based on their quartiles
-- `boxplot(mpg ~ cyl, data = mtcars, main="Car Milage Data", xlab = "Number of Cylinders", ylab="Miles Per Gallon")`
-- Another solution are violin plots
+
+```
+boxplot(mpg ~ cyl, data=mtcars, main="Car Milage Data",
+	xlab="Number of Cylinders", ylab="Miles Per Gallon")
+```
+
+- Another solution are violin plots (`vioplot`)
 
 ---------------------
 
 ## Customization
+
 - Colour
 - Legends
 - Axes and Text
@@ -106,12 +121,14 @@
 
 - [Colour Brewer](http://colorbrewer2.org/) 
  
-- `display.brewer.all()` ###
- 
-- `install.packages("RColorBrewer")` ###
-- `require(RColorBrewer)` ###
-- `mypalette <- brewer.pal(7,"Greens")` ### create a sequential palette for usage and show colors
-- `image(1:7, 1, as.matrix(1:7), col = mypalette)`
+```
+display.brewer.all() ###
+
+install.packages("RColorBrewer") ###
+require(RColorBrewer) ###
+my.palette <- brewer.pal(7, "Greens") ### create a sequential palette for usage and show colors
+image(1:7, 1, as.matrix(1:7), col=my.palette )
+```
 
 ---------------------
 
@@ -126,40 +143,53 @@
 
 ## Points
 
-- `plot(x , y1, pch = 2, cex = 3, ity= 5)`
-- `points(x, y2, pch = 3)` ### Adds points to a graph
-
+```
+plot(x , y1, pch 2, cex = 3, ity= 5)
+points(x, y2, pch=3, type="p") ### Adds points to a graph
+points(x, y2, pch=3, type="l") ### Adds lines a graph
+points(x, y2, pch=3, type="b") ### Adds points and lines a graph
+```
 
 ---------------------
 
 ## Specifying additional plot parameters
-- `curve(x^2,xlim=c(-10,10),col=”blue”,lwd=2)`
-- `curve(0.5*x^2,xlim=c(-10,10),col=”red”,add=TRUE)`
-- `abline(v=0)`
 
-- `pch` ### (point character)
-- `lty` ### (line type)
-- `lwd` ### (line width)
-- `cex` ### (character expansion)
-- `xlab, ylab, main` ### (axis/main labels)
+```
+curve(x^2,xlim=c(-10,10),col=”blue”,lwd=2)
+curve(0.5*x^2,xlim=c(-10,10),col=”red”,add=TRUE)
+abline(v=0)
+
+pch ### (point character)
+lty ### (line type)
+lwd ### (line width)
+cex ### (character expansion)
+```
+
+`xlab, ylab, main ### (axis/main labels)`
 
 ---------------------
 
 ## Legends
 
-- `legend("top", legend = LETTERS[1:6])`
+```
+legend("top", legend=LETTERS[1:6])
+```
 
 ---------------------
 
 ## Adding Text
 
-- `text(location, "text to place", pos, ...)`
-- `mtext("text to place", side, line=n, ...)` ### Write in the margins
+```
+text(location, "text to place", pos, ...)
+
+mtext("text to place", side, line=n, ...) ### Write in the margins
+```
 
 
 ---------------------
 
 ## Whole new world 
+
 - Polygons
 
 ---------------------
