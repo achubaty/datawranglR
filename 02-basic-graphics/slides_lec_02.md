@@ -26,32 +26,35 @@
 
 ## Structure of Arbitrary Objects
 
-- str()
+- Functions in R require specific objects are arguments
+- Being able to access specific elements of custum objects in R
+- `str()`
 
 ---------------------
 
 ## Base Plotting
 
-- Base plot is done mostly with `plot()`
+- Plot your data with `plot()`
 
 ---------------------
 
 ## Scatter Plots
 
 - `plot(x, y)`
-- # add solid horizontal lines at y=1,5,7 
-- abline(h=c(1,5,7))
+- `points(x,y)`	### adds x vs y points to existing plot
+- `curve(x)`		### plots continuous data / functions
 - # add dashed blue verical lines at x = 1,3,5,7,9
-- abline(v=seq(1,10,2),lty=2,col="blue")
+- `abline(v=seq(1,10,2),lty=2,col="blue")`
 
 ---------------------
 
 ## Saving your Graphs
 
 
-`pdf(save = "charmander.pdf")`
-`jpeg(save = "charmander.pdf")`
-`dev.off()`
+- `pdf(save = "charmander.pdf", width = 5, height = 5 )` ### Dimensions in inches
+- `jpeg(save = "charmander.pdf", width = 500, height = 500)` ### Size in pixels
+- `jpeg(save = "charmander.pdf", width = 500, height = 500, units= "in")` ### Or px, cm, or mm 
+- `dev.off()` ### turns off the plotting device
 
 
 ---------------------
@@ -68,7 +71,9 @@
 ## Histograms
 
 - Approximation of a probablility density funciton.
-- `hist(x , y)`
+- `hist(x , y, breaks = 10)`
+- curve(dnorm(x, mean=mean(y), sd=sd(y)), add=TRUE)
+
 
 ---------------------
 
@@ -76,7 +81,7 @@
 
 - Graph factors based on their quartiles
 - `boxplot()`
-- Another solution are violon plots
+- Another solution are violin plots
 
 ---------------------
 
@@ -108,12 +113,27 @@
 - Two ways of dealing with axes
     - Inside the plot command
     - Using the function `axis()`
+    - `axis(side, at = NULL, labels = TRUE, tick = TRUE, ...)`
 
 ---------------------
 
 ## Points
 
  - `plot(x , y, pch = 2, cex = 3, ity= 5)`
+ - 
+
+---------------------
+
+## Specifying additional plot parameters
+- `curve(x^2,xlim=c(-10,10),col=”blue”,lwd=2)`
+- `curve(0.5*x^2,xlim=c(-10,10),col=”red”,add=TRUE)`
+- `abline(v=0)`
+
+- `pch` ### (point character)
+- `lty` ### (line type)
+- `lwd` ### (line width)
+- `cex` ### (character expansion)
+- `xlab, ylab, main` ### (axis/main labels)
 
 ---------------------
 
@@ -126,7 +146,7 @@
 ## Adding Text
 
 - `text(location, "text to place", pos, ...)`
-- `mtext("text to place", side, line=n, ...)`
+- `mtext("text to place", side, line=n, ...)` ### Write in the margins
 
 
 ---------------------
