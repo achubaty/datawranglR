@@ -1,6 +1,6 @@
 % Data Wrangling & Presentation in R
 % Lecture 2: Introduction to Base Graphics
-% Alex Chubaty, Franz Simon, Sean Anderson, Corey Phillis
+% Franz Simon, Alex Chubaty, Sean Anderson, Corey Phillis
 % Fall 2013
 
 ---------------------
@@ -80,7 +80,7 @@
 ## Box Plots
 
 - Graph factors based on their quartiles
-- `boxplot()`
+- `boxplot(mpg ~ cyl, data = mtcars, main="Car Milage Data", xlab = "Number of Cylinders", ylab="Miles Per Gallon")`
 - Another solution are violin plots
 
 ---------------------
