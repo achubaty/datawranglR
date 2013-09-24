@@ -7,7 +7,7 @@
 ## Today's Lecture
 
 - Introduction to Base Plot
-- Advaneced objects using Structure()
+- Advanced objects using Structure()
 - Introduction to graphics customization
 
 ---------------------
@@ -17,7 +17,7 @@
 - Base Plot
 - Grid Graphics
 - Lattice Graphics
-- ggplot2 (Next lecture's topic)
+- `ggplot2` (Next lecture's topic)
 
 
 
@@ -26,7 +26,7 @@
 ## Structure of Arbitrary Objects
 
 - Functions in R require specific objects are arguments
-- Being able to access specific elements of custum objects in R
+- Being able to access specific elements of custom objects in R
 - `str()`
 
 ---------------------
@@ -65,7 +65,7 @@ dev.off() ### turns off the plotting device
 ## Bar Graphs
 
 - Discrete independent variable
-- Continous response variable
+- Continuous response variable
 
 ```
 barplot(x, y)
@@ -76,7 +76,7 @@ as.factor(x)
 
 ## Histograms
 
-- Approximation of a probablility density funciton.
+- Approximation of a probability density function.
 
 ```
 hist(x, y, breaks=10)
@@ -126,7 +126,7 @@ display.brewer.all() ###
 
 install.packages("RColorBrewer") ###
 require(RColorBrewer) ###
-my.palette <- brewer.pal(7, "Greens") ### create a sequential palette for usage and show colors
+my.palette <- brewer.pal(7, "Greens") ### create a sequential palette for usage and show colours
 image(1:7, 1, as.matrix(1:7), col=my.palette )
 ```
 
