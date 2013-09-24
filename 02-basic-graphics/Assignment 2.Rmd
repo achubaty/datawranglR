@@ -10,26 +10,28 @@ Your professor (an expert in Fire Pokemon) has just returned from Vermillion Cit
 
 ```
 
-2. Plot male and female Charmander mass. I want the graph to update as soon as you enter new data.
+2. Plot male and female Charmander mass.
 
 ```{r}
 
 ```
 
+3. Ecologists are often accused of Physics envy, so pretend the Charmanders are [Voltorbs](http://pokemon.wikia.com/wiki/Voltorb)(spheres) and make a scatter plot of their mass vs height. Add a blue line through these data.
 
-3. Ecologists are often accused of Physics envy, so pretend the Charmanders are [Voltorbs](http://pokemon.wikia.com/wiki/Voltorb)(spheres) and make a scatter plot of their mass vs height. Add a blue line through this data.
-
-```{r}
-
-```
-
-4. Customize the axis. Add custom legends
+[DO THEY KNOW HOW TO FIT AND EXTRACT A REGRESSION LINE YET?]
 
 ```{r}
 
 ```
 
-5. Add text to the graph labeling the graph. Create a legend.
+4. Re-plot the data and this time: (1) do not plot the axes with the `plot()` command, (2) add the axes with the `axis()` command with tick marks and labels at [FILL IN SOMETHING HERE], and (3) change the axis labels to something other than the default.
+
+```{r}
+
+```
+
+5. Add a panel label `(a)` in the top left corner. Add a legend in the top right... [THERE ISN'T MUCH TO ADD A LEGEND ABOUT YET]
+
 ```{r}
 
 ```
