@@ -7,7 +7,7 @@
 ## Today's Lecture
 
 - Introduction to Base Plot
-- Advanced objects using Structure()
+- Advanced objects using the "structure" command
 - Introduction to graphics customization
 
 ---------------------
