@@ -17,7 +17,7 @@
 - Base Plot
 - Grid Graphics
 - Lattice Graphics
-- `ggplot2` (Next lecture's topic)
+- `ggplot2` (Lecture topic in two classes)
 
 
 
