@@ -1,0 +1,35 @@
+# Assignment 1: Introduction to R
+
+For this assignment include all your R code in this R Markdown file to support your answer. Your code goes in the code "chunks" below. If you open this file in RStudio then you can run all the R code by clicking on the `Knit HTML` button. You can experiment with code in the R console and then paste your code into this document, or write it directly in this document and send it over to the console with the keyboard shortcut `command+enter` or `control+enter`.
+
+Your professor (an expert in Fire Pokemon) has just returned from Vermillion City. He has been busy collecting data on traits of herds of [Charmanders](http://pokemon.wikia.com/wiki/Charmander). The professor, hearing you are in the new Data Wrangling course asks for you help summarize his findings.
+
+1. Load the `charmander.csv` data file into the R environment. Don't display this code in the knitted document.
+
+```{r}
+
+```
+
+2. Plot male and female Charmander mass. I want the graph to update as soon as you enter new data.
+
+```{r}
+
+```
+
+
+3. Ecologists are often accused of Physics envy, so pretend the Charmanders are [Voltorbs](http://pokemon.wikia.com/wiki/Voltorb)(spheres) and make a scatter plot of their mass vs height. Add a blue line through this data.
+
+```{r}
+
+```
+
+4. Customize the axis. Add inward ticks. Insert Gamma
+
+```{r}
+
+```
+
+5. Add text to the graph labeling the graph.
+```{r}
+
+```
