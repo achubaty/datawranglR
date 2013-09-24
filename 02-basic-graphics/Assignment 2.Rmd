@@ -23,13 +23,13 @@ Your professor (an expert in Fire Pokemon) has just returned from Vermillion Cit
 
 ```
 
-4. Customize the axis. Add inward ticks. Insert Gamma
+4. Customize the axis. Add custom legends
 
 ```{r}
 
 ```
 
-5. Add text to the graph labeling the graph.
+5. Add text to the graph labeling the graph. Create a legend.
 ```{r}
 
 ```
