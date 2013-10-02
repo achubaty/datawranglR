@@ -11,4 +11,3 @@ reshape:
 clean:
 	rm -rf *.tex *.log *.bbl *.blg *.out *.toc *.aux *.fdb_latexmk *.fls
 	rm plyr-notes-00*.pdf
-	rm reshape-notes-00*.pdf

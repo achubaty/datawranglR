@@ -2,14 +2,11 @@
 \documentclass[12pt]{article}
 \usepackage{geometry}
 \geometry{letterpaper}
-\usepackage{graphicx}
 \usepackage{Sweave}
 \usepackage{url}
 \usepackage[usenames,dvipsnames]{color}
 \usepackage[pdftex,colorlinks=true,urlcolor=MidnightBlue]{hyperref}
 \usepackage[pdftex,colorlinks=true]{hyperref}
-\usepackage{booktabs}
-\usepackage{listings}
 
 \usepackage{titling}
 \newcommand{\subtitle}[1]{%
@@ -37,29 +34,26 @@
 \setlength\parskip{0.1in}
 \setlength\parindent{0in}
 
-
 \begin{document}
 \SweaveOpts{concordance=TRUE}
 \maketitle
 
-\reshape\ is an \R\ package written by Hadley Wickham that makes it easy
-to transform data between ``wide'' and ``long'' format. It is based around two
+\reshape\ is an \R\ package written by Hadley Wickham that makes it easy to
+transform data between ``wide'' and ``long'' format. It is based around two
 key functions: \melt\ and \cast:
 
 \melt\ takes \wfd\ and melts it into \lfd.
 
 \cast\ takes \lfd\ and casts it into \wfd.
 
-Think of working with metal: if you melt metal, it drips and becomes long.
-If you cast it into a mold, it becomes wide.
+Think of working with metal: if you melt metal, it drips and becomes long. If
+you cast it into a mold, it becomes wide.
 
-It turns out that you need \wfd\ for some types of data analysis
-and \lfd\ for others. In reality, you need \lfd\ much
-more commonly than \wfd. For example, \ggplot\ requires
-\lfd, \plyr\ requires \lfd, and most modelling
-functions (such as \texttt{lm()}, \texttt{glm()}, and \texttt{gam()}) require
-\lfd. But people often find it easier to record their data in wide
-format.
+It turns out that you need \wfd\ for some types of data analysis and \lfd\ for
+others. In reality, you need \lfd\ much more commonly than \wfd. For example,
+\ggplot\ requires \lfd, \plyr\ requires \lfd, and most modelling functions
+(such as \texttt{lm()}, \texttt{glm()}, and \texttt{gam()}) require \lfd. But
+people often find it easier to record their data in wide format.
 
 \clearpage
 
@@ -88,15 +82,15 @@ melt(d)
 Long-format data has a column for possible variable types and a column for the
 values of those variables. Long-format data isn't necessarily only two
 columns. For example, we might have ozone measurements for each day of the
-year. In that case, we could have another column for for day. In
-other words, there are different levels of ``longness''. The ultimate shape you
-want to get your data into will depend on what you are doing with it.
+year. In that case, we could have another column for for day. In other words,
+there are different levels of ``longness''. The ultimate shape you want to get
+your data into will depend on what you are doing with it.
 
 \section{Wide- to \lfd: the \melt\ function}
 
-For this example we'll work with the \texttt{airquality} dataset that is
-built into \R. First we'll change the column names to lower case to make them
-easier to work with. Then we'll look at the data:
+For this example we'll work with the \texttt{airquality} dataset that is built
+into \R. First we'll change the column names to lower case to make them easier
+to work with. Then we'll look at the data:
 
 <<<>>=
 names(airquality) <- tolower(names(airquality))
@@ -161,7 +155,8 @@ head(aqw)
 
 So, besides re-arranging the columns, we've recovered our original data.
 
-One ``mistake'' you might find yourself making is casting a data set in which there is more than one value per data cell. For example:
+One ``mistake'' you might find yourself making is casting a data set in which
+there is more than one value per data cell. For example:
 
 <<>>=
 dcast(aql, month ~ variable)
@@ -186,7 +181,7 @@ values.
 dcast(aql, month ~ variable, fun.aggregate = mean, na.rm = TRUE)
 @
 
-Unlike \melt\, there are some other fancy things you can do with \dcast\ that
+Unlike \melt, there are some other fancy things you can do with \dcast\ that
 I'm not going to cover here. It's well worth reading the help file
 \texttt{?dcast}. For example, you can compute summaries for rows and columns,
 subset the columns, and fill in missing cells in one call to \dcast.
@@ -199,11 +194,10 @@ Read the package help:\\
 See the \reshape\ website:\\
 \url{http://had.co.nz/reshape/}
 
-And read the paper on \reshape:\\
+And read the paper on \texttt{reshape}:\\
 Wickham, H. (2007). Reshaping data with the \texttt{reshape} package. 21(12):1--20.
-\url{http://www.jstatsoft.org/v21/i12}
-
-
-
+\\\url{http://www.jstatsoft.org/v21/i12}\\
+(But note that the paper is written for the \texttt{reshape} package not the
+\texttt{reshape2} package.)
 
 \end{document}
