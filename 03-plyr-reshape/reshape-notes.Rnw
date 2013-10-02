@@ -137,20 +137,33 @@ to \wfd\ can take a bit more thought. It usually involves some head scratching
 and some trial and error for all but the simplest cases. Let's go through some
 examples.
 
-In \reshape\ there are multiple \cast\ functions. We're going to work with
-\dcast, which returns a \texttt{data.frames}, which you will most commonly
-work with. (There is also \texttt{acast} to return a vector, matrix, or
-array.)
+In \reshape\ there are multiple \cast\ functions. Since you will most commonly
+work with \texttt{data.frame} objects, we'll explore the \dcast\ function.
+(There is also \texttt{acast} to return a vector, matrix, or array.)
 
 Let's take the long-format \texttt{airquality} data and \cast\ it into some
 different wide formats. To start with, we'll recover the same format we
-started with and compare the two:
+started with and compare the two.
+
+\dcast\ uses a formula to describe the shape of the data. The arguments on the
+left refer to the ID variables and the arguments on the right refer to the
+measured variables. Coming up with the right formula can take some trial and
+error at first. So, if you're stuck don't feel bad about just experimenting
+with formulas! There are usually only so many ways you can write the formula.
+
+Here, we need to tell \dcast\ that \texttt{month} and \texttt{day} are the ID
+variables (we want a column for each) and that \texttt{variable} describes the
+measured variables. Since there is only one remaining column, \dcast\ will
+figure out that it contains the values themselves. We could explicitly declare
+this with \texttt{value.var}. (And in some cases it will be necessary to do so.)
 
 <<>>=
 aql <- melt(airquality, id.vars = c("month", "day"))
+head(aql)
 aqw <- dcast(aql, month + day ~ variable) # [a]ir [q]uality [w]ide
-head(airquality)
+aqw <- dcast(aql, month + day ~ variable, value.var = "value") # same thing
 head(aqw)
+head(airquality) # original data
 @
 
 So, besides re-arranging the columns, we've recovered our original data.
@@ -182,9 +195,9 @@ dcast(aql, month ~ variable, fun.aggregate = mean, na.rm = TRUE)
 @
 
 Unlike \melt, there are some other fancy things you can do with \dcast\ that
-I'm not going to cover here. It's well worth reading the help file
-\texttt{?dcast}. For example, you can compute summaries for rows and columns,
-subset the columns, and fill in missing cells in one call to \dcast.
+I'm not covering here. It's well worth reading the help file \texttt{?dcast}.
+For example, you can compute summaries for rows and columns, subset the
+columns, and fill in missing cells in one call to \dcast.
 
 \section{Additional help}
 
