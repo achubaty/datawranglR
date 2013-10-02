@@ -1,10 +1,10 @@
 % Sean Anderson, 2011-13, sean@seananderson.ca
 %\documentclass{tufte-handout}
 \documentclass[12pt]{article}
-\usepackage{geometry} 
+\usepackage{geometry}
 \geometry{letterpaper}
 \usepackage{graphicx}
-\usepackage{Sweave} 
+\usepackage{Sweave}
 \usepackage{url}
 \usepackage[usenames,dvipsnames]{color}
 \usepackage[pdftex,colorlinks=true,urlcolor=MidnightBlue]{hyperref}
@@ -12,9 +12,18 @@
 \usepackage{booktabs}
 \usepackage{listings}
 
+\usepackage{titling}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}}%
+}
+
 \title{A quick introduction to plyr}
 
-\author{Sean C. Anderson\\ sean@seananderson.ca}
+\subtitle{BISC 888--1 Simon Fraser University}
+
+\author{Sean C. Anderson\\ \texttt{sean@seananderson.ca}}
 
 \setlength\parskip{0.1in}
 \setlength\parindent{0in}
@@ -30,7 +39,7 @@ library(plyr)
 \texttt{plyr} is an R package that makes it simple to split data apart, do
 stuff to it, and mash it back together. This is a common data-manipulation
 step. Importantly, \texttt{plyr} makes it easy to control the input and output
-data format from a syntactically consistent set of functions.
+data format with a consistent syntax.
 
 Or, from the documentation:
 
@@ -59,15 +68,6 @@ quite a bit of discussion online in general, and especially on
   \item Apply functions can be faster than for loops, sometimes dramatically.
 \end{enumerate}
 
-\section{Why use \texttt{plyr} over base \texttt{apply} functions?}
-
-\begin{enumerate}
-  \item \texttt{plyr} has a common syntax --- easier to remember
-  \item \texttt{plyr} requires less code since it takes care of the input and
-    output format
-  \item \texttt{plyr} can easily be run in parallel --- faster
-\end{enumerate}
-
 \section{\texttt{plyr} basics}
 
 \texttt{plyr} builds on the built-in \texttt{apply} functions by giving you
@@ -78,7 +78,7 @@ parallel processing, and progress bars.
 The basic format is 2 letters followed by  \texttt{ply()}. The first letter
 refers to the format in and the second to the format out.
 
-The 3 main letters are: 
+The 3 main letters are:
 \begin{enumerate}
   \item \texttt{d} = data frame
   \item \texttt{a} = array (includes matrices)
@@ -90,7 +90,7 @@ and return a data frame. I find I use this the majority of the time since I
 often work with data frames. \texttt{ldply} means: take a list, split it up,
 do something to it, and return a data frame. This extends to all combinations.
 In the following table, the columns are the input formats and the rows are the
-output format: 
+output format:
 
 \begin{tabular}{llll}
 \toprule
@@ -112,7 +112,7 @@ I've ignored some less common format options:
 
 For plotting, you might find the underscore (\texttt{\_}) option useful. It
 will do something with the data (say add line segments to a plot) and then
-throw away the output (e.g.,\ \texttt{d\_ply()}). 
+throw away the output (e.g.,\ \texttt{d\_ply()}).
 
 \section{Base R \texttt{apply} functions and \texttt{plyr}}
 
@@ -146,7 +146,7 @@ expanding it here to show the format a more complex function could take.
 
 <<echo = true>>=
 set.seed(1)
-d <- data.frame(year = rep(2000:2002, each = 3), 
+d <- data.frame(year = rep(2000:2002, each = 3),
 count = round(runif(9, 0, 20)))
 print(d)
 library(plyr)
@@ -158,7 +158,7 @@ ddply(d, "year", function(x) {
 })
 @
 
-\section{\texttt{transform} and \texttt{summarise}} 
+\section{\texttt{transform} and \texttt{summarise}}
 
 It is often convenient to use these functions within \texttt{plyr}.
 \texttt{transform} acts as it would normally as the base R function and
@@ -171,10 +171,10 @@ ddply(d, "year", transform, total.count = sum(count))
 @
 
 Bonus function: \texttt{mutate}. \texttt{mutate} works like \texttt{transform}
-but lets you build on columns you build. 
+but lets you build on columns you build.
 
 <<echo = true>>=
-ddply(d, "year", mutate, mu = mean(count), sigma = sd(count), 
+ddply(d, "year", mutate, mu = mean(count), sigma = sd(count),
   cv = sigma/mu)
 @
 
@@ -229,9 +229,9 @@ TRUE}.
   wait <- function(i) Sys.sleep(0.1)
   system.time(llply(x, wait))
   system.time(sapply(x, wait))
-  
+
   library(doMC)
-  registerDoMC(2) 
+  registerDoMC(2)
   system.time(llply(x, wait, .parallel = TRUE))
 @
 
@@ -255,7 +255,7 @@ system.time(tapply(baseball$year, baseball$id, function(x) length(x)))
 (2) Use an immutable data frame. An immutable data frame
 (\texttt{idata.frame}) returns pointers to the original object when subset
 instead of creating a copy of itself each time. This is often the
-rate-limiting step in an apply function. 
+rate-limiting step in an apply function.
 
 <<<echo = true>>=
 system.time(ddply(idata.frame(baseball), "id", summarize, length(year)))
