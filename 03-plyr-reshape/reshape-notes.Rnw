@@ -21,6 +21,7 @@
 \newcommand{\reshape}{\texttt{reshape2}}
 \newcommand{\melt}{\texttt{melt}}
 \newcommand{\cast}{\texttt{cast}}
+\newcommand{\dcast}{\texttt{dcast}}
 \newcommand{\ggplot}{\texttt{ggplot2}}
 \newcommand{\plyr}{\texttt{plyr}}
 \newcommand{\R}{\texttt{R}}
@@ -84,6 +85,13 @@ And this is \lfd:
 melt(d)
 @
 
+Long-format data has a column for possible variable types and a column for the
+values of those variables. Long-format data isn't necessarily only two
+columns. For example, we might have ozone measurements for each day of the
+year. In that case, we could have another column for for day. In
+other words, there are different levels of ``longness''. The ultimate shape you
+want to get your data into will depend on what you are doing with it.
+
 \section{Wide- to \lfd: the \melt\ function}
 
 For this example we'll work with the \texttt{airquality} dataset that is
@@ -99,30 +107,31 @@ What happens if we run the function \melt\ with all the default argument
 values?
 
 <<<>>=
-airquality_long <- melt(airquality)
-head(airquality_long)
-tail(airquality_long)
+aql <- melt(airquality) # [a]ir [q]uality [l]ong format
+head(aql)
+tail(aql)
 @
 
-By default \melt\ has assumed that all columns with numeric values are
+By default, \melt\ has assumed that all columns with numeric values are
 variables with values. Often this is what you want. Maybe here we want to know
 the values of \texttt{ozone}, \texttt{solar.r}, \texttt{wind}, and
-\texttt{temp} for each \texttt{month} and \texttt{day}. We can do that
-with \melt\ by telling it that we want \texttt{month} and \texttt{day} to be
-``ID variables'':
+\texttt{temp} for each \texttt{month} and \texttt{day}. We can do that with
+\melt\ by telling it that we want \texttt{month} and \texttt{day} to be ``ID
+variables''. ID variables are the variables that identify individual rows of
+data.
 
 <<<>>=
-airquality_long <- melt(airquality, id.vars = c("month", "day"))
-head(airquality_long)
+aql <- melt(airquality, id.vars = c("month", "day"))
+head(aql)
 @
 
-What if we wanted to control the column names in our \lfd? \melt\ let's us set
+What if we wanted to control the column names in our \lfd? \melt\ lets us set
 those too all in one step:
 
 <<<>>=
-airquality_long <- melt(airquality, id.vars = c("month", "day"),
+aql <- melt(airquality, id.vars = c("month", "day"),
   variable.name = "climate_variable", value.name = "climate_value")
-head(airquality_long)
+head(aql)
 @
 
 That's about all there is to \melt!
@@ -133,6 +142,66 @@ Whereas going from wide- to \lfd\ is pretty straightforward, going from long-
 to \wfd\ can take a bit more thought. It usually involves some head scratching
 and some trial and error for all but the simplest cases. Let's go through some
 examples.
+
+In \reshape\ there are multiple \cast\ functions. We're going to work with
+\dcast, which returns a \texttt{data.frames}, which you will most commonly
+work with. (There is also \texttt{acast} to return a vector, matrix, or
+array.)
+
+Let's take the long-format \texttt{airquality} data and \cast\ it into some
+different wide formats. To start with, we'll recover the same format we
+started with and compare the two:
+
+<<>>=
+aql <- melt(airquality, id.vars = c("month", "day"))
+aqw <- dcast(aql, month + day ~ variable) # [a]ir [q]uality [w]ide
+head(airquality)
+head(aqw)
+@
+
+So, besides re-arranging the columns, we've recovered our original data.
+
+One ``mistake'' you might find yourself making is casting a data set in which there is more than one value per data cell. For example:
+
+<<>>=
+dcast(aql, month ~ variable)
+@
+
+When you run this in \R, you'll notice the warning message:
+
+\begin{verbatim}
+Aggregation function missing: defaulting to length
+\end{verbatim}
+
+And if you look at the output you got, the cells are filled with the number of
+data rows for each month-climate combination. When you \cast\ your data and
+there are multiple values per cell, you also need to tell \dcast\ how to
+aggregate the data. For example, maybe you want to take the \texttt{mean}, or
+the \texttt{median}, or the \texttt{sum}. Let's try the last example, but this
+time we'll take the mean of the climate values. We'll also pass the option
+\texttt{na.rm = TRUE} through the \texttt{...} argument to remove \texttt{NA}
+values.
+
+<<<>>=
+dcast(aql, month ~ variable, fun.aggregate = mean, na.rm = TRUE)
+@
+
+Unlike \melt\, there are some other fancy things you can do with \dcast\ that
+I'm not going to cover here. It's well worth reading the help file
+\texttt{?dcast}. For example, you can compute summaries for rows and columns,
+subset the columns, and fill in missing cells in one call to \dcast.
+
+\section{Additional help}
+
+Read the package help:\\
+\texttt{help(package = "reshape2")}
+
+See the \reshape\ website:\\
+\url{http://had.co.nz/reshape/}
+
+And read the paper on \reshape:\\
+Wickham, H. (2007). Reshaping data with the \texttt{reshape} package. 21(12):1--20.
+\url{http://www.jstatsoft.org/v21/i12}
 
 
 

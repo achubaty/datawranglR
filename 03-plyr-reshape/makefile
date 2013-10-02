@@ -1,4 +1,4 @@
-all: plyr reshape clean
+all: reshape plyr clean
 
 plyr: 
 	R CMD Sweave plyr-notes.Rnw
