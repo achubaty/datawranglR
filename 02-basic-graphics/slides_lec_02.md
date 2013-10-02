@@ -188,9 +188,13 @@ mtext("text to place", side, line=n, ...) ### Write in the margins
 
 ---------------------
 
-## Whole new world 
+## Whole new world (Polygons)
 
-- Polygons
+```
+polygon(x, y = NULL, density = NULL, angle = 45,
+        border = NULL, col = NA, lty = par("lty"),
+        ..., fillOddEven = FALSE)
+```
 
 ---------------------
 

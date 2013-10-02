@@ -1,4 +1,4 @@
-# Assignment 1: Introduction to R
+# Assignment 2: Basic Graphics
 
 For this assignment include all your R code in this R Markdown file to support your answer. Your code goes in the code "chunks" below. If you open this file in RStudio then you can run all the R code by clicking on the `Knit HTML` button. You can experiment with code in the R console and then paste your code into this document, or write it directly in this document and send it over to the console with the keyboard shortcut `command+enter` or `control+enter`.
 
@@ -10,15 +10,13 @@ Your professor (an expert in Fire Pokemon) has just returned from Vermillion Cit
 
 ```
 
-2. Plot male and female Charmander mass.
+2. Plot male and female Charmander mass. Choose two colour-blind safe colours.
 
 ```{r}
 
 ```
 
-3. Ecologists are often accused of Physics envy, so pretend the Charmanders are [Voltorbs](http://pokemon.wikia.com/wiki/Voltorb)(spheres) and make a scatter plot of their mass vs height. Add a blue line through these data.
-
-[DO THEY KNOW HOW TO FIT AND EXTRACT A REGRESSION LINE YET?]
+3. Ecologists are often accused of Physics envy, so pretend the Charmanders are [Voltorbs](http://pokemon.wikia.com/wiki/Voltorb)(spheres) and make a scatter plot of their mass vs height. 
 
 ```{r}
 
@@ -30,7 +28,7 @@ Your professor (an expert in Fire Pokemon) has just returned from Vermillion Cit
 
 ```
 
-5. Add a panel label `(a)` in the top left corner. Add a legend in the top right... [THERE ISN'T MUCH TO ADD A LEGEND ABOUT YET]
+5. Add a legend in the top right two the charmander data. Have males and females have different style points. Add text directly to the graph identifying the smallest and the largest charmanders. Change the ticks on the graph to face inward and space them every 5 units.
 
 ```{r}
 
