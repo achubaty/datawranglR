@@ -47,7 +47,7 @@ key functions: \melt\ and \cast:
 \cast\ takes \lfd\ and casts it into \wfd.
 
 Think of working with metal: if you melt metal, it drips and becomes long. If
-you cast it into a mold, it becomes wide.
+you cast it into a mould, it becomes wide.
 
 It turns out that you need \wfd\ for some types of data analysis and \lfd\ for
 others. In reality, you need \lfd\ much more commonly than \wfd. For example,
