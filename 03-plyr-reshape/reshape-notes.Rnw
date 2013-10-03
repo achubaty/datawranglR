@@ -187,7 +187,7 @@ Figure~1.
 
 \clearpage
 
-One confusing ``mistake'' you might make is casting a data set in which there
+One confusing ``mistake'' you might make is casting a dataset in which there
 is more than one value per data cell. For example, this time we won't include
 \texttt{day} as an ID variable:
 
