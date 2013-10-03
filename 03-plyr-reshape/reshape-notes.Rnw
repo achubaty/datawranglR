@@ -2,6 +2,7 @@
 \documentclass[12pt]{article}
 \usepackage{geometry}
 \geometry{letterpaper}
+\usepackage{graphicx}
 \usepackage{Sweave}
 \usepackage{url}
 \usepackage[usenames,dvipsnames]{color}
@@ -14,6 +15,7 @@
     \par\end{center}
     \begin{center}\large#1\end{center}}%
 }
+
 
 \newcommand{\reshape}{\texttt{reshape2}}
 \newcommand{\melt}{\texttt{melt}}
@@ -46,16 +48,10 @@ key functions: \melt\ and \cast:
 
 \cast\ takes \lfd\ and casts it into \wfd.
 
+(Wondering what ``long'' and ``wide'' data are? We'll get to that next.)
+
 Think of working with metal: if you melt metal, it drips and becomes long. If
 you cast it into a mould, it becomes wide.
-
-It turns out that you need \wfd\ for some types of data analysis and \lfd\ for
-others. In reality, you need \lfd\ much more commonly than \wfd. For example,
-\ggplot\ requires \lfd, \plyr\ requires \lfd, and most modelling functions
-(such as \texttt{lm()}, \texttt{glm()}, and \texttt{gam()}) require \lfd. But
-people often find it easier to record their data in wide format.
-
-\clearpage
 
 \section{What makes data wide or long?}
 
@@ -82,9 +78,16 @@ melt(d)
 Long-format data has a column for possible variable types and a column for the
 values of those variables. Long-format data isn't necessarily only two
 columns. For example, we might have ozone measurements for each day of the
-year. In that case, we could have another column for for day. In other words,
+year. In that case, we could have another column for day. In other words,
 there are different levels of ``longness''. The ultimate shape you want to get
 your data into will depend on what you are doing with it.
+
+It turns out that you need \wfd\ for some types of data analysis and \lfd\ for
+others. In reality, you need \lfd\ much more commonly than \wfd. For example,
+\ggplot\ requires \lfd, \plyr\ requires \lfd, and most modelling functions
+(such as \texttt{lm()}, \texttt{glm()}, and \texttt{gam()}) require \lfd. But
+people often find it easier to record their data in wide format.
+
 
 \section{Wide- to \lfd: the \melt\ function}
 
@@ -128,7 +131,7 @@ aql <- melt(airquality, id.vars = c("month", "day"),
 head(aql)
 @
 
-That's about all there is to \melt!
+That's about all there is to \melt.
 
 \section{Long- to \wfd: the \cast\ functions}
 
@@ -149,7 +152,7 @@ started with and compare the two.
 left refer to the ID variables and the arguments on the right refer to the
 measured variables. Coming up with the right formula can take some trial and
 error at first. So, if you're stuck don't feel bad about just experimenting
-with formulas! There are usually only so many ways you can write the formula.
+with formulas. There are usually only so many ways you can write the formula.
 
 Here, we need to tell \dcast\ that \texttt{month} and \texttt{day} are the ID
 variables (we want a column for each) and that \texttt{variable} describes the
@@ -168,8 +171,25 @@ head(airquality) # original data
 
 So, besides re-arranging the columns, we've recovered our original data.
 
-One ``mistake'' you might find yourself making is casting a data set in which
-there is more than one value per data cell. For example:
+If it isn't clear to you what just happened there, then have a look at
+Figure~1.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=6.5in]{dcast-illustration}
+  \caption{An illustration of the \texttt{dcast} function. The blue shading
+  indicates ID variables that we want to represent individual rows. The red
+  shading represents variable names that we want to swing into column names.
+  The grey shading represents the data values that we want to fill in the
+  cells with.}
+  \label{fig:dcast}
+\end{figure}
+
+\clearpage
+
+One confusing ``mistake'' you might make is casting a data set in which there
+is more than one value per data cell. For example, this time we won't include
+\texttt{day} as an ID variable:
 
 <<>>=
 dcast(aql, month ~ variable)
@@ -182,10 +202,11 @@ Aggregation function missing: defaulting to length
 \end{verbatim}
 
 And if you look at the output you got, the cells are filled with the number of
-data rows for each month-climate combination. When you \cast\ your data and
-there are multiple values per cell, you also need to tell \dcast\ how to
-aggregate the data. For example, maybe you want to take the \texttt{mean}, or
-the \texttt{median}, or the \texttt{sum}. Let's try the last example, but this
+data rows for each month-climate combination. The numbers we're seeing are the
+number of days recorded in each month. When you \cast\ your data and there are
+multiple values per cell, you also need to tell \dcast\ how to aggregate the
+data. For example, maybe you want to take the \texttt{mean}, or the
+\texttt{median}, or the \texttt{sum}. Let's try the last example, but this
 time we'll take the mean of the climate values. We'll also pass the option
 \texttt{na.rm = TRUE} through the \texttt{...} argument to remove \texttt{NA}
 values.
