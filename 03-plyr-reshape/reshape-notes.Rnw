@@ -41,19 +41,9 @@
 \maketitle
 
 \reshape\ is an \R\ package written by Hadley Wickham that makes it easy to
-transform data between ``wide'' and ``long'' format. It is based around two
-key functions: \melt\ and \cast:
+transform data between wide and long formats. 
 
-\melt\ takes \wfd\ and melts it into \lfd.
-
-\cast\ takes \lfd\ and casts it into \wfd.
-
-(Wondering what ``long'' and ``wide'' data are? We'll get to that next.)
-
-Think of working with metal: if you melt metal, it drips and becomes long. If
-you cast it into a mould, it becomes wide.
-
-\section{What makes data wide or long?}
+\section*{What makes data wide or long?}
 
 Wide data has a column for each variable. For example, this is \wfd:
 
@@ -88,14 +78,25 @@ others. In reality, you need \lfd\ much more commonly than \wfd. For example,
 (such as \texttt{lm()}, \texttt{glm()}, and \texttt{gam()}) require \lfd. But
 people often find it easier to record their data in wide format.
 
+\section*{The \reshape\ package}
 
-\section{Wide- to \lfd: the \melt\ function}
+\reshape\ is based around two
+key functions: \melt\ and \cast:
+
+\melt\ takes \wfd\ and melts it into \lfd.
+
+\cast\ takes \lfd\ and casts it into \wfd.
+
+Think of working with metal: if you melt metal, it drips and becomes long. If
+you cast it into a mould, it becomes wide.
+
+\section*{Wide- to \lfd: the \melt\ function}
 
 For this example we'll work with the \texttt{airquality} dataset that is built
 into \R. First we'll change the column names to lower case to make them easier
 to work with. Then we'll look at the data:
 
-<<<>>=
+<<>>=
 names(airquality) <- tolower(names(airquality))
 head(airquality)
 @
@@ -103,7 +104,7 @@ head(airquality)
 What happens if we run the function \melt\ with all the default argument
 values?
 
-<<<>>=
+<<>>=
 aql <- melt(airquality) # [a]ir [q]uality [l]ong format
 head(aql)
 tail(aql)
@@ -117,7 +118,7 @@ the values of \texttt{ozone}, \texttt{solar.r}, \texttt{wind}, and
 variables''. ID variables are the variables that identify individual rows of
 data.
 
-<<<>>=
+<<>>=
 aql <- melt(airquality, id.vars = c("month", "day"))
 head(aql)
 @
@@ -125,15 +126,13 @@ head(aql)
 What if we wanted to control the column names in our \lfd? \melt\ lets us set
 those too all in one step:
 
-<<<>>=
+<<>>=
 aql <- melt(airquality, id.vars = c("month", "day"),
   variable.name = "climate_variable", value.name = "climate_value")
 head(aql)
 @
 
-That's about all there is to \melt.
-
-\section{Long- to \wfd: the \cast\ functions}
+\section*{Long- to \wfd: the \cast\ functions}
 
 Whereas going from wide- to \lfd\ is pretty straightforward, going from long-
 to \wfd\ can take a bit more thought. It usually involves some head scratching
@@ -201,7 +200,7 @@ When you run this in \R, you'll notice the warning message:
 Aggregation function missing: defaulting to length
 \end{verbatim}
 
-And if you look at the output you got, the cells are filled with the number of
+And if you look at the output, the cells are filled with the number of
 data rows for each month-climate combination. The numbers we're seeing are the
 number of days recorded in each month. When you \cast\ your data and there are
 multiple values per cell, you also need to tell \dcast\ how to aggregate the
@@ -209,18 +208,19 @@ data. For example, maybe you want to take the \texttt{mean}, or the
 \texttt{median}, or the \texttt{sum}. Let's try the last example, but this
 time we'll take the mean of the climate values. We'll also pass the option
 \texttt{na.rm = TRUE} through the \texttt{...} argument to remove \texttt{NA}
-values.
+values. (The \texttt{...} let's you pass on additional arguments to your 
+\texttt{fun.aggregate} function, here \texttt{mean}.
 
 <<<>>=
 dcast(aql, month ~ variable, fun.aggregate = mean, na.rm = TRUE)
 @
 
 Unlike \melt, there are some other fancy things you can do with \dcast\ that
-I'm not covering here. It's well worth reading the help file \texttt{?dcast}.
+I'm not covering here. It's worth reading the help file \texttt{?dcast}.
 For example, you can compute summaries for rows and columns, subset the
 columns, and fill in missing cells in one call to \dcast.
 
-\section{Additional help}
+\section*{Additional help}
 
 Read the package help:\\
 \texttt{help(package = "reshape2")}
