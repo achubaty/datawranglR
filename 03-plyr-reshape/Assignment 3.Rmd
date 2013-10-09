@@ -1,0 +1,48 @@
+# Assignment 3: `plyr` and `reshape`
+
+For this assignment include all your R code in this R Markdown file to support your answer. Your code goes in the code "chunks" below. If you open this file in RStudio then you can run all the R code by clicking on the `Knit HTML` button. You can experiment with code in the R console and then paste your code into this document, or write it directly in this document and send it over to the console with the keyboard shortcut `command+enter` or `control+enter`.
+
+Your professor (the expert in Fire Pokemon) has been denied tenure (what'd you expect, he studies Pokemon...) and has quit in disgrace.
+Fortunately for you another Biology professor (one that studies, you know, actual living things) has agreed to take you on as a student. 
+She has just discovered [BIRDD](http://bioquest.org/birdd/morph.php) makes morphological data from Galapagos finches freely available online. 
+This is great because you don't have money for a field season. 
+There must be a dissertation chapter in this data somewhere! 
+Time to tidy up the data and see what gems you can find.
+
+1. Load the morphological data provided on the BIRDD webpage into the R environment. [intentionally vague, will they be able to figure this out?]
+Do not display this code in the knitted document.
+
+```{r}
+
+```
+
+2. Take a look at the data
+  - Print the first 6 rows of the data frame.
+  - Use a command to determine the dimensions of the data frame (number of rows, number of columns?).
+  - Is the data in long or wide format?
+
+```{r}
+
+```
+
+3. When manipulating a larger data frame like this it is often useful to develop your code using just a subset.
+One way to do this is by indexing using the square brackets `[ ]`. 
+Using the example below as a guide, create a subset of your data frame that has only the first 100 rows and all columns.  
+
+```{r}
+# the general form is: 
+# my.df_short <- my.df[r,c] 
+# where r is the row or rows and c is the same for columns. Leaving a slot blank will take all rows or columns
+```
+
+4. [Some plyr exercises. Re-calculate the data for some of the tables on the BIRDD website?]
+
+```{r}
+
+```
+
+5. [Reshape the data into long format using `melt` and save for use in the ggplot assignment.]
+
+```{r}
+
+```
