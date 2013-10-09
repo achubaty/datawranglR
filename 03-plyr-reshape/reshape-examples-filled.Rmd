@@ -1,0 +1,83 @@
+% An introduction to the `reshape2` package
+% 2013-10-07
+% Sean Anderson, sean@seananderson.ca
+
+First, load the `reshape2` package and the `airquality` dataset:
+
+```{r}
+library(reshape2)
+names(airquality) <- tolower(names(airquality))
+head(airquality)
+```
+
+What happens if you just run the `melt` function on the `airquality` data?
+
+```{r}
+aqw <- melt(airquality)
+head(aqw)
+tail(aqw)
+```
+
+Let's melt the `airquality` dataset but maintain a row of data for `month` and
+`day`:
+
+```{r}
+aql <- melt(airquality, id.vars = c("month", "day"))
+```
+
+We can also control the variable and value column names with `variable.name`
+and `value.name` arguments. Try changing these column names while you run the
+`melt` function:
+
+```{r}
+aql <- melt(airquality, id.vars = c("month", "day"),
+  variable.name = "climate_variable", value.name = "climate_value")
+head(aql)
+```
+
+Now let's try making the long data wide again with the `dcast` function. First,
+let's go back to the default column names:
+
+```{r}
+aql <- melt(airquality, id.vars = c("month", "day"))
+```
+
+Now, let's try and re-create the original wide data frame with `dcast` and
+compare it to the original data frame:
+
+```{r}
+aqw <- dcast(aql, month + day ~ variable)
+head(aqw)
+head(airquality)
+```
+
+What happens if you use `dcast` but don't specify day as an ID variable?
+
+```{r}
+dcast(aql, month ~ variable)
+```
+
+This time aggregate the multiple days by taking a `mean` value:
+
+```{r}
+dcast(aql, month ~ variable, fun.aggregate = mean, na.rm = TRUE)
+```
+
+OK, now try this on a different dataset. The `reshape2` package contains a
+dataset called `french_fries` that describes the results from a study that
+tested the effect of frying oils on French fry taste.
+
+Try `melt`ing the data with while keeping ID columns for `time`, `treatment`,
+`subject`, and `rep`.
+
+```{r}
+head(french_fries)
+ff <- melt(french_fries, id.vars = c("time", "treatment", "subject", "rep"))
+```
+
+And then `cast` the data frame you created back into wide format:
+
+```{r}
+ff_wide <- dcast(ff, time + treatment + subject + rep ~ variable, value.var =
+  "value")
+```
