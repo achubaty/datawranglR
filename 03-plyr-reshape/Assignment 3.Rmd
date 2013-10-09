@@ -1,3 +1,6 @@
+NOTE THAT THIS ASSIGNMENT IS NOT COMPLETE YET. 
+PLEASE WAIT TO START WORKING ON IT!
+
 # Assignment 3: `plyr` and `reshape`
 
 For this assignment include all your R code in this R Markdown file to support your answer. Your code goes in the code "chunks" below. If you open this file in RStudio then you can run all the R code by clicking on the `Knit HTML` button. You can experiment with code in the R console and then paste your code into this document, or write it directly in this document and send it over to the console with the keyboard shortcut `command+enter` or `control+enter`.
@@ -9,7 +12,7 @@ This is great because you don't have money for a field season.
 There must be a dissertation chapter in this data somewhere! 
 Time to tidy up the data and see what gems you can find.
 
-1. Load the morphological data provided on the BIRDD webpage into the R environment. [intentionally vague, will they be able to figure this out?]
+1. Load the morphological data provided on the BIRDD webpage into the R environment.
 Do not display this code in the knitted document.
 
 ```{r}
