@@ -1,0 +1,55 @@
+% An introduction to the `plyr` package
+% 2013-10-09
+% Sean Anderson, sean@seananderson.ca
+
+For these exercises we'll use the `french_fries` dataset from the `reshape2`
+package.
+
+```{r}
+library(reshape2)
+library(plyr)
+head(french_fries)
+```
+
+Did the mean rancid flavour change through time?
+
+```{r}
+ff <- ddply(french_fries, "time", summarize, mean_rancid_rating = mean(rancid, na.rm = TRUE))
+plot(ff)
+plot.default(ff)
+```
+
+What is the mean rancid rating for each time-treatment combination?
+
+```{r}
+ff2 <- ddply(french_fries, c("time", "treatment"), summarize, mean_rancid = mean(rancid, na.rm = TRUE), sd_rancid = sd(rancid, na.rm = TRUE))
+```
+
+How many subjects are there for each treatment? Use `ddply` with the
+`summarize` function to find out.
+
+```{r}
+ff5 <- ddply(french_fries, "treatment", summarize, length(unique(subject)), mean(buttery))
+max(as.numeric(as.character(french_fries$subject)))
+```
+
+Say you wanted to standardize the buttery rating within each subject. You
+could do this by dividing the buttery rating within each subject by the
+maximum buttery rating that subject gave throughout the study. You would come
+up with a "percentage buttery" value. You can do this with the `transform`
+function within `ddply`. Try that now: 
+
+```{r}
+ff3 <- ddply(french_fries, "subject", transform, percentage_buttery = buttery / max(buttery))
+```
+
+Some examples with the `baseball` dataset where we return character objects:
+
+```{r}
+# Get first listed player id for each team:
+b1 <- ddply(baseball, "team", summarize, first_id = id[1])
+# split by team, year
+# return id with most hr (there might be problems here if multiple players have
+# the same max home runs)
+b2 <- ddply(baseball, c("team", "year"), summarize, max_hr = id[hr == max(hr)])
+```
