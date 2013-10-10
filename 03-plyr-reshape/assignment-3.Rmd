@@ -1,51 +1,114 @@
 NOTE THAT THIS ASSIGNMENT IS NOT COMPLETE YET. 
 PLEASE WAIT TO START WORKING ON IT!
 
-# Assignment 3: `plyr` and `reshape`
+# Assignment 3: `plyr` and `reshape2`
 
-For this assignment include all your R code in this R Markdown file to support your answer. Your code goes in the code "chunks" below. If you open this file in RStudio then you can run all the R code by clicking on the `Knit HTML` button. You can experiment with code in the R console and then paste your code into this document, or write it directly in this document and send it over to the console with the keyboard shortcut `command+enter` or `control+enter`.
+Your professor (the expert in Fire Pokemon) has been denied tenure (what did
+you expect, he studies Pokemon...) and has quit in disgrace. Fortunately for
+you, another biology professor (one that studies, you know, actual living
+things) has agreed to take you on as a student. She has just discovered that
+[BIRDD](http://bioquest.org/birdd/morph.php) makes morphological data from
+Galapagos finches freely available online. This is great because you don't
+have money for a field season. There must be a dissertation chapter in this
+dataset somewhere! Time to tidy up the data and see what gems you can find.
 
-Your professor (the expert in Fire Pokemon) has been denied tenure (what'd you expect, he studies Pokemon...) and has quit in disgrace.
-Fortunately for you another Biology professor (one that studies, you know, actual living things) has agreed to take you on as a student. 
-She has just discovered [BIRDD](http://bioquest.org/birdd/morph.php) makes morphological data from Galapagos finches freely available online. 
-This is great because you don't have money for a field season. 
-There must be a dissertation chapter in this data somewhere! 
-Time to tidy up the data and see what gems you can find.
+First, load the `plyr` and `reshape2` libraries:
 
-1. Load the morphological data provided on the BIRDD webpage into the R environment.
-Do not display this code in the knitted document.
+```{r}
+library(plyr)
+library(reshape2)
+```
+
+1. Load the morphological data provided on the 
+   [BIRDD webpage](http://bioquest.org/birdd/morph.php) into a `data.frame`
+   named `morph`. (Hint: it's probably easier to download the Excel file and
+   convert it to a `.csv`.) Once you've loaded the `.csv` file into `R`, make
+   all the column names lowercase with the `tolower()` function. Do not display
+   this code chunk in the knitted document. 
+
+
+```{r, echo=FALSE}
+# Bonus `R` tip: you can download a file through `R` like this:
+# download.file("http://bioquest.org/birdd/Morph_for_Sato.xls", destfile = "Morph_for_Sato.xls")
+# now go look in your R working directory for the file
+```
 
 ```{r}
 
 ```
 
-2. Take a look at the data
-  - Print the first 6 rows of the data frame.
-  - Use a command to determine the dimensions of the data frame (number of rows, number of columns?).
-  - Is the data in long or wide format?
+2. Take a look at the data. First, print the first 6 rows of the data frame.
+   (Use the `head()` command.) Then, use a command to determine the dimensions
+   of the data frame (number of rows, number of columns). Finally, is the data
+   (the morphological measurements themselves) in long or wide format?
 
 ```{r}
 
 ```
 
-3. When manipulating a larger data frame like this it is often useful to develop your code using just a subset.
-One way to do this is by indexing using the square brackets `[ ]`. 
-Using the example below as a guide, create a subset of your data frame that has only the first 100 rows and all columns.  
+   Just to make things simpler, we're going to remove the columns `n.ubkl`,
+   `bodyl`, `plumage`. To do that, just run these lines:
 
 ```{r}
-# the general form is: 
-# my.df_short <- my.df[r,c] 
-# where r is the row or rows and c is the same for columns. Leaving a slot blank will take all rows or columns
+morph$n.ubkl <- NULL
+morph$bodyl <- NULL
+morph$plumage <- NULL
 ```
 
-4. [Some plyr exercises. Re-calculate the data for some of the tables on the BIRDD website?]
+3. If you scroll down on the BIRDD webpage where you got the data file you'll
+   see a table of summary statistics. Using `ddply()`, we're going to recreate
+   parts of the first table (Statistics by Island, Species for the
+   Genovesa/Tower island). 
+
+   First, subset the data to only include the `islandid` `Gnov_Twr` and call
+   this new `data.frame` `morph_gt`.
+
+   Then, use `ddply()` along with `summarize` to calculate the mean and
+   standard deviation for beak height (`beakh`) for each species (`speciesid`)
+   for this new object `morph_gt`. Within your `ddply` line, tell `mean` and
+   `sd` to remove the `NA` values.
+
+   Check a couple of the species with the website. Do they match?
 
 ```{r}
 
 ```
 
-5. [Reshape the data into long format using `melt` and save for use in the ggplot assignment.]
+4. There are a lot of `NA` values in this dataset. Let's figure out how many
+   `NA`s there are for each of these measurements. One quick way to do this is
+   by `melt`ing the measurements into long format and using `ddply`.
+
+   First, `melt` `morph_gt` so that you have an ID row for `speciesid`,
+   `subspid`, and `sex`. Keep all the remaining measured columns to the right.
+   Name your new long-format `data.frame` object `morph_gt_melt`.
+
+   Hint: since we don't want the first 6 columns in our melted dataset, we can
+   remove them with `morph_gt[ , -c(1:6)]`. Do that first.
 
 ```{r}
 
 ```
+
+5.  Now, use `ddply` to count the number of `NA` values for each combination of
+   `speciesid`, `subspid`, and `sex`. Hint: you'll need to combine `is.na()`
+   and `sum()`. Test out what happens if you run `sum(c(TRUE, TRUE))` vs.
+   `sum(c(TRUE, FALSE))` and note that `is.na()` returns `TRUE` or `FALSE`.
+
+```{r}
+
+```
+
+6.  Now, take `morph_gt_melt` and make it wide again using the `dcast`
+   function. Since we'll be condensing multiple rows of data, use the argument
+   `fun.aggregate` to calculate the mean value (make sure to exclude `NA`s).
+
+```{r}
+
+```
+
+Notice that you've just used `dcast` to create the summaries on the
+[BIRDD webpage](http://bioquest.org/birdd/morph.php). Combining `melt` and 
+`dcast` is another way to do what you did with `ddply` in step 3.
+
+Make sure your whole script runs when you click the "Knit HTML" button in
+Rstudio.
