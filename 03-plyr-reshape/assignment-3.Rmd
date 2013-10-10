@@ -19,12 +19,12 @@ library(plyr)
 library(reshape2)
 ```
 
-1. Load the morphological data provided on the 
-   [BIRDD webpage](http://bioquest.org/birdd/morph.php) into a `data.frame`
-   named `morph`. (Hint: it's probably easier to download the Excel file and
-   convert it to a `.csv`.) Once you've loaded the `.csv` file into `R`, make
-   all the column names lowercase with the `tolower()` function. Do not display
-   this code chunk in the knitted document. 
+1.  Load the morphological data provided on the 
+    [BIRDD webpage](http://bioquest.org/birdd/morph.php) into a `data.frame`
+    named `morph`. (Hint: it's probably easier to download the Excel file and
+    convert it to a `.csv`.) Once you've loaded the `.csv` file into `R`, make
+    all the column names lowercase with the `tolower()` function. Do not display
+    this code chunk in the knitted document. 
 
 
 ```{r, echo=FALSE}
@@ -37,17 +37,17 @@ library(reshape2)
 
 ```
 
-2. Take a look at the data. First, print the first 6 rows of the data frame.
-   (Use the `head()` command.) Then, use a command to determine the dimensions
-   of the data frame (number of rows, number of columns). Finally, is the data
-   (the morphological measurements themselves) in long or wide format?
+2.  Take a look at the data. First, print the first 6 rows of the data frame.
+    (Use the `head()` command.) Then, use a command to determine the dimensions
+    of the data frame (number of rows, number of columns). Finally, is the data
+    (the morphological measurements themselves) in long or wide format?
 
 ```{r}
 
 ```
 
-   Just to make things simpler, we're going to remove the columns `n.ubkl`,
-   `bodyl`, `plumage`. To do that, just run these lines:
+    Just to make things simpler, we're going to remove the columns `n.ubkl`,
+    `bodyl`, `plumage`. To do that, just run these lines:
 
 ```{r}
 morph$n.ubkl <- NULL
@@ -55,54 +55,54 @@ morph$bodyl <- NULL
 morph$plumage <- NULL
 ```
 
-3. If you scroll down on the BIRDD webpage where you got the data file you'll
-   see a table of summary statistics. Using `ddply()`, we're going to recreate
-   parts of the first table (Statistics by Island, Species for the
-   Genovesa/Tower island). 
+3.  If you scroll down on the BIRDD webpage where you got the data file you'll
+    see a table of summary statistics. Using `ddply()`, we're going to recreate
+    parts of the first table (Statistics by Island, Species for the
+    Genovesa/Tower island). 
 
-   First, subset the data to only include the `islandid` `Gnov_Twr` and call
-   this new `data.frame` `morph_gt`.
+    First, subset the data to only include the `islandid` `Gnov_Twr` and call
+    this new `data.frame` `morph_gt`.
 
-   Then, use `ddply()` along with `summarize` to calculate the mean and
-   standard deviation for beak height (`beakh`) for each species (`speciesid`)
-   for this new object `morph_gt`. Within your `ddply` line, tell `mean` and
-   `sd` to remove the `NA` values.
+    Then, use `ddply()` along with `summarize` to calculate the mean and
+    standard deviation for beak height (`beakh`) for each species (`speciesid`)
+    for this new object `morph_gt`. Within your `ddply` line, tell `mean` and
+    `sd` to remove the `NA` values.
 
-   Check a couple of the species with the website. Do they match?
-
-```{r}
-
-```
-
-4. There are a lot of `NA` values in this dataset. Let's figure out how many
-   `NA`s there are for each of these measurements. One quick way to do this is
-   by `melt`ing the measurements into long format and using `ddply`.
-
-   First, `melt` `morph_gt` so that you have an ID row for `speciesid`,
-   `subspid`, and `sex`. Keep all the remaining measured columns to the right.
-   Name your new long-format `data.frame` object `morph_gt_melt`.
-
-   Hint: since we don't want the first 6 columns in our melted dataset, we can
-   remove them with `morph_gt[ , -c(1:6)]`. Do that first.
+    Check a couple of the species with the website. Do they match?
 
 ```{r}
 
 ```
 
-5.  Now, use `ddply` to count the number of `NA` values for each combination of
-   `speciesid`, `subspid`, and `sex`. Hint: you'll need to combine `is.na()`
-   and `sum()`. Test out what happens if you run `sum(c(TRUE, TRUE))` vs.
-   `sum(c(TRUE, FALSE))` and note that `is.na()` returns `TRUE` or `FALSE`.
+4.  There are a lot of `NA` values in this dataset. Let's figure out how many
+    `NA`s there are for each of these measurements. One quick way to do this is
+    by `melt`ing the measurements into long format and using `ddply`.
+
+    First, `melt` `morph_gt` so that you have an ID row for `speciesid`,
+    `subspid`, and `sex`. Keep all the remaining measured columns to the right.
+    Name your new long-format `data.frame` object `morph_gt_melt`.
+
+    Hint: since we don't want the first 6 columns in our melted dataset, we can
+    remove them with `morph_gt[ , -c(1:6)]`. Do that first.
+
+```{r}
+
+```
+
+5.   Now, use `ddply` to count the number of `NA` values for each combination of
+    `speciesid`, `subspid`, and `sex`. Hint: you'll need to combine `is.na()`
+    and `sum()`. Test out what happens if you run `sum(c(TRUE, TRUE))` vs.
+    `sum(c(TRUE, FALSE))` and note that `is.na()` returns `TRUE` or `FALSE`.
 
 ```{r}
 
 ```
 
 6.  Now, take `morph_gt_melt` and make it wide again using the `dcast`
-   function. Maintain ID columns for `speciesid`, `subspid`, and `sex`. Since
-   we'll be condensing multiple rows of data, use the argument `fun.aggregate`
-   to calculate the mean value (make sure to exclude `NA`s). (Hint: see the
-   example in class for how to pass `na.rm = TRUE` to `dcast`.)
+    function. Maintain ID columns for `speciesid`, `subspid`, and `sex`. Since
+    we'll be condensing multiple rows of data, use the argument `fun.aggregate`
+    to calculate the mean value (make sure to exclude `NA`s). (Hint: see the
+    example in class for how to pass `na.rm = TRUE` to `dcast`.)
 
 ```{r}
 
