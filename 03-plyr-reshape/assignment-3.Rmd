@@ -99,8 +99,10 @@ morph$plumage <- NULL
 ```
 
 6.  Now, take `morph_gt_melt` and make it wide again using the `dcast`
-   function. Since we'll be condensing multiple rows of data, use the argument
-   `fun.aggregate` to calculate the mean value (make sure to exclude `NA`s).
+   function. Maintain ID columns for `speciesid`, `subspid`, and `sex`. Since
+   we'll be condensing multiple rows of data, use the argument `fun.aggregate`
+   to calculate the mean value (make sure to exclude `NA`s). (Hint: see the
+   example in class for how to pass `na.rm = TRUE` to `dcast`.)
 
 ```{r}
 
