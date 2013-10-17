@@ -1,4 +1,4 @@
-% Sean Anderson, 2011, sean@seananderson.ca
+% Sean Anderson, 2011-13, sean@seananderson.ca
 \documentclass[12pt]{article}
 \usepackage{geometry} 
 \geometry{letterpaper}
@@ -6,7 +6,17 @@
 \usepackage{Sweave} 
 \setkeys{Gin}{width=0.65\textwidth}
 
+\usepackage{titling}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}}%
+}
+
 \title{Multipanel plotting in R\\(with base graphics)}
+
+\subtitle{BISC 888--1 Simon Fraser University}
+
 \author{Sean Anderson}
 
 \textheight 21cm

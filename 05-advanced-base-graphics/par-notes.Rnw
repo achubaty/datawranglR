@@ -1,0 +1,40 @@
+% Sean Anderson, 2013, sean@seananderson.ca
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx}
+\usepackage{Sweave}
+\usepackage{url}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[pdftex,colorlinks=true,urlcolor=MidnightBlue]{hyperref}
+\usepackage[pdftex,colorlinks=true]{hyperref}
+\usepackage{booktabs}
+\usepackage{listings}
+
+\usepackage{titling}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}}%
+}
+
+\title{Pretty plots with \texttt{par}}
+
+\subtitle{BISC 888--1 Simon Fraser University}
+
+\author{Sean C. Anderson\\ \texttt{sean@seananderson.ca}}
+
+\setlength\parskip{0.1in}
+\setlength\parindent{0in}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\maketitle
+
+take a default figure and take it to a pretty figure showing all the par steps along the way
+
+to include - grey lines, grey on axes, las on axes, location of axis labels, margin space, panel label
+
+show lines, polygons, points, ...
+
+\end{document}
