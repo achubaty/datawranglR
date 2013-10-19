@@ -1,7 +1,7 @@
 all: notes
 
 notes:
-	Rscript -e "library(knitr); knit('ggplot2-notes.Rnw')"
+	Rscript -e "knitr::knit('ggplot2-notes.Rnw')"
 	pdflatex ggplot2-notes
 	pdflatex ggplot2-notes
 

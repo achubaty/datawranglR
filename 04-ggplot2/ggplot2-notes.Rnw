@@ -170,11 +170,11 @@ and shape inside or outside the \texttt{aes} function --- those inside the
 on the data. If characteristics like colour or shape are defined outside the
 \texttt{aes} function, then the characteristic is not mapped to data. Example:
 
-<<echo=TRUE, fig.height=4, fig.width=6>>=
+<<echo=TRUE, fig.height=3, fig.width=5>>=
 ggplot(mpg, aes(cty, hwy)) + geom_point(aes(colour = class))
 @
 
-<<echo=TRUE, fig.height=4, fig.width=6>>=
+<<echo=TRUE, fig.height=3, fig.width=5>>=
 ggplot(mpg, aes(cty, hwy)) + geom_point(colour = "red")
 @
 
@@ -201,6 +201,8 @@ position.
 
 By default all x and y axes will be shared among panels. You could, for
 example, specify ``free'' y axes with \texttt{face\_wrap(scales = "free\_y")}.
+
+\clearpage 
 
 \section{Themes}
 
