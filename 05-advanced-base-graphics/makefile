@@ -1,11 +1,11 @@
-all: multi par clean
+all: par
 
 multi: 
 	R CMD Sweave multipanel-notes.Rnw
 	pdflatex multipanel-notes
 
 par:
-	R CMD Sweave par-notes.Rnw
+	Rscript -e "knitr::knit('par-notes.Rnw')"
 	pdflatex par-notes
 
 clean:

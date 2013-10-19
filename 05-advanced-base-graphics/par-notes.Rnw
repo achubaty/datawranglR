@@ -3,14 +3,7 @@
 \usepackage{geometry}
 \geometry{letterpaper}
 \usepackage{graphicx}
-\usepackage{Sweave}
 \usepackage{url}
-\usepackage[usenames,dvipsnames]{color}
-\usepackage[pdftex,colorlinks=true,urlcolor=MidnightBlue]{hyperref}
-\usepackage[pdftex,colorlinks=true]{hyperref}
-\usepackage{booktabs}
-\usepackage{listings}
-
 \usepackage{titling}
 \newcommand{\subtitle}[1]{%
   \posttitle{%
@@ -19,16 +12,22 @@
 }
 
 \title{Pretty plots with \texttt{par}}
-
 \subtitle{BISC 888--1 Simon Fraser University}
-
 \author{Sean C. Anderson\\ \texttt{sean@seananderson.ca}}
 
 \setlength\parskip{0.1in}
 \setlength\parindent{0in}
 
 \begin{document}
-\SweaveOpts{concordance=TRUE}
+
+<<set-knitr-options, echo=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.align='center', fig.pos="htpb", cache=TRUE, echo=TRUE,
+message=FALSE, autodep=TRUE, fig.path='figure/', fig.width=5, par=TRUE)
+opts_chunk$set(warning=FALSE, message=FALSE, tidy=FALSE, refresh=TRUE)
+opts_chunk$set(dev = 'pdf')
+@
+
 \maketitle
 
 take a default figure and take it to a pretty figure showing all the par steps along the way

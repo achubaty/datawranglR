@@ -1,3 +1,5 @@
 .Rapp.history
 *00*.pdf
-
+*.aux
+*.log
+*.tex
