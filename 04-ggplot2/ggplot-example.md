@@ -1,3 +1,0 @@
-# `ggplot` for Life!
-
-## kkjjhh
