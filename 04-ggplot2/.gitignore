@@ -1,1 +1,7 @@
 ggplot2_slides.key
+cache
+figure
+.Rapp.history
+*.aux
+*.log
+*.tex

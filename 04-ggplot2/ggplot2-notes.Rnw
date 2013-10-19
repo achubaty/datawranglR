@@ -1,87 +1,124 @@
 % Sean Anderon, 2012-13, sean@seananderson.ca
-\documentclass{tufte-handout}
+\documentclass[12pt]{article}
 \usepackage{geometry} 
 \geometry{letterpaper}
 \usepackage{graphicx}
-\usepackage{Sweave} 
+ 
 \usepackage{url} 
-\urlstyle{rm} 
-\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \usepackage{fancyvrb}
 \fvset{fontsize=\normalsize}
-\bibliographystyle{apalike}   
 \usepackage{booktabs}
 
-\title{An introduction to ggplot2}
-\author{Sean C. Anderson}
+\usepackage{titling}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}}%
+}
+
+\newcommand{\ggtwo}{\texttt{ggplot2}}
+\newcommand{\ggplot}{\texttt{ggplot}}
+\newcommand{\qplot}{\texttt{qplot}}
+
+\title{An introduction to \ggtwo}
+\subtitle{BISC 888--1 Simon Fraser University}
+\author{Sean C. Anderson\\ \texttt{sean@seananderson.ca}}
+
+\setlength\parskip{0.1in}
+\setlength\parindent{0in}
+
 
 \begin{document}
-\maketitle
 
-<<echo = false, results = hide>>=
-library(ggplot2)
+<<set-knitr-options, echo=FALSE>>=
+library(knitr)
+opts_chunk$set(fig.align='center', fig.pos="htpb", cache=TRUE, echo=TRUE,
+message=FALSE, autodep=TRUE, fig.path='figure/', fig.width=5, par=TRUE)
+opts_chunk$set(warning=FALSE, message=FALSE, tidy=FALSE, refresh=TRUE)
+opts_chunk$set(dev = 'pdf')
 @
 
-\section{The ggplot philosophy: rapid data exploration}
+\maketitle
 
-\texttt{ggplot2} is an R package that implements Wilkinson's Grammar of
-Graphics.\sidenote{Wilkinson, L. (2005). \textit{The Grammar of Graphics}.
+\section{The \ggtwo\ philosophy: rapid data exploration}
+
+\ggtwo\ is an R package that implements Wilkinson's Grammar of
+Graphics.\footnote{Wilkinson, L. (2005). \textit{The Grammar of Graphics}.
 Springer, 2\textsuperscript{2nd} edition.} Hadley Wickham wrote the package as
 a chapter of his PhD thesis. Many people now participate in developing the
 package.
 
-The emphasis of \texttt{ggplot} is on rapid exploration of data, and
-especially high-dimensional data. Think of base graphics functions as drawing
-with data. You have complete control over every pixel in a plot (once you
-learn the arcane world of \texttt{par}) but it can take a lot of time and code
-to produce a complex plot.
+The emphasis of \ggtwo\ is on rapid exploration of data, and especially
+high-dimensional data. Think of base graphics functions\footnote{Examples
+of base graphic functions are \texttt{plot}, \texttt{points}, and
+\texttt{lines}.} as drawing with data. You have complete control over every
+pixel in a plot (once you learn the arcane world of \texttt{par}) but it can
+take a lot of time and code to produce a complex plot.
 
-Although \texttt{ggplot} can be fully customized, I find it reaches a point of
-diminishing returns. I tend to use \texttt{ggplot} and base graphics for what
-they excel at: \texttt{ggplot} for rapid data exploration and base graphics
-for polished and fully-customized plots for publication.
+Although \ggtwo\ can be fully customized, I find it reaches a point of
+diminishing returns. I tend to use \ggtwo\ and base graphics for what they
+excel at: \ggtwo\ for rapid data exploration and base graphics for polished
+and fully-customized plots for publication (Figure \ref{fig:gg-time}).
 
-The idea is simple: good graphical displays data require rapid iteration and
-lots of exploration. If it takes you hours to code a plot in base graphics,
-you're unlikely to throw it out and try something else. If it takes you hours
-to code a plot in base graphics, you're unlikely to explore other ways of
-visualizing the data or all the dimensions of the data.
+\begin{figure}[htb]
+  \centering
+    \includegraphics[height=2.15in]{gg-dimensions.pdf}
+    \includegraphics[height=2.15in]{gg-vs-base-pub.pdf}
+  \caption{Creation time vs.\ data dimensions and customization level for base
+  graphics (blue) and \ggtwo\ (red). (Left panel) It's remarkably easy to plot
+  high-dimensional data in \ggtwo\ with, for example, colours, sizes, shapes,
+  and panels. (Right panel) \ggtwo\ excels at rapid visual exploration of
+  data, but has some limitations in how it can be customized. Base graphics
+  are fully customizable but can take longer to set up. I try and exploit the
+  grey shaded areas: I use \ggtwo\ for data exploration and once I've decided
+  on a small number of key plots, I'll use base graphics to make
+  fully-customized plots if needed.}
+  \label{fig:gg-time}
+\end{figure}
 
-\section{qplot vs.\ ggplot}     
+The idea is simple: good graphical displays of data require rapid iteration
+and lots of exploration. If it takes you hours to code a plot in base
+graphics, you're unlikely to throw it out and try something else. If it takes
+you hours to code a plot in base graphics, you're unlikely to explore other
+ways of visualizing the data or all the dimensions of the data.
 
-There are two main plotting functions in the \texttt{ggplot2} package:
-\texttt{qplot} and \texttt{ggplot}. \texttt{qplot} is short for ``quick plot''
-and is made to mimic the format of \texttt{plot} from base R. \texttt{qplot}
+\section{\qplot\ vs.\ \ggplot}     
+
+There are two main plotting functions in the \ggtwo\ package:
+\qplot\ and \ggplot. \qplot\ is short for ``quick plot''
+and is made to mimic the format of \texttt{plot} from base R. \qplot\
 requires less syntax for many common tasks, but has limitations --- it's
-essentially a wrapper for \texttt{ggplot}. The \texttt{ggplot} function itself
+essentially a wrapper for \ggplot. The \ggplot\ function itself
 isn't complicated and will work in all cases. I prefer to work with just the
-\texttt{ggplot} syntax and will focus on it here.
+\ggplot\ syntax and will focus on it here.
 
 \section{Basics of the grammar}
-Let's look at some illustrative \texttt{ggplot} code:
+Let's look at some illustrative \ggtwo\ code:
 
-<<echo = true, fig = true, height = 4, width = 8>>=
- d <- data.frame(x = c(1:10, 1:10), y = runif(20), 
-                 group1 = rep(gl(2, 5, labels = c("a", "b")), 2), 
-                 group2 = gl(2, 10))
- ggplot(d) + geom_point(aes(x, y, colour = group1)) + facet_grid(~group2)
+<<echo=TRUE, fig.height=4, fig.width=8>>=
+library(ggplot2)
+d <- data.frame(x = c(1:10, 1:10), y = runif(20), 
+  group1 = rep(gl(2, 5, labels = c("a", "b")), 2), 
+  group2 = gl(2, 10))
+ggplot(d) + geom_point(aes(x, y, colour = group1)) + 
+  facet_grid(~group2)
 @
 
 The basic format in this example is:
 
 \begin{enumerate}
-  \item \texttt{ggplot()}: start a \texttt{ggplot} object and specify the data
+  \item \texttt{ggplot()}: start a \ggplot\ object and specify the data
   \item \texttt{geom\_point()}: we want a scatter plot; this is called a \texttt{geom}
   \item \texttt{aes()}: specifies the ``aesthetic'' elements; a legend is automatically created
   \item \texttt{facet\_grid()}: specifies the panel layout
 \end{enumerate}
 
-There are also statistics, scales, and annotation options, among others. At a
-minimum, you must specify the data, some aesthetics, and a geom. I will
-elaborate on these below. Yes, \texttt{ggplot} combines elements with
-\texttt{+} symbols!\sidenote{This may seem non-standard, although it has the
-advantage of allowing \texttt{ggplot} plots to be proper R objects, which can
-modified, inspected, and re-used.}
+There are also statistics, scales, and annotation options, among others. At
+a minimum, you must specify the data, some aesthetics, and a geom. I will
+elaborate on these below. Yes, \ggtwo\ combines elements with \texttt{+}
+symbols! This may seem non-standard, although it has the advantage of allowing
+\ggtwo\ plots to be proper R objects, which can modified, inspected, and
+re-used.
 
 \section{Geoms}
 
@@ -108,19 +145,19 @@ plot elements. Some common geoms:
 
 \section{Aesthetics}
 
-Aesthetics refer to the attributes of the data you want to display. They map
-the data to an attribute (such as the size or shape of a symbol) and generate
-an appropriate legend. Aesthetics are specified with the \texttt{aes}
+Aesthetics refer to the attributes of the data you want to display. They
+map the data to an attribute (such as the size or shape of a symbol) and
+generate an appropriate legend. Aesthetics are specified with the \texttt{aes}
 function.
 
 As an example, the aesthetics available for \texttt{geom\_point} are:
 \texttt{x}, \texttt{y}, \texttt{alpha}, \texttt{colour}, \texttt{fill},
-\texttt{shape}, and \texttt{size}.\sidenote{Note that \texttt{ggplot} tries to
-accommodate the user who's never ``suffered'' through base graphics before by
-using intuitive terms like \texttt{colour}, \texttt{size}, and
-\texttt{linetype}, but \texttt{ggplot} will also accept terms such as
-\texttt{col}, \texttt{cex}, and \texttt{lty}.} Read the help files to see the
-aesthetic options for the geom you're using. They're generally self
+\texttt{shape}, and \texttt{size}.\footnote{Note that \ggtwo\ tries
+to accommodate the user who's never ``suffered'' through base graphics
+before by using intuitive arguments like \texttt{colour}, \texttt{size},
+and \texttt{linetype}, but \ggplot\ will also accept arguments such
+as \texttt{col}, \texttt{cex}, and \texttt{lty}.} Read the help files to
+see the aesthetic options for the geom you're using. They're generally self
 explanatory.
 
 Aesthetics can be specified within the data function or within a geom. If
@@ -129,31 +166,30 @@ specify.
 
 Note the important difference between specifying characteristics like colour
 and shape inside or outside the \texttt{aes} function --- those inside the
-\texttt{aes} function are assigned the colour or shape automatically based on
-the data. If characteristics like colour or shape are defined outside the
+\texttt{aes} function are assigned the colour or shape automatically based
+on the data. If characteristics like colour or shape are defined outside the
 \texttt{aes} function, then the characteristic is not mapped to data. Example:
 
-<<echo = true, fig = true, height = 4, width = 6>>=
-library(ggplot2)
+<<echo=TRUE, fig.height=4, fig.width=6>>=
 ggplot(mpg, aes(cty, hwy)) + geom_point(aes(colour = class))
 @
 
-<<echo = true, fig = true, height = 4, width = 6>>=
+<<echo=TRUE, fig.height=4, fig.width=6>>=
 ggplot(mpg, aes(cty, hwy)) + geom_point(colour = "red")
 @
 
 \section{Small multiples}
 
-In \texttt{ggplot} parlance, small multiples are referred to as facets. There
+In \ggtwo\ parlance, small multiples are referred to as facets. There
 are two kinds: \texttt{facet\_wrap} and \texttt{facet\_grid}. This is where
-\texttt{ggplot} really shines.
+\ggtwo\ really shines.
 
-<<echo = true, fig = true, height = 5, width = 6.5>>=
+<<echo=TRUE, fig.height=5, fig.width=6.5>>=
 ggplot(mpg, aes(cty, hwy)) + geom_point() + facet_wrap(~class)
 @
 
 \clearpage
-<<echo = true, fig = true, height = 3, width = 8>>=
+<<echo=TRUE, fig.height=3, fig.width=8>>=
  ggplot(mpg, aes(cty, hwy)) + geom_point() + facet_grid(year~class)
 @
 
@@ -168,87 +204,77 @@ example, specify ``free'' y axes with \texttt{face\_wrap(scales = "free\_y")}.
 
 \section{Themes}
 
-A useful theme built into \texttt{ggplot} is \texttt{theme\_bw}:
+A useful theme built into \ggtwo\ is \texttt{theme\_bw}:
 
-<<echo = true, fig = true, height = 2.5, width = 4.5>>=
+<<echo=TRUE, fig.height=3.5, fig.width=4>>=
 dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
 ggplot(mtcars, aes(wt, mpg)) + geom_point() + theme_bw()
 @
 
-A powerful aspect of \texttt{ggplot} is that you can write your own themes.
-This feature of \texttt{ggplot} was recently expanded substantially, and I
-imagine we'll see more themes developed and shared in the future. See the
-\texttt{ggthemes} package for some examples.\sidenote{Install the R package
-from:\\ \url{https://github.com/jrnold/ggthemes}}
+A powerful aspect of \ggtwo\ is that you can write your own themes.  This
+feature of \ggtwo\ was recently expanded, and I imagine we'll see more
+themes developed and shared in the future. See the \texttt{ggthemes}
+package for some examples.\footnote{Install the R package from:
+\url{https://github.com/jrnold/ggthemes}}
 
 \clearpage
-A Tufte-like theme:
-<<echo = true, fig = true, height = 2.5, width = 4.5>>=
+An Edward Tufte-like theme:
+<<echo=TRUE, fig.height=2.5, fig.width=4.5>>=
 library("ggthemes")
 ggplot(mtcars, aes(wt, mpg)) + geom_point() + geom_rangeframe() +
  theme_tufte()
 @
 
 Just what you wanted:
-<<echo = true, fig = true, height = 2.5, width = 5>>=
+<<echo=TRUE, fig.height=2.5, fig.width=5>>=
 qplot(carat, price, data = dsamp, colour = cut) + theme_excel() +
  scale_colour_excel()
 @
 
-You can customize just about every aspect of a \texttt{ggplot} plot. We won't
-get into that today.
+You can customize just about every aspect of a \ggtwo\ plot. We won't get into
+that today, but see the additional help resources at the end of this document.
 
-\section{ggplot's dirty little secret}
+\section{\ggtwo's dirty little secret}
 \begin{enumerate}
-  \item \texttt{ggplot} is easy to learn, however \ldots
+  \item \ggtwo\ is easy to learn, however \ldots
   \item you need to be a data-manipulation ninja to effectively use it
 \end{enumerate}
 
-With base plot, you can work with almost any data structure you'd like
-providing you can write the code to work with it. \texttt{ggplot} requires you
-to think carefully about the data structure and then write one line of code.
+With base graphics, you can work with almost any data structure you'd like,
+providing you can write the code to work with it. \ggtwo\ requires you to
+think carefully about the data structure and then write one line of code.
 
-\texttt{ggplot} works with ``long'' format data with each aesthetic or facet
+\ggplot\ works with ``long'' format data with each aesthetic or facet
 variable in its own column.  So, for example, if we wanted a panel for each
-level of a factor called ``fishstock'' then we'd need a column named
-``fishstock'' with all the different values of ``fishstock'' in that column.
+level of a factor called \texttt{fishstock} then we'd need a column named
+\texttt{fishstock} with all the different values of \texttt{fishstock} in that
+column.
 
-With the \texttt{reshape} and \texttt{plyr} packages you can get almost any
-dataset into shape for \texttt{ggplot} in a few lines. Sometimes this will
-take some serious thought.
-
-\section{Help}
-
-The R help files were notoriously bad but are rapidly improving.  
-
-The best (and nearly essential) help source is the
-website.\sidenote{\url{http://docs.ggplot2.org/}} There's also an active
-\texttt{ggplot} discussion
-group.\sidenote{\url{http://groups.google.com/group/ggplot2}} \texttt{ggplot}
-is heavily featured on
-stackoverflow.\sidenote{\url{http://stackoverflow.com/questions/tagged/ggplot2}} 
-
-Hadley wrote a book on \texttt{ggplot}. It's quite thorough but doesn't
-feature some of the newer additions to \texttt{ggplot}.
+With the \texttt{reshape2} and \texttt{plyr} packages, combined with
+\texttt{merge} (or \texttt{join} from the \texttt{plyr} package), you can get
+almost any dataset into shape for \ggtwo\ in a few lines. Sometimes this will
+take some serious thought along with pen and paper.
 
 \section{Random tips}
 
 \begin{description}
   \item[Jittering and statistics] \hfill \\
-    \texttt{ggplot2} has lots of built in niceties like automatic position
-    jittering and the addition of basic statistical models to your plots. Have
-    a look through the website.
+    \ggtwo\ has lots of built in niceties like automatic position jittering
+    and the addition of basic statistical models to your plots. Have a look
+    through the help resources listed at the end of this document.
   \item[Axis labels] \hfill \\
     \texttt{xlab("Your x-axis label")}
   \item[Suppressing the legend] \hfill \\ 
     \texttt{theme(legend.position = "none")}
-  \item[Exploiting the object-oriented nature of \texttt{ggplot2}] \hfill \\
+  \item[Exploiting the object-oriented nature of \ggtwo] \hfill \\
     Save the basic plot to an object and then experiment with different
     aesthetics, geoms, and theme adjustments.
 
-<<<echo = true, figure = false>>=
- p <- ggplot(d) + geom_point(aes(x, y, colour = group1)) 
- p <- p + facet_grid(~group2)
+<<echo=TRUE, fig.keep='none'>>=
+# Build the basic object:
+p <- ggplot(d) + geom_point(aes(x, y, colour = group1)) 
+p + facet_grid(~group1) # try one way
+p + facet_grid(~group2) # try another way
 @
 
   \item[Horizontal error bars]\hfill \\  
@@ -257,20 +283,48 @@ feature some of the newer additions to \texttt{ggplot}.
     segments, or you can use \texttt{point\_range()} and then rotate the axes
     with \texttt{+ coord\_flip()}.
   \item[Axis limits and zooming] \hfill \\
-    \texttt{ggplot2} has two ways of adjusting the axis limits: \texttt{+
-    xlim(2, 5)} will ``cut'' the data at \texttt{2} and \texttt{5} and plot
-    the data. \texttt{coord\_cartesian(xlim = c(2, 5))} will zoom in on the
-    plot while retaining the original data. This will, for example, affect
-    colour scales.
-  \item[Displaying and saving ggplot2 plots] \hfill \\
-    If \texttt{ggplot2} plots are generated in a function, they will be need
-    to be wrapped in \texttt{print()} to display. There is a convenience
-    function \texttt{ggsave("filename.pdf")}, which will save the last plot to
-    a pdf and guess at reasonable dimensions. You can, of course specify which
-    plot to save and the dimensions of the pdf. You can also use all the same
-    methods of saving \texttt{ggplot2} plots that you can use for base
-    graphics.
+    \ggtwo\ has two ways of adjusting the axis limits: \texttt{+ xlim(2, 5)}
+    will ``cut'' the data at \texttt{2} and \texttt{5} and plot the data.
+    \texttt{coord\_cartesian(xlim = c(2, 5))} will zoom in on the plot while
+    retaining the original data. This will, for example, affect colour scales.
+  \item[Displaying and saving \ggtwo\ plots] \hfill \\
+    If \ggtwo\ plots are generated in a function, they will be need to be
+    wrapped in \texttt{print()} to display. There is a convenience function
+    \texttt{ggsave("filename.pdf")}, which will save the last plot to a pdf
+    and guess at reasonable dimensions. You can, of course specify which plot
+    to save and the dimensions of the pdf. You can also use all the same
+    methods of saving \ggtwo\ plots that you can use for base graphics.
+  \item[Combining multiple \ggtwo\ panels] \hfill \\
+    \ggtwo\ makes it easy to create multipanel figures with
+    \texttt{facet\_grid} and \texttt{facet\_wrap}. But, sometimes you need to
+    combine different kinds of plots in one figure or plots that require
+    different data. One easy way to do this is with the \texttt{grid.arrange}
+    function from the \texttt{gridExtra} package. For example: 
+
+<<grid.arrange, fig.width=4.5, fig.height=5>>=
+df <- data.frame(x = 1:10, y = rnorm(100))
+p1 <- ggplot(df, aes(x, y)) + geom_point()
+p2 <- ggplot(df, aes(y)) + geom_histogram()
+gridExtra::grid.arrange(p1, p2)
+@
+
 \end{description}
 
-\end{document}
+\section{Help}
 
+The best (and nearly essential) help source is the website, which is largely
+based off the package help files, shows the example plots, and is easy to
+navigate:\\ 
+\url{http://docs.ggplot2.org/}\\ 
+Don't be afraid to keep it open whenever you're using \ggtwo.
+
+There's also an active \ggtwo\ discussion group:\\
+\url{http://groups.google.com/group/ggplot2}
+
+\ggtwo\ is heavily featured on stackoverflow:\\
+\url{http://stackoverflow.com/questions/tagged/ggplot2}
+
+Hadley wrote a book on \ggtwo: \url{http://ggplot2.org/book/}. It's quite
+thorough but doesn't feature some of the newer additions to the package.
+
+\end{document}
