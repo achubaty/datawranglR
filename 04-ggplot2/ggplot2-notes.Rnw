@@ -49,9 +49,9 @@ a chapter of his PhD thesis. Many people now participate in developing the
 package.
 
 The emphasis of \ggtwo\ is on rapid exploration of data, and especially
-high-dimensional data. Think of base graphics functions\footnote{Examples
-of base graphic functions are \texttt{plot}, \texttt{points}, and
-\texttt{lines}.} as drawing with data. You have complete control over every
+high-dimensional data. Think of base graphic functions as drawing with
+data\footnote{Examples of base graphic functions are \texttt{plot},
+\texttt{points}, and \texttt{lines}.}. You have complete control over every
 pixel in a plot (once you learn the arcane world of \texttt{par}) but it can
 take a lot of time and code to produce a complex plot.
 
@@ -95,6 +95,8 @@ isn't complicated and will work in all cases. I prefer to work with just the
 \section{Basics of the grammar}
 Let's look at some illustrative \ggtwo\ code:
 
+\clearpage
+
 <<echo=TRUE, fig.height=4, fig.width=8>>=
 library(ggplot2)
 d <- data.frame(x = c(1:10, 1:10), y = runif(20), 
@@ -108,8 +110,10 @@ The basic format in this example is:
 
 \begin{enumerate}
   \item \texttt{ggplot()}: start a \ggplot\ object and specify the data
-  \item \texttt{geom\_point()}: we want a scatter plot; this is called a \texttt{geom}
-  \item \texttt{aes()}: specifies the ``aesthetic'' elements; a legend is automatically created
+  \item \texttt{geom\_point()}: we want a scatter plot; this is called a
+    \texttt{geom}
+  \item \texttt{aes()}: specifies the ``aesthetic'' elements; a legend is
+    automatically created
   \item \texttt{facet\_grid()}: specifies the panel layout
 \end{enumerate}
 
@@ -133,7 +137,7 @@ plot elements. Some common geoms:
  \texttt{geom\_line} & Lines\\
  \texttt{geom\_ribbon} & Ribbons, y range with continuous x values\\
  \texttt{geom\_polygon} & Polygon, a filled path\\
- \texttt{geom\_pointrange} & Vertical line with a point in the middle\\ % todo - flip axes
+ \texttt{geom\_pointrange} & Vertical line with a point in the middle\\
  \texttt{geom\_linerange} & An interval represented by a vertical line\\
  \texttt{geom\_path} & Connect observations in original order\\
  \texttt{geom\_histogram} & Histograms \\
@@ -174,7 +178,7 @@ on the data. If characteristics like colour or shape are defined outside the
 ggplot(mpg, aes(cty, hwy)) + geom_point(aes(colour = class))
 @
 
-<<echo=TRUE, fig.height=3, fig.width=5>>=
+<<echo=TRUE, fig.height=3, fig.width=4>>=
 ggplot(mpg, aes(cty, hwy)) + geom_point(colour = "red")
 @
 
@@ -268,6 +272,7 @@ take some serious thought along with pen and paper.
     \texttt{xlab("Your x-axis label")}
   \item[Suppressing the legend] \hfill \\ 
     \texttt{theme(legend.position = "none")}
+    \clearpage
   \item[Exploiting the object-oriented nature of \ggtwo] \hfill \\
     Save the basic plot to an object and then experiment with different
     aesthetics, geoms, and theme adjustments.
@@ -303,7 +308,8 @@ p + facet_grid(~group2) # try another way
     different data. One easy way to do this is with the \texttt{grid.arrange}
     function from the \texttt{gridExtra} package. For example: 
 
-<<grid.arrange, fig.width=4.5, fig.height=5>>=
+\clearpage
+<<grid.arrange, fig.width=4.2, fig.height=5.2>>=
 df <- data.frame(x = 1:10, y = rnorm(100))
 p1 <- ggplot(df, aes(x, y)) + geom_point()
 p2 <- ggplot(df, aes(y)) + geom_histogram()
@@ -312,11 +318,13 @@ gridExtra::grid.arrange(p1, p2)
 
 \end{description}
 
+\clearpage
+
 \section{Help}
 
 The best (and nearly essential) help source is the website, which is largely
-based off the package help files, shows the example plots, and is easy to
-navigate:\\ 
+based off the package help files. However, the website also shows the example
+plots and is easier to navigate:\\ 
 \url{http://docs.ggplot2.org/}\\ 
 Don't be afraid to keep it open whenever you're using \ggtwo.
 
