@@ -197,14 +197,14 @@ ggplot(mpg, aes(cty, hwy)) + geom_point() + facet_wrap(~class)
  ggplot(mpg, aes(cty, hwy)) + geom_point() + facet_grid(year~class)
 @
 
-\texttt{face\_wrap} plots the panels in the order of the factor levels. When
+\texttt{facet\_wrap} plots the panels in the order of the factor levels. When
 it gets to the end of a column it wraps to the next column. You can specify
 the number of columns and rows with \texttt{nrow} and \texttt{ncol}.
 \texttt{facet\_grid} lays out the panels in a grid with an explicit x and y
 position.
 
 By default all x and y axes will be shared among panels. You could, for
-example, specify ``free'' y axes with \texttt{face\_wrap(scales = "free\_y")}.
+example, specify ``free'' y axes with \texttt{facet\_wrap(scales = "free\_y")}.
 
 \clearpage 
 
