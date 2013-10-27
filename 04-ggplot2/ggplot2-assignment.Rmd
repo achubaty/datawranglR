@@ -1,0 +1,85 @@
+# Assignment 4: `ggplot2`
+
+```{r}
+library(ggplot2)
+```
+
+Great job tidying up the Galapagos finch morphology data so quickly, your professor is very impressed. (Your new professor, not that Fire Pokemon one.) There's a conference coming up in an exotic locale and your professor has even offered to pay your way *IF* you have results to present. But you don't have much time, abstracts are due in two weeks (Nov. 6th). Quick, time to plot your data! To the `ggplot2`!
+
+[ggplot2 help page](http://docs.ggplot2.org/)
+
+First, load your data from the previous assignment (`plyr` & `reshape2`)
+There are a number of ways you could do this. You might be tempted to run the assignment #3 code, save the workspace, and then load it here. But this (saving/loading workspaces across sessions) is considered bad practice as it means your document is no longer reproducible.
+
+"Friends don't let friends save their workspaces..." - [Hadley Wickham](https://twitter.com/hadleywickham/status/233203184057856000)
+
+You could copy and paste all of the R code into this document, but we're interested in plotting our data, we don't want this document cluttered up with our data-tidying code.
+
+The `source` function comes in handy here. It reads in and evaluates an R script, recreating the workspace. Because we are using R Markdown we will need to extract just the R script. `purl` in the `knitr` package allows us to do that. The code below pulls out the R script from our R Markdown file (making a temporary `.R` file) and then sources it for this session. Check out `?source` and `?purl` to learn more.
+
+For this to work, you'll need to replace `assignment-3-answers.Rmd` with whatever your assignment 3 file was named. You'll also need to have that file and this file in the same folder (or add the folder path in the function call). Make sure the `.csv` data file is in the same folder too.
+
+```{r message=FALSE, results='hide'}
+library(knitr)
+# Replace with your file name:
+purl("assignment-3-answers.Rmd") # creates the .R file for the next line
+# Replace with your file name:
+source("assignment-3-answers.R")
+```
+
+Check that it worked. Look at the `head` of morph.
+
+The data set has three different levels for sex: `F`, `M`, and `U`. If we use `table` we can see that `U` is only represented twice in the data set. Let's ignore those so we can focus on just females and males. We'll reassign the `U` level to `NA` values.
+
+```{r}
+head(morph)
+table(morph$sex)
+levels(morph$sex)[3] <- NA
+```
+
+## 1. Data distribution
+
+Inspect the distribution of the `wingl` data at each island using three different geoms. Use the `fill` or `color` aesthetic to represent different islands and therefore get the data from all islands onto a single panel each time. (I.e. don't use `facet_grid` or `face_wrap` yet.)
+
+```{r}
+```
+
+## 2. Scatterplot
+
+In a single panel scatterplot show the relationship between `wingl` (x-axis), `beakh` (y-axis), and `ubeakl` (size) for both sexes. Adjust the `alpha` aesthetic to make overlapping data visible.
+
+```{r}
+```
+
+## 3. Faceting
+
+Now use faceting to display the same data for each `genusl69` and `islandid` combination. Keep the same axis limits for wing length but allow the axis limits for beak height to vary with island ID.
+
+```{r, warning=FALSE}
+```
+
+## 3. Themes
+
+Now look at the data from the island `Gnov_Twr` (the `morph_gt` data frame from your last assignment). In a single scatterplot show the wing-length to beak-height relationship for both sexes (colour) and each species ID (shape). Rename the x and y labels, choose a different theme, and move the legend to the top.
+
+```{r}
+```
+
+## 4. Summary stats
+
+First, we'll modify our `ddply()` on morph_gt in the `plyr` assignment to include sex:
+
+```{r}
+```
+
+Make a barchart to plot the mean +/- 2 standard deviations of beak height by sex for the species on `Gnov_Twr`. We want side-by-side bars of female and male for each species with error bars. (Hint: Look at what the `stat` and `position` arguments do in the `geom_errorbar` geom.) Give the plot meaningful x and y label names.
+
+```{r}
+```
+
+Now plot the same data with points and lines. Flip the coordinates so that species ID is on the vertical axis. Add a single dashed reference line at the overall mean beak height for all species on the island. Make sure the overall mean line is behind (not overlapping) the species-specific data.
+
+```{r}
+```
+
+Make sure you can knit your complete document. Before submitting, comment out any `setwd` lines of code. Then compress the folder containing this file, your assignment 3 file, and the `.csv` file into a `.zip` file and email us a copy. (On a Mac, select the 3 files, control click, and select `Compress 3 Items`.) Last names starting with A-L, send to Sean; last names starting with M-Z send to Corey. Thanks!
