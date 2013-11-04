@@ -1,7 +1,7 @@
-all: par
+all: multi par
 
 multi: 
-	R CMD Sweave multipanel-notes.Rnw
+	Rscript -e "knitr::knit('multipanel-notes.Rnw')"
 	pdflatex multipanel-notes
 
 par:
