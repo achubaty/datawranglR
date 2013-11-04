@@ -57,7 +57,9 @@ First, let's set up \texttt{par}. We're going to reduce the character expansion 
 par(cex = 0.8)
 @
 
-We're also going to set \texttt{mgp}, which controls the XX, XX, and XX. 
+We're also going to set \texttt{mgp}, which controls the spacing of the axis
+titles, axis number labels, and the axis line itself. The first two values
+(axis title and label and label spacing) are useful to set.
 
 <<>>=
 par(mgp = c(2, 0.6, 0))
@@ -75,6 +77,7 @@ We're going to make all the axis text horizontal by setting \texttt{las} (label 
 par(las = 1)
 @
 
+And now remake the plot:
 
 <<par-setup, echo=5>>=
 par(cex = 0.8)
@@ -122,7 +125,9 @@ z <- 50:1
 d <- data.frame(x, y, z)
 @
 
-There are a number of ways to do this. We'll use \texttt{findInterval}.
+There are a number of ways to do this. We'll use \texttt{findInterval}. First,
+we're going to create a data frame that matches colours (from Color Brewer)
+with values of \texttt{z} that we want to assign colours at.
 
 <<>>=
 library(RColorBrewer)
@@ -132,13 +137,20 @@ pal_df <- data.frame(pal = pal, cuts = seq(min(d$z), max(d$z),
 pal_df
 @
 
+Now we'll use \texttt{findInterval} to find the rows of cut values that match
+the values of \texttt{z}:
+
 <<>>=
 pal_indices <- findInterval(d$z, pal_df$cuts)
 @
 
+And then use those indices to pick out the colour palette values:
+
 <<>>=
 d$col <- pal_df$pal[pal_indices]
 @
+
+Now we can plot with those colours:
 
 <<echo=2:999>>=
 par(cex = 0.8)
@@ -150,17 +162,23 @@ plot(d$x, d$y, col = d$col, pch = 19)
 We're going to work through an example adding a linear model fit and shaded
 confidence intervals to our scatter plot.
 
-Many ways (and for this simple case, many much simpler ways), but this is a
-general example that can work across any linear or non-linear model with
-minimal modification.
+There are many ways to do this (and for this simple case, many much simpler
+ways), but this is a general example that can work across nearly any type of
+linear or non-linear model with minimal modification.
 
-Fit the model:
+First, we'll fit the model:
 
 <<>>=
 m <- lm(y ~ x, data = d)
 @
 
-Predict:
+Now, we'll create a new prediction data frame and generate values of
+\texttt{x} that we want to predict across. We'll predict across a sequence of
+\texttt{x} values that are close enough to each other that our confidence
+interval curve will look smooth.
+
+We'll get both the fitted line and the 95\% confidence intervals by adding and
+subtracting 1.96 times the standard error on the predictions.
 
 <<>>=
 pred_df <- data.frame(x = seq(min(x), max(x), length.out = 100))
@@ -170,7 +188,14 @@ pred_df$lower <- pred_df$fit + 1.96 * se
 pred_df$upper <- pred_df$fit - 1.96 * se
 @
 
-And plot it again:
+Then we'll plot the data again and add the line with \texttt{lines} and the
+confidence interval with \texttt{polygon}. The first argument to
+\texttt{polygon} is a sequence of x-values from left to right and the second
+argument is a sequence of y-values from left to right. Therefore, some of the
+vectors need to be reversed with the \texttt{rev} function. We'll also use the
+\texttt{with} function, which allows us to avoid writing out
+\texttt{pred\_df\$} repeatedly. It allows us to access the column names
+directly in that line of code.
 
 <<echo=2:999>>=
 par(cex = 0.8)
@@ -180,9 +205,9 @@ with(pred_df, polygon(c(x, rev(x)), c(lower, rev(upper)),
   border = NA, col = "#00000050"))
 @
 
-(2) coefficient plot
-points
-segments
+\section{Working with points and segments}
+
+coefficient plot
 
 
 \end{document}
