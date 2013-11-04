@@ -15,6 +15,8 @@
 \subtitle{BISC 888--1 Simon Fraser University}
 \author{Sean C. Anderson\\ \texttt{sean@seananderson.ca}}
 
+%\newcommand{\par}{\texttt{par}}
+
 \setlength\parskip{0.1in}
 \setlength\parindent{0in}
 
@@ -22,18 +24,165 @@
 
 <<set-knitr-options, echo=FALSE>>=
 library(knitr)
-opts_chunk$set(fig.align='center', fig.pos="htpb", cache=TRUE, echo=TRUE,
-message=FALSE, autodep=TRUE, fig.path='figure/', fig.width=5, par=TRUE)
+opts_chunk$set(fig.align='center', fig.pos="htpb", cache=FALSE, echo=TRUE,
+message=FALSE, autodep=TRUE, fig.path='figure/', fig.width=4, fig.height=4)
 opts_chunk$set(warning=FALSE, message=FALSE, tidy=FALSE, refresh=TRUE)
 opts_chunk$set(dev = 'pdf')
 @
 
 \maketitle
 
-take a default figure and take it to a pretty figure showing all the par steps along the way
+%take a default figure and take it to a pretty figure showing all the par steps along the way
 
-to include - grey lines, grey on axes, las on axes, location of axis labels, margin space, panel label
+%to include - grey lines, grey on axes, las on axes, location of axis labels, margin space, panel label
 
-show lines, polygons, points, ...
+%show lines, polygons, points, ...
+
+\section{Making one panel look good}
+
+In this section, we're going to start with a default base graphics plot and thoroughly customize it.
+
+Let's start with a basic scatterplot. We'll generate some data and make a default plot.
+
+<<>>=
+set.seed(2)
+x <- seq_len(50)
+y <- x * 3 + rnorm(50, sd = 20)
+plot(x, y)
+@
+
+First, let's set up \texttt{par}. We're going to reduce the character expansion value \texttt{cex}. 
+
+<<>>=
+par(cex = 0.8)
+@
+
+We're also going to set \texttt{mgp}, which controls the XX, XX, and XX. 
+
+<<>>=
+par(mgp = c(2, 0.6, 0))
+@
+
+We're going to reduce the tick length by setting \texttt{tck}.
+
+<<>>=
+par(tck = -0.02)
+@
+
+We're going to make all the axis text horizontal by setting \texttt{las} (label axis style).
+
+<<>>=
+par(las = 1)
+@
+
+
+<<par-setup, echo=5>>=
+par(cex = 0.8)
+par(mgp = c(2, 0.6, 0))
+par(tck = -0.02)
+par(las = 1)
+plot(x, y)
+@
+
+We're getting there. Now let's emphasize the data by lightening the axes and axis labels. There are multiple ways to do this, but I'm going to show you the most flexible way: starting with a blank plot and building it up piece by piece:
+
+<<echo=5:99>>=
+par(cex = 0.8)
+par(mgp = c(2, 0.6, 0))
+par(tck = -0.02)
+par(las = 1)
+plot(x, y, type = "n", axes = FALSE, ann = FALSE)
+points(x, y)
+axis_col <- "grey50"
+box(col = axis_col)
+axis(1, col = axis_col, col.axis = axis_col)
+axis(2, col = axis_col, col.axis = axis_col)
+mtext("X axis label", side = 1, col = axis_col, line = 2.0, cex = 0.9)
+mtext("Y axis label", side = 2, col = axis_col, las = 3, 
+  line = 2.2, cex = 0.9)
+@
+
+\section{Adding a colour dimension}
+
+This is going to be much more involved than in \texttt{ggplot}, but bear with
+me. It's also very flexible. First we're going to bring in a colour palette.
+Then we're going to match cut that colour palette up according to our data.
+Then we're going to join that colour palette to the data we want to plot.
+
+\texttt{RColorBrewer} is an excellent package for colour palettes. We're
+going to start with one of those. Since the data we're going to colour is
+continuous we're going to pick a continuous colour scale.
+
+First, let's create some fake data we want to colour by. We'll call this
+column \texttt{z}. We'll combine, \texttt{x}, \texttt{y}, and \texttt{z} in a
+data frame.
+
+<<>>=
+z <- 50:1
+d <- data.frame(x, y, z)
+@
+
+There are a number of ways to do this. We'll use \texttt{findInterval}.
+
+<<>>=
+library(RColorBrewer)
+pal <- brewer.pal(9, "YlOrRd")
+pal_df <- data.frame(pal = pal, cuts = seq(min(d$z), max(d$z), 
+    length.out = length(pal)), stringsAsFactors = FALSE)
+pal_df
+@
+
+<<>>=
+pal_indices <- findInterval(d$z, pal_df$cuts)
+@
+
+<<>>=
+d$col <- pal_df$pal[pal_indices]
+@
+
+<<echo=2:999>>=
+par(cex = 0.8)
+plot(d$x, d$y, col = d$col, pch = 19)
+@
+
+\section{Adding lines and polygons}
+
+We're going to work through an example adding a linear model fit and shaded
+confidence intervals to our scatter plot.
+
+Many ways (and for this simple case, many much simpler ways), but this is a
+general example that can work across any linear or non-linear model with
+minimal modification.
+
+Fit the model:
+
+<<>>=
+m <- lm(y ~ x, data = d)
+@
+
+Predict:
+
+<<>>=
+pred_df <- data.frame(x = seq(min(x), max(x), length.out = 100))
+pred_df$fit <- predict(m, newdata = pred_df)
+se <- predict(m, newdata = pred_df, se = TRUE)$se.fit
+pred_df$lower <- pred_df$fit + 1.96 * se
+pred_df$upper <- pred_df$fit - 1.96 * se
+@
+
+And plot it again:
+
+<<echo=2:999>>=
+par(cex = 0.8)
+plot(d$x, d$y)
+with(pred_df, lines(x, fit))
+with(pred_df, polygon(c(x, rev(x)), c(lower, rev(upper)), 
+  border = NA, col = "#00000050"))
+@
+
+(2) coefficient plot
+points
+segments
+
 
 \end{document}
