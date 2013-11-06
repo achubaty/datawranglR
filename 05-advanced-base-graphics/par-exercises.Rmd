@@ -1,0 +1,64 @@
+# Customizing base graphics plots
+
+Let's go back to the IMDB dataset and work on customizing one panel:
+
+First, we'll subset for drama films and calculate the quartile values of the IMDB rating:
+
+```{r}
+library(plyr)
+load("imdb.rda")
+imdb <- imdb[imdb$genre %in% "Drama", ]
+d <- ddply(imdb, c("genre", "year"), summarize, median_rating =
+  median(imdb_rating), lower_quant = quantile(imdb_rating, 0.25),
+  upper_quant = quantile(imdb_rating, 0.75), median_length =
+  median(length, na.rm = TRUE))
+```
+
+Let's plot year against median rating and customize the plot:
+
+```{r}
+with(d, plot(year, median_rating))
+```
+
+Now let's use segments to show the quartiles of rating through time:
+
+```{r}
+with(d, plot(year, median_rating))
+```
+
+Often it makes sense to connect these kinds of plots into lines and polygons. Let's try that. We'll have a line for the median and a shaded polygon showing the upper and lower quartiles:
+
+```{r}
+with(d, plot(year, median_rating, type = "l"))
+```
+
+Let's match a colour palette to our data. We'll add a colour palette for the median length of a movie in a given year.
+
+```{r}
+library(RColorBrewer)
+pal <- brewer.pal(9, "YlOrRd")
+pal_df <- data.frame(pal = pal, cuts = seq(min(d$median_length),
+    max(d$median_length), length.out = length(pal)),
+  stringsAsFactors = FALSE)
+```
+
+With base graphics you can draw with data. If you can think it, you can plot it.
+
+Here's a little exercise to get you thinking about that. Using `symbols`, `segments`, `points`, and `polygon`, recreate the smiley face with these data:
+
+```{r}
+eyes <- data.frame(x = c(25, 75), y = c(80, 80), radii = c(5, 5))
+eyebrows <- data.frame(x1 = c(20, 70), y1 = c(90, 90), x2 = c(30,
+    80), y2 = c(90, 90))
+nose <- data.frame(x = c(47, 53), y = c(50, 50))
+mouth <- data.frame(x = c(20, 30, 40, 50, 60, 70, 80, 70, 60, 50,
+    40, 30, 20), y = c(40, 35, 30, 30, 30, 35, 40, 30, 25, 25, 25,
+    30, 40))
+```
+
+You can use each base graphics function once on one line of code. In other words, only add four lines of code to make the complete face. I've started the plot for you.
+
+```{r}
+par(mar = c(2, 2, 2, 2), oma = c(0,0,0,0))
+plot(10:90, 10:90, type = "n", xlab = "", ylab = "", axes = TRUE)
+```

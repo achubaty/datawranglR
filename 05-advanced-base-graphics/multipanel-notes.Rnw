@@ -16,7 +16,7 @@
 
 \subtitle{BISC 888--1 Simon Fraser University}
 
-\author{Sean Anderson}
+\author{Sean C. Anderson\\ \texttt{sean@seananderson.ca}}
 
 \textheight 21cm
 \setlength\parskip{0.1in}

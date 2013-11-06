@@ -233,25 +233,25 @@ with(pred_df, polygon(c(x, rev(x)), c(lower, rev(upper)),
   border = NA, col = "#00000050"))
 @
 
-\section{Working with points and segments}
+%\section{Working with points and segments}
 
-<<morph, fig.width=5, fig.height=4>>=
-morph <- read.csv("Morph_for_Sato.csv")
-library(plyr)
-morph_body <- ddply(morph, "TaxonOrig", summarize, l =
-  quantile(BodyL, 0.25, na.rm = TRUE), m = quantile(BodyL, 0.5,
-    na.rm = TRUE), u = quantile(BodyL, 0.75, na.rm = TRUE))
-morph_body <- na.omit(morph_body)
-morph_body$TaxonOrig <- factor(morph_body$TaxonOrig)
-par(mar = c(4, 18, 1, 1), cex = 0.8)
-with(morph_body, plot(m, TaxonOrig, xlim = range(morph_body[, 2:4],
-      na.rm = TRUE), type = "p", xlab = "Body length (mm)", ylab =
-    "", yaxt = "n"))
-with(morph_body, segments(l, as.numeric(TaxonOrig), u,
-    as.numeric(TaxonOrig)))
-with(morph_body, axis(2, at = as.numeric(TaxonOrig), labels =
-    TaxonOrig, las = 1))
-@
+%<<morph, fig.width=5, fig.height=4>>=
+%morph <- read.csv("Morph_for_Sato.csv")
+%library(plyr)
+%morph_body <- ddply(morph, "TaxonOrig", summarize, l =
+%  quantile(BodyL, 0.25, na.rm = TRUE), m = quantile(BodyL, 0.5,
+%    na.rm = TRUE), u = quantile(BodyL, 0.75, na.rm = TRUE))
+%morph_body <- na.omit(morph_body)
+%morph_body$TaxonOrig <- factor(morph_body$TaxonOrig)
+%par(mar = c(4, 18, 1, 1), cex = 0.8)
+%with(morph_body, plot(m, TaxonOrig, xlim = range(morph_body[, 2:4],
+%      na.rm = TRUE), type = "p", xlab = "Body length (mm)", ylab =
+%    "", yaxt = "n"))
+%with(morph_body, segments(l, as.numeric(TaxonOrig), u,
+%    as.numeric(TaxonOrig)))
+%with(morph_body, axis(2, at = as.numeric(TaxonOrig), labels =
+%    TaxonOrig, las = 1))
+%@
 
 
 

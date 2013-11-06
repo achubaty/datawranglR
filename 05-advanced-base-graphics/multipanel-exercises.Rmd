@@ -1,0 +1,30 @@
+We're going to work with some IMDB data. First we'll load it and subset it to four genres just to keep things simple. We're also going to use `ddply` to calculate the median rating for each year. We're going to ask: Does the distribution of ratings change through time across these four genres?
+
+```{r}
+library(plyr)
+load("imdb.rda")
+genres <- c("Action", "Drama", "Romance", "Comedy")
+imdb <- imdb[imdb$genre %in% genres, ]
+d <- ddply(imdb, c("genre", "year"), summarize, median_rating =
+  median(imdb_rating))
+```
+
+Now, let's plot out the median ratings by year with panels for each genre. We'll use `par(mfrow)` this time:
+
+```{r}
+```
+
+In this case we can remove the inner margin space and remove redundant axes:
+
+```{r}
+```
+
+Now, we'll use `layout` to make a plot with a long plot on the top and two narrower plots on the bottom. We'll plot a time series of year against IMDB rating on the top, a histogram of ratings on the bottom left, and a histogram of votes on the bottom right.
+
+```{r}
+```
+
+Now, let's try using `split.screen`. We'll come up with an arbitrary layout for 3 panels, create a `.csv` file containing the positions, and plot 3 panels.
+
+```{r}
+```

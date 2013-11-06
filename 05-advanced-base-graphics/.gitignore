@@ -5,3 +5,12 @@
 *.tex
 cache/
 figure/
+
+Morph_for_Sato.csv
+face.pdf
+imdb.RData
+multipanel-exercises-answers.Rmd
+multipanel-slides.key/
+par-exercises-answers.Rmd
+par-slides.key/
+split-screen.csv
