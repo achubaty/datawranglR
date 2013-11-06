@@ -38,6 +38,17 @@ opts_chunk$set(dev = 'pdf')
 
 %show lines, polygons, points, ...
 
+Base plotting functions let you draw with data. If you can imagine it, you can
+make it with base graphics functions in R.
+
+The price you pay for this flexibility is a lack of structured grammar like
+\texttt{ggplot2}, a lot of sometimes-complex code, and a lot of time coding.
+
+Explore data rapidly with \texttt{ggplot2}, and if you reach the limits of
+what you can do with \texttt{ggplot2}, or you find a plot you want to
+customize beyond what you can easily do with \texttt{ggplot2}, then create it
+with base graphics.
+
 \section{Making one panel look good}
 
 In this section, we're going to start with a default base graphics plot and thoroughly customize it.
@@ -51,7 +62,19 @@ y <- x * 3 + rnorm(50, sd = 20)
 plot(x, y)
 @
 
-First, let's set up \texttt{par}. We're going to reduce the character expansion value \texttt{cex}. 
+First, let's set up \texttt{par}. We'll cover some common adjustments here,
+but there are many options we won't touch on. It is well worth reading the
+help file \texttt{?par} frequently. If you want to be able to quickly produce
+highly-customized R graphics, you will need to be intimately familiar with the
+\texttt{par} options.
+
+
+We're going to reduce the character
+expansion value \texttt{cex}.  This will make everything a bit smaller. The
+\texttt{cex} value you choose will depend on the aesthetics of the plot and
+the output (e.g. PDF) dimensions. Typically, values around 0.8 will work.
+Lower values can be useful if you are working with small plots or plots with
+lots of panels.
 
 <<>>=
 par(cex = 0.8)
@@ -87,6 +110,7 @@ par(las = 1)
 plot(x, y)
 @
 
+\clearpage
 We're getting there. Now let's emphasize the data by lightening the axes and axis labels. There are multiple ways to do this, but I'm going to show you the most flexible way: starting with a blank plot and building it up piece by piece:
 
 <<echo=5:99>>=
@@ -105,6 +129,7 @@ mtext("Y axis label", side = 2, col = axis_col, las = 3,
   line = 2.2, cex = 0.9)
 @
 
+\clearpage
 \section{Adding a colour dimension}
 
 This is going to be much more involved than in \texttt{ggplot}, but bear with
@@ -121,30 +146,33 @@ column \texttt{z}. We'll combine, \texttt{x}, \texttt{y}, and \texttt{z} in a
 data frame.
 
 <<>>=
-z <- 50:1
-d <- data.frame(x, y, z)
+d <- data.frame(x, y, z = 50:1)
 @
 
-There are a number of ways to do this. We'll use \texttt{findInterval}. First,
-we're going to create a data frame that matches colours (from Color Brewer)
-with values of \texttt{z} that we want to assign colours at.
+Now, we'll load the \texttt{RColorBrewer} library and read in a palette.
 
 <<>>=
 library(RColorBrewer)
 pal <- brewer.pal(9, "YlOrRd")
+@
+
+Now, we're going to create a data frame that matches colours with values of
+\texttt{z} that we want to assign colours at.
+
+<<>>=
 pal_df <- data.frame(pal = pal, cuts = seq(min(d$z), max(d$z), 
     length.out = length(pal)), stringsAsFactors = FALSE)
 pal_df
 @
 
-Now we'll use \texttt{findInterval} to find the rows of cut values that match
+And we'll use \texttt{findInterval} to find the rows of cut values that match
 the values of \texttt{z}:
 
 <<>>=
 pal_indices <- findInterval(d$z, pal_df$cuts)
 @
 
-And then use those indices to pick out the colour palette values:
+Then we'll use those indices to pick out the colour palette values:
 
 <<>>=
 d$col <- pal_df$pal[pal_indices]
@@ -207,7 +235,24 @@ with(pred_df, polygon(c(x, rev(x)), c(lower, rev(upper)),
 
 \section{Working with points and segments}
 
-coefficient plot
+<<morph, fig.width=5, fig.height=4>>=
+morph <- read.csv("Morph_for_Sato.csv")
+library(plyr)
+morph_body <- ddply(morph, "TaxonOrig", summarize, l =
+  quantile(BodyL, 0.25, na.rm = TRUE), m = quantile(BodyL, 0.5,
+    na.rm = TRUE), u = quantile(BodyL, 0.75, na.rm = TRUE))
+morph_body <- na.omit(morph_body)
+morph_body$TaxonOrig <- factor(morph_body$TaxonOrig)
+par(mar = c(4, 18, 1, 1), cex = 0.8)
+with(morph_body, plot(m, TaxonOrig, xlim = range(morph_body[, 2:4],
+      na.rm = TRUE), type = "p", xlab = "Body length (mm)", ylab =
+    "", yaxt = "n"))
+with(morph_body, segments(l, as.numeric(TaxonOrig), u,
+    as.numeric(TaxonOrig)))
+with(morph_body, axis(2, at = as.numeric(TaxonOrig), labels =
+    TaxonOrig, las = 1))
+@
+
 
 
 \end{document}
