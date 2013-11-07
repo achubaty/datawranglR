@@ -10,4 +10,4 @@ This folder contains the notes, example exercises, and slides on base graphics l
 
 - [notes](https://github.com/seananderson/datawranglR/blob/master/05-advanced-base-graphics/par-notes.pdf?raw=true)
 - [slides](https://github.com/seananderson/datawranglR/blob/master/05-advanced-base-graphics/par-slides.pdf?raw=true)
--reshape2 [blank exercises](https://github.com/seananderson/datawranglR/blob/master/05-advanced-base-graphics/par-exercises.Rmd?raw=true) / [exercises with code](https://github.com/seananderson/datawranglR/blob/master/05-advanced-base-graphics/par-exercises-answers.Rmd?raw=true)
+- [blank exercises](https://github.com/seananderson/datawranglR/blob/master/05-advanced-base-graphics/par-exercises.Rmd?raw=true) / [exercises with code](https://github.com/seananderson/datawranglR/blob/master/05-advanced-base-graphics/par-exercises-answers.Rmd?raw=true)
