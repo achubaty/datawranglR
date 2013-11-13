@@ -17,15 +17,10 @@ Writing custom functions in R. (Approx. 20 mins)
     - e.g., calculate the proportion from counts
     - e.g., return R^2 from `lm()`
 
-### Manipulate
+### Student Presentations: Figures
 
-Introduction to the RStudio-specific `manipulate` package for visualizing data across multiple parameter values.  (Approx. 30 mins)
+Two minutes per student. Everyone presents their figure from last week's assignment.
 
-- parameter values in anylyical models
-    - e.g., logistic growth - Ricker model
-- useful for data exploration?
-    - e.g., bins for histogram
-    - e.g., gui for adding layers to plots
 
 ### Maps
 
