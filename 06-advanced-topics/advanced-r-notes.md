@@ -19,7 +19,7 @@ Writing custom functions in R. (Approx. 20 mins)
 
 ### Student Presentations: Figures
 
-Two minutes per student. Everyone presents their figure from last week's assignment.
+Two minutes per student. Everyone presents their figure from last week's assignment. Minimize the biological background, and focus on what the figure shows and, to a lesser extent, how you made it.
 
 
 ### Maps
