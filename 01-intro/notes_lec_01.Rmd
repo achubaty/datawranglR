@@ -399,7 +399,7 @@ if (condition1) {
 >
 == # You must use two since = means assign
 <=
-<=
+>=
 != # Does not equal
 && # And
 || # Or (in programming "or" is inclusive)
