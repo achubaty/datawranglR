@@ -1,10 +1,15 @@
 # Data Wragling and Presentation in R
 
+## Student Presentations: Figures
+
+Two minutes per student. Everyone presents their figure from last week's assignment. Minimize the biological background, and focus on what the figure shows and, to a lesser extent, how you made it. Discussion to follow. (Approx. 45-60 minutes)
+
+
 ## Advanced topics
 
-- [rOpenSci](http://ropensci.org/)
-- manipulate
+- functions
 - maps
+- [rOpenSci](http://ropensci.org/)
 
 ### Functions
 
@@ -16,11 +21,6 @@ Writing custom functions in R. (Approx. 20 mins)
 - use with `ddply()`
     - e.g., calculate the proportion from counts
     - e.g., return R^2 from `lm()`
-
-### Student Presentations: Figures
-
-Two minutes per student. Everyone presents their figure from last week's assignment. Minimize the biological background, and focus on what the figure shows and, to a lesser extent, how you made it.
-
 
 ### Maps
 
