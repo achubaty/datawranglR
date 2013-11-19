@@ -1,0 +1,119 @@
+# Creating maps in R
+
+This is a brief introduction to plotting maps in R. In order to simplify this process, we'll only cover the basics of generating maps and plotting points, colours, etc. We won't delve into more advanced GIS topics like map data collection, choosing projections, etc.
+
+## Before we start
+
+We need to make sure we have all of the packages we need to make basic maps:
+
+```{r}
+install.packages(list("gpclib","maptools","rcdal", "rgeos"))
+require(rgdal)
+require(rgeos)
+require(maptools) # gpclibPermit()
+```
+
+We will be using some map data not found in these packages, so we have to download an additional data file called a **shape file** from the [Global Administrative Areas database](http://www.gadm.org/). We will use Canada and US map data, which can be downloaded as `.zip` archive that contains the `.shp` file we will be using. Once downloaded, this archive should be saved somewhere easy to find, and extracted (unzipped).
+
+## Plotting maps in R
+
+Let's start with a couple of basic maps of Canada and then the United States using the preinstalled map data in the `maps` package.
+
+```{r}
+require(maps)
+map("world", regions="canada", projection="polyconic", fill=TRUE, col="grey90")
+map("state", projection="polyconic", fill=TRUE, col="grey90")
+```
+
+However, rather than using the default map data, you will likely be using map data imported from a shape file. We will need to transform the data using a projection that best suits the purpose of the map. In this case, I've chosen a different projection and orientation than from above.
+
+```{r}
+canada <- readShapeSpatial("CAN_adm/CAN_adm1.shp", proj4string=CRS("+proj=longlat +datum=WGS84"))
+canada.proj <- spTransform(canada, CRS("+proj=lcc +lon_0=110w +lat_1=49n +lat_2=60n"))
+plot(canada.proj)
+```
+
+We can adjust the perspective of the map by changing the longitude and latitude of the projection in the code above. I've projected the map in such a way as to focus on Alberta and Saskatchewan, because that's where my field data were collected. So because of that, let's not bother plotting anything other than these two provinces. For these data, `NAME_1` denotes the names of the provinces and territories:
+
+```{r}
+names(canada.proj)
+summary(canada.proj$NAME_1)
+```
+
+To only plot AB and SK, we need to subset the Canada map data, extracting only those pertaining to these provinces:
+
+```{r}
+ab.proj <- subset(canada.proj, subset=NAME_1=="Alberta")
+sk.proj <- subset(canada.proj, subset=NAME_1=="Saskatchewan")
+absk.proj <- rbind(prov.ab, prov.sk)
+plot(absk.proj, col="grey90")
+```
+
+### Adding points
+
+Now, let's say we want to add points to our map to indicate the location of field sites. Let's load our data from a `.csv` file:
+
+```{r}
+absk.sites <- read.csv(file="survey2006-cleaned.csv", header=TRUE)
+names(absk.sites)
+head(absk.sites)
+tail(absk.sites)
+```
+
+You can see that there is a lot of repeated rows (because I stripped out the actual data columns collected at each site). Since all we need for this map are the latlong coordinates for each site, let's clean this up a bit further.
+
+```{r}
+sites.unique <- unique(absk.sites$site) # lists all site names, but we want all data not just name
+sites.by.name <- unique(ab.sk.sites[with(ab.sk.sites, order(site)), ])
+print(sites.by.name, row.names=FALSE)
+```
+
+Before we can plot the sites on our map, we need to make sure we project the spatial coordinates using the same projection as the base map. **Note that the longitudes are degrees west rather than negative degrees from prime meridian, hence the need to make them negative below.**
+
+```{r}
+sites.sp <- SpatialPoints(cbind(-sites.by.name$long, sites.by.name$lat), CRS("+proj=longlat +datum=WGS84"))
+sites.proj <- spTransform(sites.sp, CRS("+proj=lcc +lon_0=110w +lat_1=49n +lat_2=60n"))
+
+plot(absk, col="grey90")
+points(sites.proj)
+```
+
+Now we want to add labels to our map to identify each site.  **Note that the longitudes are degrees west rather than negative degrees from prime meridian, hence the need to make them negative below.**
+
+```{r}
+labels.sp <- SpatialPoints(cbind(-sites.by.name$long-0.2, sites.by.name$lat-0.2), CRS("+proj=longlat +datum=WGS84"))
+labels.proj <- spTransform(labels.sp, CRS("+proj=lcc +lon_0=110w +lat_1=49n +lat_2=60n"))
+
+par(mar=c(0,0,0,0))
+plot(absk, col="grey90")
+points(sites.proj)
+text(labels.proj$coords.x1, labels.proj$coords.x2, pch=as.character(1:length(sites.by.name$site)))
+```
+
+How would you identify stand type on the above map? How about adding a legend to identify the stand labels with their identities? Any other tweaks?
+
+```{r}
+labels.sp <- SpatialPoints(cbind(-sites.by.name$long-0.2, sites.by.name$lat-0.2), CRS("+proj=longlat +datum=WGS84"))
+labels.proj <- spTransform(labels.sp, CRS("+proj=lcc +lon_0=110w +lat_1=49n +lat_2=60n"))
+
+par(mar=c(0,0,0,0))
+plot(absk, col="grey90")
+points(sites.proj)
+text(labels.proj$coords.x1, labels.proj$coords.x2, pch=as.character(1:length(sites.by.name$site))) # add stand type, legend, etc.
+```
+
+## Other fun map stuff
+
+You can access Google Map data through the `RgoogleMaps` package, generating an image file and link to an online copy of the image file.
+
+```{r}
+install.packages("RgoogleMaps")
+require(RgoogleMaps)
+lat <- c(48,64) #define our map's ylim
+lon <- c(-140,-110) #define our map's xlim
+center = c(mean(lat), mean(lon))  #tell what point to center on
+zoom <- 5  #zoom: 1 = furthest out (entire globe), larger numbers = closer in
+terrmap <- GetMap(center=center, zoom=zoom, maptype= "terrain", destfile = "terrain.png") #lots of visual options, just like google maps: maptype = c("roadmap", "mobile", "satellite", "terrain", "hybrid", "mapmaker-roadmap", "mapmaker-hybrid")
+```
+
+Also, check out [spatial.ly](http://spatial.ly) for some beautiful maps.
