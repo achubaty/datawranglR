@@ -13,7 +13,7 @@ require(rgeos)
 require(maptools) # gpclibPermit()
 ```
 
-We will be using some map data not found in these packages, so we have to download an additional data file called a **shape file** from the [Global Administrative Areas database](http://www.gadm.org/). We will use Canada and US map data, which can be downloaded as `.zip` archive that contains the `.shp` file we will be using. Once downloaded, this archive should be saved somewhere easy to find, and extracted (unzipped).
+We will be using some map data not found in these packages, so we have to download an additional data file called a **shape file** from the [Global Administrative Areas database](http://www.gadm.org/). We will use Canadian map data, which can be downloaded as `.zip` archive that contains the `.shp` file we will be using. Once downloaded, this archive should be saved somewhere easy to find, and extracted (unzipped).
 
 ## Plotting maps in R
 
