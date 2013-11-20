@@ -7,7 +7,7 @@ This is a brief introduction to plotting maps in R. In order to simplify this pr
 We need to make sure we have all of the packages we need to make basic maps:
 
 ```{r}
-install.packages(list("gpclib","maptools","rcdal", "rgeos"))
+install.packages(c("gpclib","maptools","rgdal", "rgeos"))
 require(rgdal)
 require(rgeos)
 require(maptools) # gpclibPermit()
@@ -30,7 +30,9 @@ However, rather than using the default map data, you will likely be using map da
 ```{r}
 canada <- readShapeSpatial("CAN_adm/CAN_adm1.shp", proj4string=CRS("+proj=longlat +datum=WGS84"))
 canada.proj <- spTransform(canada, CRS("+proj=lcc +lon_0=110w +lat_1=49n +lat_2=60n"))
+png("canada-map.png", width = 800, height = 600)
 plot(canada.proj)
+dev.off()
 ```
 
 We can adjust the perspective of the map by changing the longitude and latitude of the projection in the code above. I've projected the map in such a way as to focus on Alberta and Saskatchewan, because that's where my field data were collected. So because of that, let's not bother plotting anything other than these two provinces. For these data, `NAME_1` denotes the names of the provinces and territories:
@@ -45,7 +47,7 @@ To only plot AB and SK, we need to subset the Canada map data, extracting only t
 ```{r}
 ab.proj <- subset(canada.proj, subset=NAME_1=="Alberta")
 sk.proj <- subset(canada.proj, subset=NAME_1=="Saskatchewan")
-absk.proj <- rbind(prov.ab, prov.sk)
+absk.proj <- rbind(ab.proj, sk.proj)
 plot(absk.proj, col="grey90")
 ```
 
@@ -64,7 +66,7 @@ You can see that there is a lot of repeated rows (because I stripped out the act
 
 ```{r}
 sites.unique <- unique(absk.sites$site) # lists all site names, but we want all data not just name
-sites.by.name <- unique(ab.sk.sites[with(ab.sk.sites, order(site)), ])
+sites.by.name <- unique(absk.sites[with(absk.sites, order(site)), ])
 print(sites.by.name, row.names=FALSE)
 ```
 
@@ -74,7 +76,7 @@ Before we can plot the sites on our map, we need to make sure we project the spa
 sites.sp <- SpatialPoints(cbind(-sites.by.name$long, sites.by.name$lat), CRS("+proj=longlat +datum=WGS84"))
 sites.proj <- spTransform(sites.sp, CRS("+proj=lcc +lon_0=110w +lat_1=49n +lat_2=60n"))
 
-plot(absk, col="grey90")
+plot(absk.proj, col="grey90")
 points(sites.proj)
 ```
 
@@ -85,7 +87,7 @@ labels.sp <- SpatialPoints(cbind(-sites.by.name$long-0.2, sites.by.name$lat-0.2)
 labels.proj <- spTransform(labels.sp, CRS("+proj=lcc +lon_0=110w +lat_1=49n +lat_2=60n"))
 
 par(mar=c(0,0,0,0))
-plot(absk, col="grey90")
+plot(absk.proj, col="grey90")
 points(sites.proj)
 text(labels.proj$coords.x1, labels.proj$coords.x2, pch=as.character(1:length(sites.by.name$site)))
 ```
@@ -97,7 +99,7 @@ labels.sp <- SpatialPoints(cbind(-sites.by.name$long-0.2, sites.by.name$lat-0.2)
 labels.proj <- spTransform(labels.sp, CRS("+proj=lcc +lon_0=110w +lat_1=49n +lat_2=60n"))
 
 par(mar=c(0,0,0,0))
-plot(absk, col="grey90")
+plot(absk.proj, col="grey90")
 points(sites.proj)
 text(labels.proj$coords.x1, labels.proj$coords.x2, pch=as.character(1:length(sites.by.name$site))) # add stand type, legend, etc.
 ```
