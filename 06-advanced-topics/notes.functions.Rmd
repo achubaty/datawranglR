@@ -1,0 +1,129 @@
+User-Defined Functions
+========================================================
+
+Functions are the back bone of any programing language, they do most of the heavy lifting.  Functions also have the added benefit of compartmentalizing your code which increases readability and efficiency.
+
+Up until this point you have been using pre-built functions (eg `plot()`, `summary()`, `ddply()`). The fun doesn't stop there however as R is also a programming language letting you build your own functions, as well. These functions are known as user-defined functions and your imagination and ingenuity are the limits.
+
+I will teach you how to build your own function and common pitfalls that can occur when writing your own functions.
+
+## A function 
+```{r}
+
+add <- function(x, y){ 
+  z <-  x + y
+}
+```
+
+`function` is the operator you need to create your own function. The variables `x` and `y` are the names of the arguments you will pass to a function. Exaxtly like in the pre-built function `subset(x, subset, select, ...)` where `x` and `subset` are the arguments you are passing to the function. These arguments are locally declared variables meaning their value is not known outside the function.
+
+## Using the function
+
+You can use your function by passing calling its name and passing it its arguments. You can also save the value it is returning to another variable.
+```{r}
+
+add(2, 4)
+
+xy <- add(5, 7)
+
+```
+
+Sadly x will return `null`. This is because the function `add` does not know what it should return. Therefore at the end of your function you should `return()` the variable you wish. There are cases where you will not need to use return such as if you are using your function to create plots. 
+
+
+## Use `return()` to return a value from the function
+```{r}
+
+add <- function(x, y){
+  z <-  x + y
+  return(z)
+}
+
+xy <- add(2, 4)
+print(xy)
+```
+
+Now you should get `6`!!! R will forget everything else that happened in the function except for the value you return.
+
+
+## A non-trivial example.
+
+The function `add` is a silly example however since R already has pre-built functions for summing two numbers. Therefore lets do something a little more fun and create a function that can calculate the hypotenuse of a right angle triangle.
+
+Just as with your pre-built functions you can pass variables instead of just values to your functions. R is great because it allows you to pass vectors, and dataframes to your functions.
+
+
+```{r}
+hypo <- function(xd, yd){
+  
+  z <-  (xd ^ 2 + yd ^ 2) ^ (0.5)
+  
+  return(z)
+}
+
+a <- 3
+
+b <- 8
+
+hypo(a, b)
+
+```
+
+Remember that if you called `xd` outside the function it will not have a value because `xd` is only known inside the function. This also helps reduce conflicts by accidently reusing the same variable.
+
+## Calling functions within functions!!!
+
+When building a function you can start calling other pre-built or user-defined functions within your function such as in the following chunk where I calculate the distance along the following line segment!
+
+
+```{r}
+
+
+x <- c(3, 7, 4, 2, 5)
+
+y <- c(9, 4, 4, 3, 6)
+
+plot(x, y)
+segments(x[-5], y[-5], x[-1], y[-1])
+
+
+distance <- function(x, y){
+  
+  dist.temp <- 0
+  
+  for(i in 1:(length(x)-1)){
+    
+    dist.temp <- hypo(x[i+1] - x[i], y[i+1] - y[i]) + dist.temp
+  
+  }
+  
+  return(dist.temp)
+  
+}
+
+final <- distance(x, y)
+print(final)
+
+
+```
+
+
+## Returning characters and multiple returns
+
+You can also return characters from functions. More interestingly is you can have multiple `return()` in a function and then you can use control operators such as `ifelse()` to decide which one to use such as in the following functions
+
+```{r}
+truth <- function(a){
+  
+  ifelse(a < 5, return("The dog stinks"), return("The dog really stinks"))
+  
+}
+
+days.since.wash <- 7
+
+truth(days.since.wash)
+
+```
+
+Using functions will save you lots of time and heartache. They will prevent you from writing repetitive pieces of code and will add in readability. Functions are one way you can begin to compartmentalize your code. You can start your scripts by declaring any user-defined functinos you are creating and then call them later when necessary. 
+
