@@ -1,4 +1,5 @@
-
+.Rhistory
+.RData
 03-plyr-reshape/*.tex
 03-plyr-reshape/*.log
 03-plyr-reshape/*.aux
