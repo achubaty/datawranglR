@@ -1,7 +1,10 @@
 .Rhistory
 .RData
+*.html
+*.zip
 03-plyr-reshape/*.tex
 03-plyr-reshape/*.log
 03-plyr-reshape/*.aux
 03-plyr-reshape/*.out
 03-plyr-reshape/plyr-notes-005.pdf
+06-advanced-topics/CAN_adm/
